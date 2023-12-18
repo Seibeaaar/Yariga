@@ -78,7 +78,7 @@ const SignUpForm = () => {
         )}
       />
       <div className="my-[20px]">
-        <Button type="submit" text="Sign In" />
+        <Button type="submit" text="Sign Up" />
       </div>
     </form>
   );

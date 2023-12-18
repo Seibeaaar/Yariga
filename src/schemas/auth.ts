@@ -19,3 +19,8 @@ export const SIGN_UP_SCHEMA = yup.object({
     .required("Last name required")
     .matches(NAME_REGEX, "Last name required"),
 });
+
+export const LOGIN_SCHEMA = yup.object({
+  email: yup.string().required("Email required").email("Invalid email"),
+  password: yup.string().required("Password required"),
+});

@@ -1,5 +1,6 @@
 import SignUpForm from "./components/SignUpForm";
 import SkyScraperImage from "@/assets/images/Skyscraper.webp";
+import AuthRedirect from "@/components/AuthRedirect";
 
 const SignUpScreen = () => {
   return (
@@ -13,6 +14,11 @@ const SignUpScreen = () => {
             Please fill out the form to become a part of real estate community
           </h4>
           <SignUpForm />
+          <AuthRedirect
+            to="/login"
+            question="Already have an account"
+            linkTitle="Login"
+          />
         </div>
       </section>
       <img
