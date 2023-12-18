@@ -1,10 +1,12 @@
 import ScreenContainer from "./components/ScreenContainer";
 import ThemeContextProvider from "./customization/ThemeContext";
+import { RouterProvider } from "react-router-dom";
+import router from "./router";
 
 const App = () => (
   <ThemeContextProvider>
     <ScreenContainer>
-      <h1>Yariga</h1>
+      <RouterProvider router={router} />
     </ScreenContainer>
   </ThemeContextProvider>
 );

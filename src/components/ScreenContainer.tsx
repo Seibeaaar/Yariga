@@ -5,7 +5,7 @@ type ScreenContainerProps = {
 };
 
 const ScreenContainer: FC<ScreenContainerProps> = ({ children }) => (
-  <main className="w-screen h-screen bg-light dark:bg-black text-text-primary-light dark:text-text-primary-dark">
+  <main className="w-screen h-screen bg-light dark:bg-black text-primary-light dark:text-primary-dark">
     {children}
   </main>
 );

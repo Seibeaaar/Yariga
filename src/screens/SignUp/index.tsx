@@ -1,0 +1,27 @@
+import SignUpForm from "./components/SignUpForm";
+import SkyScraperImage from "@/assets/images/Skyscraper.webp";
+
+const SignUpScreen = () => {
+  return (
+    <main className="w-screen h-screen flex items-center bg-white dark:bg-black text-primary-light dark:text-primary-dark">
+      <section className="h-full md:w-1/2 w-full px-[24px] xl:p-0 flex items-center justify-center">
+        <div className="2xl:w-1/2 xl:w-2/3 w-full">
+          <h1 className="text-center md:text-left font-bold text-4xl">
+            Welcome to Yariga
+          </h1>
+          <h4 className="text-center md:text-left text-base leading-6 text-secondary-light dark:text-secondary-dark">
+            Please fill out the form to become a part of real estate community
+          </h4>
+          <SignUpForm />
+        </div>
+      </section>
+      <img
+        src={SkyScraperImage}
+        alt="Sky scraper"
+        className="h-screen w-1/2 md:block hidden"
+      />
+    </main>
+  );
+};
+
+export default SignUpScreen;
