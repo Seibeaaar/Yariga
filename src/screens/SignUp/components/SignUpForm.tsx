@@ -1,16 +1,24 @@
 import { Controller, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import { SIGN_UP_SCHEMA } from "@/schemas/auth";
 import Input from "@/components/Input";
 import { SignUpData } from "@/types/auth";
 import Button from "@/components/Button";
 
 const SignUpForm = () => {
-  const { control, handleSubmit } = useForm({
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       firstName: "",
       lastName: "",
       email: "",
       password: "",
     },
+    resolver: yupResolver(SIGN_UP_SCHEMA),
   });
 
   const onSignUp = (data: SignUpData) => console.log(data);
@@ -26,6 +34,7 @@ const SignUpForm = () => {
               label="First name"
               onChange={onChange}
               placeholder="Your first name"
+              error={errors.firstName?.message}
             />
           )}
         />
@@ -37,6 +46,7 @@ const SignUpForm = () => {
               label="Last name"
               onChange={onChange}
               placeholder="Your last name"
+              error={errors.lastName?.message}
             />
           )}
         />
@@ -50,6 +60,7 @@ const SignUpForm = () => {
             label="Email"
             onChange={onChange}
             placeholder="Your email"
+            error={errors.email?.message}
           />
         )}
       />
@@ -62,6 +73,7 @@ const SignUpForm = () => {
             type="password"
             onChange={onChange}
             placeholder="Your password"
+            error={errors.password?.message}
           />
         )}
       />
