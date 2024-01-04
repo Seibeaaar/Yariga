@@ -1,6 +1,10 @@
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
+import { AppDispatch } from "@/redux/store";
+import { useDispatch } from "react-redux";
+import { executeSignUpRequest } from "@/redux/thunks/profile";
+
 import { SIGN_UP_SCHEMA } from "@/schemas/auth";
 import Input from "@/components/Input";
 import { SignUpData } from "@/types/auth";
@@ -21,7 +25,9 @@ const SignUpForm = () => {
     resolver: yupResolver(SIGN_UP_SCHEMA),
   });
 
-  const onSignUp = (data: SignUpData) => console.log(data);
+  const dispatch = useDispatch<AppDispatch>();
+
+  const onSignUp = (data: SignUpData) => dispatch(executeSignUpRequest(data));
 
   return (
     <form onSubmit={handleSubmit(onSignUp)} className="mt-[20px]">

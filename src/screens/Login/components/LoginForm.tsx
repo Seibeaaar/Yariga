@@ -1,6 +1,10 @@
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
+import { useDispatch } from "react-redux";
+import { executeLoginRequest } from "@/redux/thunks/profile";
+import { AppDispatch } from "@/redux/store";
+
 import { LOGIN_SCHEMA } from "@/schemas/auth";
 import Input from "@/components/Input";
 import { LoginData } from "@/types/auth";
@@ -18,8 +22,9 @@ const LoginForm = () => {
     },
     resolver: yupResolver(LOGIN_SCHEMA),
   });
+  const dispatch = useDispatch<AppDispatch>();
 
-  const onLogin = (data: LoginData) => console.log(data);
+  const onLogin = (data: LoginData) => dispatch(executeLoginRequest(data));
 
   return (
     <form onSubmit={handleSubmit(onLogin)} className="mt-[20px]">
