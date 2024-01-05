@@ -28,6 +28,7 @@ const profileSlice = createSlice({
       state.profile = action.payload;
     });
     builder.addCase(executeLoginRequest.rejected, (state) => {
+      state.pending = false;
       state.error = true;
     });
     builder.addCase(executeSignUpRequest.pending, (state) => {
@@ -40,6 +41,7 @@ const profileSlice = createSlice({
     });
     builder.addCase(executeSignUpRequest.rejected, (state) => {
       state.error = true;
+      state.pending = false;
     });
   },
 });

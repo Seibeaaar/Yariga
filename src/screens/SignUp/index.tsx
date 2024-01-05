@@ -1,10 +1,17 @@
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+
 import SignUpForm from "./components/SignUpForm";
 import SkyScraperImage from "@/assets/images/Skyscraper.webp";
 import AuthRedirect from "@/components/AuthRedirect";
+import Loader from "@/components/Loader";
 
 const SignUpScreen = () => {
+  const { pending } = useSelector((state: RootState) => state.profile);
+
   return (
     <main className="w-screen h-screen flex items-center bg-white dark:bg-black text-primary-light dark:text-primary-dark">
+      {pending ? <Loader /> : null}
       <section className="h-full md:w-1/2 w-full px-[24px] xl:p-0 flex items-center justify-center">
         <div className="2xl:w-1/2 xl:w-2/3 w-full">
           <h1 className="text-center md:text-left font-bold text-4xl">
