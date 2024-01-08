@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Profile } from "@/types/proifle";
 import { executeLoginRequest, executeSignUpRequest } from "../thunks/profile";
+import router from "@/router";
 
 export type ProfileState = {
   pending: boolean;
@@ -26,6 +27,7 @@ const profileSlice = createSlice({
       state.pending = false;
       state.error = false;
       state.profile = action.payload;
+      router.navigate("/complete-profile");
     });
     builder.addCase(executeLoginRequest.rejected, (state) => {
       state.pending = false;
@@ -38,6 +40,7 @@ const profileSlice = createSlice({
       state.pending = false;
       state.error = false;
       state.profile = action.payload;
+      router.navigate("/verify-email");
     });
     builder.addCase(executeSignUpRequest.rejected, (state) => {
       state.error = true;

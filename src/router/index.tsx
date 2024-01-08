@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 
 import SignUpScreen from "@/screens/SignUp";
 import LoginScreen from "@/screens/Login";
+import VerifyEmailScreen from "@/screens/VerifyEmail";
 
 const router = createBrowserRouter([
   {
@@ -11,6 +12,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <LoginScreen />,
+  },
+  {
+    path: "/verify-email",
+    element: <VerifyEmailScreen />,
   },
 ]);
 
