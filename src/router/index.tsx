@@ -2,7 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 
 import SignUpScreen from "@/screens/SignUp";
 import LoginScreen from "@/screens/Login";
-import VerifyEmailScreen from "@/screens/VerifyEmail";
+import EmailSentScreen from "@/screens/EmailSent";
+import EmailVerificationScreen from "@/screens/EmailVerification";
 
 const router = createBrowserRouter([
   {
@@ -14,8 +15,12 @@ const router = createBrowserRouter([
     element: <LoginScreen />,
   },
   {
-    path: "/verify-email",
-    element: <VerifyEmailScreen />,
+    path: "/email-sent",
+    element: <EmailSentScreen />,
+  },
+  {
+    path: "/email-verification?",
+    element: <EmailVerificationScreen />,
   },
 ]);
 

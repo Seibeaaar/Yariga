@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { loginRequest, signUpRequest } from "@/api/auth";
 import { LoginData, SignUpData } from "@/types/auth";
+import { emailVerificationRequest } from "@/api/verification";
 
 export const executeLoginRequest = createAsyncThunk(
   "profile/login",
@@ -21,6 +22,18 @@ export const executeSignUpRequest = createAsyncThunk(
     try {
       const { profile, token } = await signUpRequest(data);
       localStorage.setItem("JWT", token);
+      return profile;
+    } catch (e) {
+      return rejectWithValue(e);
+    }
+  },
+);
+
+export const verifyEmail = createAsyncThunk(
+  "profile/verifyEmail",
+  async (id: string, { rejectWithValue }) => {
+    try {
+      const profile = await emailVerificationRequest(id);
       return profile;
     } catch (e) {
       return rejectWithValue(e);

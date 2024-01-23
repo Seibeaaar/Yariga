@@ -2,7 +2,7 @@ import ScreenContainer from "@/components/ScreenContainer";
 import VerifyEmailIcon from "@/assets/icons/VerifyEmail.svg";
 import Button from "@/components/Button";
 
-const VerifyEmailScreen = () => (
+const EmailSentScreen = () => (
   <ScreenContainer>
     <section className="w-full h-full flex flex-col justify-center items-center text-center px-[24px] py-[32px]">
       <div>
@@ -26,4 +26,4 @@ const VerifyEmailScreen = () => (
   </ScreenContainer>
 );
 
-export default VerifyEmailScreen;
+export default EmailSentScreen;
