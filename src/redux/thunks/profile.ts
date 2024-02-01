@@ -1,7 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { loginRequest, signUpRequest } from "@/api/auth";
-import { LoginData, SignUpData } from "@/types/auth";
+import {
+  loginRequest,
+  signUpRequest,
+  completeProfileRequest,
+} from "@/api/auth";
+import { LoginData, ProfileCompletionRequest, SignUpData } from "@/types/auth";
 import { emailVerificationRequest } from "@/api/verification";
+import { uploadProfileAvatarRequest } from "@/api/profile";
+import { ProfileAvatarRequest } from "@/types/proifle";
 
 export const executeLoginRequest = createAsyncThunk(
   "profile/login",
@@ -34,6 +40,30 @@ export const verifyEmail = createAsyncThunk(
   async (id: string, { rejectWithValue }) => {
     try {
       const profile = await emailVerificationRequest(id);
+      return profile;
+    } catch (e) {
+      return rejectWithValue(e);
+    }
+  },
+);
+
+export const completeProfile = createAsyncThunk(
+  "profile/complete",
+  async (data: ProfileCompletionRequest, { rejectWithValue }) => {
+    try {
+      const profile = await completeProfileRequest(data);
+      return profile;
+    } catch (e) {
+      return rejectWithValue(e);
+    }
+  },
+);
+
+export const uploadAvatar = createAsyncThunk(
+  "profile/uploadAvatar",
+  async (data: ProfileAvatarRequest, { rejectWithValue }) => {
+    try {
+      const profile = await uploadProfileAvatarRequest(data);
       return profile;
     } catch (e) {
       return rejectWithValue(e);

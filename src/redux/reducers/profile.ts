@@ -4,6 +4,8 @@ import {
   executeLoginRequest,
   executeSignUpRequest,
   verifyEmail,
+  uploadAvatar,
+  completeProfile,
 } from "../thunks/profile";
 import router from "@/router";
 
@@ -70,6 +72,32 @@ const profileSlice = createSlice({
       state.pending = true;
       state.emailVerificationComplete = false;
       state.emailVerificationError = false;
+    });
+    builder.addCase(completeProfile.fulfilled, (state, action) => {
+      state.pending = false;
+      state.profile = action.payload;
+      state.error = false;
+    });
+    builder.addCase(completeProfile.rejected, (state) => {
+      state.pending = false;
+      state.error = true;
+    });
+    builder.addCase(completeProfile.pending, (state) => {
+      state.pending = false;
+      state.error = false;
+    });
+    builder.addCase(uploadAvatar.pending, (state) => {
+      state.pending = true;
+      state.error = false;
+    });
+    builder.addCase(uploadAvatar.fulfilled, (state, action) => {
+      state.pending = false;
+      state.error = false;
+      state.profile = action.payload;
+    });
+    builder.addCase(uploadAvatar.rejected, (state) => {
+      state.error = true;
+      state.pending = false;
     });
   },
 });

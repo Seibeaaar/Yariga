@@ -1,5 +1,7 @@
+import { ProfileCompletionRequest } from "@/types/auth";
 import instance from ".";
 import { LoginData, SignUpData, AuthRequestResponse } from "@/types/auth";
+import { Profile } from "@/types/proifle";
 
 export const loginRequest = async (
   data: LoginData,
@@ -12,5 +14,12 @@ export const signUpRequest = async (
   data: SignUpData,
 ): Promise<AuthRequestResponse> => {
   const result = await instance.post("/auth/signUp", data);
+  return result.data;
+};
+
+export const completeProfileRequest = async (
+  data: ProfileCompletionRequest,
+): Promise<Profile> => {
+  const result = await instance.post("/auth/complete", data);
   return result.data;
 };
