@@ -2,10 +2,13 @@ import { FC, ReactNode } from "react";
 
 type ScreenContainerProps = {
   children: ReactNode;
+  className?: string;
 };
 
-const ScreenContainer: FC<ScreenContainerProps> = ({ children }) => (
-  <main className="w-screen h-screen bg-light dark:bg-black text-primary-light dark:text-primary-dark">
+const ScreenContainer: FC<ScreenContainerProps> = ({ children, className }) => (
+  <main
+    className={`w-screen h-screen bg-light dark:bg-black text-primary-light dark:text-primary-dark ${className}`}
+  >
     {children}
   </main>
 );

@@ -21,3 +21,5 @@ export enum USER_ROLE {
 export type ProfileAvatarRequest = {
   avatar: BufferSource;
 };
+
+export type OnboardingRole = "soleProp" | "customer";

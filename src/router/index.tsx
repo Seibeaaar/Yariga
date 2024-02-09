@@ -4,6 +4,7 @@ import SignUpScreen from "@/screens/SignUp";
 import LoginScreen from "@/screens/Login";
 import EmailSentScreen from "@/screens/EmailSent";
 import EmailVerificationScreen from "@/screens/EmailVerification";
+import ProfileCompleteScreen from "@/screens/ProfileComplete";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
   {
     path: "/email-verification?",
     element: <EmailVerificationScreen />,
+  },
+  {
+    path: "/complete-profile",
+    element: <ProfileCompleteScreen />,
   },
 ]);
 
