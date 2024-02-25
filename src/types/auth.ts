@@ -18,10 +18,11 @@ export type AuthRequestResponse = {
 export type ProfileCompletionRequest = {
   role: USER_ROLE;
   taxNumber?: string;
-  licenseNumber?: string;
   dateOfBirth: string;
 };
 
 export type PhoneVerificationRequest = {
   phoneNumber: string;
 };
+
+export type InitialRoleOption = "sole" | "customer";

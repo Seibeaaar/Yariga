@@ -1,9 +1,16 @@
 import PropertyBuyerIcon from "@/assets/icons/PropertyBuyer.svg";
 import PropertySellerIcon from "@/assets/icons/PropertySeller.svg";
+import { InitialRoleOption } from "@/types/auth";
 
-export const ONBOARDING_ROLE_OPTIONS = [
+export type OnboardingRoleOption = {
+  role: InitialRoleOption;
+  title: string;
+  image: string;
+};
+
+export const ONBOARDING_ROLE_OPTIONS: OnboardingRoleOption[] = [
   {
-    role: "soleProp",
+    role: "sole",
     title: "Sell and/or rent out properties",
     image: PropertySellerIcon,
   },
@@ -14,9 +21,12 @@ export const ONBOARDING_ROLE_OPTIONS = [
   },
 ];
 
-export const ONBOARDING_STEPS = [
+export const ONBOARDING_STEPS: string[] = [
   "Choose your role",
   "Date of birth",
   "Profile picture",
   "Phone verification",
 ];
+
+export const ONBOARDING_ROLES = ["sole", "customer"];
+export const USER_ROLES = ["general", "manager", ...ONBOARDING_ROLES];

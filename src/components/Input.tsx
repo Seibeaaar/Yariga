@@ -19,11 +19,13 @@ const Input: FC<InputProps> = (props) => {
         className={`py-[10px] px-[12px] border ${borderStyle} rounded-[8px]`}
       >
         <input
-          className="bg-transparent w-full outline-none border-none"
+          className="dark:[color-scheme:dark] bg-transparent w-full outline-none border-none"
           {...props}
         />
       </div>
-      <p className="text-danger text-xs mt-[4px] h-[8px]">{props.error}</p>
+      {props.error ? (
+        <p className="text-danger text-xs mt-[4px] h-[8px]">{props.error}</p>
+      ) : null}
     </div>
   );
 };
