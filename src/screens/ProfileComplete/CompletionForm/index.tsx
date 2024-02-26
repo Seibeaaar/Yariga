@@ -45,8 +45,8 @@ const ProfileCompletionForm = () => {
   return (
     <>
       {pending ? <Loader /> : null}
-      <section className="w-1/2 h-full flex items-center justify-center">
-        <form onSubmit={handleSubmit(onSubmit)} className="w-2/3">
+      <section className="lg:w-1/2 md:w-2/3 w-full px-[24px] md:px-0 h-full flex items-center justify-center">
+        <form onSubmit={handleSubmit(onSubmit)} className="sm:w-2/3 w-full">
           <div>
             <p className="text-xl font-medium mb-[16px]">
               Your main goal in Yariga is:
@@ -55,7 +55,7 @@ const ProfileCompletionForm = () => {
               name="role"
               control={control}
               render={({ field: { onChange, value } }) => (
-                <div className="flex items-stretch gap-[16px]">
+                <div className="flex flex-col md:flex-row items-stretch gap-[16px]">
                   {ONBOARDING_ROLE_OPTIONS.map((option) => (
                     <ProfileRoleOption
                       key={option.role}

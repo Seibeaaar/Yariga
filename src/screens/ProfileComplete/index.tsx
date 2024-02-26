@@ -2,19 +2,13 @@ import ScreenContainer from "@/components/ScreenContainer";
 import CityScapeImage from "@/assets/images/CityScape.webp";
 import ProfileCompletionForm from "./CompletionForm";
 
-// 1. Role;
-// 2. DOB;
-// 3. If a proprietor - tax number form;;
-// 4. Avatar;
-// 5. Phone verification;
-
 const ProfileCompleteScreen = () => {
   return (
-    <ScreenContainer className="flex items-center">
+    <ScreenContainer className="flex items-center justify-center lg:justify-normal">
       <img
         src={CityScapeImage}
         alt="Business center"
-        className="h-full w-1/2"
+        className="h-full w-1/2 hidden lg:block"
       />
       <ProfileCompletionForm />
     </ScreenContainer>

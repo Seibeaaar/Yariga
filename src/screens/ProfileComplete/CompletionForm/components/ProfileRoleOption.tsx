@@ -22,7 +22,7 @@ const ProfileRoleOption: FC<ProfileRoleOptionProps> = ({
   return (
     <div
       onClick={onSelect}
-      className={`rounded-[16px] border-[1px] cursor-pointer p-[16px] transition-all w-1/2 flex flex-col items-center ${conditionalStyles}`}
+      className={`rounded-[16px] border-[1px] w-full md:w-1/2 cursor-pointer p-[16px] transition-all flex flex-col items-center ${conditionalStyles}`}
     >
       <img
         className="h-[96px] w-[96px]"
