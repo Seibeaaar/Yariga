@@ -1,9 +1,8 @@
 import { Profile } from "@/types/proifle";
 import instance from ".";
-import { ProfileAvatarRequest } from "@/types/proifle";
 
 export const uploadProfileAvatarRequest = async (
-  data: ProfileAvatarRequest,
+  data: FormData,
 ): Promise<Profile> => {
   const result = await instance.post("/profile/avatar", data, {
     headers: {

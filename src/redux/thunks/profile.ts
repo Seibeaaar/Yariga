@@ -7,7 +7,6 @@ import {
 import { LoginData, ProfileCompletionRequest, SignUpData } from "@/types/auth";
 import { emailVerificationRequest } from "@/api/verification";
 import { uploadProfileAvatarRequest } from "@/api/profile";
-import { ProfileAvatarRequest } from "@/types/proifle";
 
 export const executeLoginRequest = createAsyncThunk(
   "profile/login",
@@ -61,7 +60,7 @@ export const completeProfile = createAsyncThunk(
 
 export const uploadAvatar = createAsyncThunk(
   "profile/uploadAvatar",
-  async (data: ProfileAvatarRequest, { rejectWithValue }) => {
+  async (data: FormData, { rejectWithValue }) => {
     try {
       const profile = await uploadProfileAvatarRequest(data);
       return profile;

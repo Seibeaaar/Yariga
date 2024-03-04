@@ -30,3 +30,5 @@ export const ONBOARDING_STEPS: string[] = [
 
 export const ONBOARDING_ROLES = ["sole", "customer"];
 export const USER_ROLES = ["general", "manager", ...ONBOARDING_ROLES];
+
+export const ACCEPTED_AVATAR_FORMATS = ["png", "jpeg", "jpg", "webp"];

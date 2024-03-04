@@ -5,6 +5,7 @@ import LoginScreen from "@/screens/Login";
 import EmailSentScreen from "@/screens/EmailSent";
 import EmailVerificationScreen from "@/screens/EmailVerification";
 import ProfileCompleteScreen from "@/screens/ProfileComplete";
+import ProfileAvatarUpload from "@/screens/ProfileComplete/AvatarUpload";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
   {
     path: "/complete-profile",
     element: <ProfileCompleteScreen />,
+  },
+  {
+    path: "/upload-avatar",
+    element: <ProfileAvatarUpload />,
   },
 ]);
 
