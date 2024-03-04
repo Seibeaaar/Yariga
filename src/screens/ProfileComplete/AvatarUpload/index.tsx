@@ -42,7 +42,7 @@ const ProfileAvatarUpload = () => {
   };
 
   return (
-    <ScreenContainer className="pt-[24px] pb-[48px] flex flex-col items-center">
+    <ScreenContainer className="pt-[24px] pb-[48px] px-[24px] xl:px-0 flex flex-col items-center">
       {pending ? <Loader /> : null}
       <h1 className="text-center font-bold text-2xl md:text-3xl mb-[16px]">
         Please choose your profile picture
@@ -86,7 +86,7 @@ const ProfileAvatarUpload = () => {
           ) : null}
         </div>
       </section>
-      <div className="w-1/3">
+      <div className="lg:w-1/2 xl:w-1/3 w-full">
         <Button
           onClick={onSubmit}
           disabled={!uploadedImage}
