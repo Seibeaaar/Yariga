@@ -2,6 +2,10 @@ import { createBrowserRouter } from "react-router-dom";
 
 import SignUpScreen from "@/screens/SignUp";
 import LoginScreen from "@/screens/Login";
+import EmailSentScreen from "@/screens/EmailSent";
+import EmailVerificationScreen from "@/screens/EmailVerification";
+import ProfileCompleteScreen from "@/screens/ProfileComplete";
+import ProfileAvatarUpload from "@/screens/ProfileComplete/AvatarUpload";
 
 const router = createBrowserRouter([
   {
@@ -11,6 +15,22 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <LoginScreen />,
+  },
+  {
+    path: "/email-sent",
+    element: <EmailSentScreen />,
+  },
+  {
+    path: "/email-verification?",
+    element: <EmailVerificationScreen />,
+  },
+  {
+    path: "/complete-profile",
+    element: <ProfileCompleteScreen />,
+  },
+  {
+    path: "/upload-avatar",
+    element: <ProfileAvatarUpload />,
   },
 ]);
 

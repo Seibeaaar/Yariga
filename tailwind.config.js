@@ -20,6 +20,19 @@ export default {
         "border-dark": "#272B30",
         "border-light": "#E4E4E4"
       },
+      keyframes: {
+        heartbeat: {
+          '0%, 100%': {
+            transform: 'scale(1)'
+          },
+          '50%': {
+            transform: 'scale(2.5)'
+          }
+        }
+      },
+      animation: {
+        heartbeat: 'heartbeat 3s linear infinite'
+      }
     },
   },
   plugins: [],
