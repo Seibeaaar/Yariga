@@ -6,10 +6,12 @@ import EmailSentScreen from "@/screens/EmailSent";
 import EmailVerificationScreen from "@/screens/EmailVerification";
 import ProfileCompleteScreen from "@/screens/ProfileComplete";
 import ProfileAvatarUpload from "@/screens/ProfileComplete/AvatarUpload";
+import ProtectedRoutes from "./ProtectedRoute";
+import Dashboard from "@/screens/Dashboard";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/sign-up",
     element: <SignUpScreen />,
   },
   {
@@ -21,7 +23,7 @@ const router = createBrowserRouter([
     element: <EmailSentScreen />,
   },
   {
-    path: "/email-verification?",
+    path: "/email-verification",
     element: <EmailVerificationScreen />,
   },
   {
@@ -31,6 +33,15 @@ const router = createBrowserRouter([
   {
     path: "/upload-avatar",
     element: <ProfileAvatarUpload />,
+  },
+  {
+    element: <ProtectedRoutes />,
+    children: [
+      {
+        path: "/",
+        element: <Dashboard />,
+      },
+    ],
   },
 ]);
 
