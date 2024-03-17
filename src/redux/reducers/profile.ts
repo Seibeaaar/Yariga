@@ -38,7 +38,7 @@ const profileSlice = createSlice({
       state.pending = false;
       state.error = false;
       state.profile = action.payload;
-      router.navigate("/complete-profile");
+      router.navigate("/");
     });
     builder.addCase(executeLoginRequest.rejected, (state) => {
       state.pending = false;

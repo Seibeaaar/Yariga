@@ -4,7 +4,7 @@ import { SOLE_PROP_NAV_LINKS } from "@/constants/navigation";
 
 const SideBar = () => {
   return (
-    <aside className="w-[250px] absolute top-0 left-0 h-screen p-[16px] bg-primary-dark dark:bg-primary-light">
+    <aside className="w-[250px] h-screen p-[16px] bg-primary-dark dark:bg-primary-light">
       <div className="flex items-center gap-[16px]">
         <img src={LogoIcon} alt="Logo" />
         <h5 className="font-bold text-2xl text-primary-light dark:text-primary-dark">
