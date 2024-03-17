@@ -3,7 +3,7 @@ import { RootState, AppDispatch } from "@/redux/store";
 import { uploadAvatar } from "@/redux/thunks/profile";
 
 import Button from "@/components/Button";
-import ScreenContainer from "@/components/ScreenContainer";
+import BlankContainer from "@/components/ScreenContainer/Blank";
 import { Avatar } from "@mui/material";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import CloseIcon from "@mui/icons-material/Close";
@@ -42,7 +42,7 @@ const ProfileAvatarUpload = () => {
   };
 
   return (
-    <ScreenContainer className="pt-[24px] pb-[48px] px-[24px] xl:px-0 flex flex-col items-center">
+    <BlankContainer className="pt-[24px] pb-[48px] px-[24px] xl:px-0 flex flex-col items-center">
       {pending ? <Loader /> : null}
       <h1 className="text-center font-bold text-2xl md:text-3xl mb-[16px]">
         Please choose your profile picture
@@ -93,7 +93,7 @@ const ProfileAvatarUpload = () => {
           text="Upload a profile picture"
         />
       </div>
-    </ScreenContainer>
+    </BlankContainer>
   );
 };
 

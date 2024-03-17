@@ -10,7 +10,7 @@ export default {
         "primary-dark": "#EFEFEF",
         "secondary-light": "#808191",
         "secondary-dark": "#6F767E",
-        black: "#1A1D1F",
+        "bg-black": "#1A1D1F",
         white: "#FCFCFC",
         "bg-light": "#F4F4F4",
         warning: "#FD8539",

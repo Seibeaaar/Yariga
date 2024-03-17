@@ -1,4 +1,4 @@
-import ScreenContainer from "@/components/ScreenContainer";
+import BlankContainer from "@/components/ScreenContainer/Blank";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -65,10 +65,10 @@ const EmailVerificationScreen = () => {
   };
 
   return (
-    <ScreenContainer>
+    <BlankContainer>
       {renderLoader()}
       {renderContent()}
-    </ScreenContainer>
+    </BlankContainer>
   );
 };
 

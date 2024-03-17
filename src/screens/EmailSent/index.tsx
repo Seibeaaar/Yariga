@@ -1,9 +1,9 @@
-import ScreenContainer from "@/components/ScreenContainer";
+import BlankContainer from "@/components/ScreenContainer/Blank";
 import VerifyEmailIcon from "@/assets/icons/VerifyEmail.svg";
 import Button from "@/components/Button";
 
 const EmailSentScreen = () => (
-  <ScreenContainer>
+  <BlankContainer>
     <section className="w-full h-full flex flex-col justify-center items-center text-center px-[24px] py-[32px]">
       <div>
         <h1 className="font-bold text-2xl md:text-3xl mb-[16px]">
@@ -23,7 +23,7 @@ const EmailSentScreen = () => (
         <Button text="Resend email" className="mt-[16px]" />
       </div>
     </section>
-  </ScreenContainer>
+  </BlankContainer>
 );
 
 export default EmailSentScreen;

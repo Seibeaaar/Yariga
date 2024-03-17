@@ -21,7 +21,7 @@ const LoginScreen = () => {
           </h4>
           <LoginForm />
           <AuthRedirect
-            to="/"
+            to="/sign-up"
             question="Don\'t have n account"
             linkTitle="Create an account"
           />

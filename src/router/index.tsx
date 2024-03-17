@@ -35,13 +35,12 @@ const router = createBrowserRouter([
     element: <ProfileAvatarUpload />,
   },
   {
+    path: "/",
+    element: <Dashboard />,
+  },
+  {
     element: <ProtectedRoutes />,
-    children: [
-      {
-        path: "/",
-        element: <Dashboard />,
-      },
-    ],
+    children: [],
   },
 ]);
 
