@@ -2,14 +2,22 @@ import { useSelector } from "react-redux";
 import { Avatar } from "@mui/material";
 import { RootState } from "@/redux/store";
 import { getAvatarFallback, getFullName } from "@/utils/profile";
+import { useNavigate } from "react-router";
 
 const Header = () => {
   const { profile } = useSelector((state: RootState) => state.profile);
+  const navigate = useNavigate();
 
+  const goToProfile = () => navigate("/profile");
   return (
     <header className="bg-primary-dark h-[70px] py-[16px] dark:bg-primary-light">
       <div className="flex items-center gap-[12px]">
-        <Avatar alt={getFullName(profile!)} src={profile?.avatar}>
+        <Avatar
+          onClick={goToProfile}
+          className="cursor-pointer"
+          alt={getFullName(profile!)}
+          src={profile?.avatar}
+        >
           {getAvatarFallback(profile!)}
         </Avatar>
         <div>

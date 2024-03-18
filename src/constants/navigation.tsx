@@ -1,8 +1,9 @@
-import DashboardIcon from "@/assets/icons/Dashboard.svg";
-import PropertyIcon from "@/assets/icons/Union.svg";
-import StarIcon from "@/assets/icons/Star.svg";
-import MessageIcon from "@/assets/icons/Message.svg";
-import ProfileIcon from "@/assets/icons/Profile.svg";
+/// <reference types="vite-plugin-svgr/client" />
+import DashboardIcon from "@/assets/icons/Dashboard.svg?react";
+import PropertyIcon from "@/assets/icons/Union.svg?react";
+import StarIcon from "@/assets/icons/Star.svg?react";
+import MessageIcon from "@/assets/icons/Message.svg?react";
+import ProfileIcon from "@/assets/icons/Profile.svg?react";
 
 export const SOLE_PROP_NAV_LINKS = [
   {
