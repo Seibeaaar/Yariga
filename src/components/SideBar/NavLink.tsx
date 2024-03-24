@@ -1,5 +1,5 @@
 import { AppTheme } from "@/customization/ThemeContext";
-import { FC, useState, SVGProps } from "react";
+import { FC, useState, SVGProps, useMemo } from "react";
 import { Link } from "react-router-dom";
 
 type NavLinkProps = {
@@ -21,26 +21,24 @@ const NavLink: FC<NavLinkProps> = ({
 
   const toggleHoverState = (isOn: boolean) => setMouseOn(isOn);
 
-  const getTextColor = () => {
+  const textColor = useMemo(() => {
     if (theme === "light") {
       return mouseOn ? "primary-dark" : "primary-light";
     }
-    return "primary-light";
-  };
+    return "primary-dark";
+  }, [theme, mouseOn]);
 
-  const getIconColor = () => {
+  const iconColor = useMemo(() => {
     if (theme === "light") {
       if (mouseOn) {
         return "#FCFCFC";
       }
       return isCurrentPath ? "##1A1D1F" : "#808191";
     }
-    return isCurrentPath ? "#FCFCFC" : "#808191";
-  };
+    return mouseOn || isCurrentPath ? "#FCFCFC" : "#808191";
+  }, [theme, mouseOn, isCurrentPath]);
 
   const Icon = icon;
-
-  console.log(getTextColor(), getIconColor(), path);
 
   return (
     <Link
@@ -49,11 +47,11 @@ const NavLink: FC<NavLinkProps> = ({
       onMouseEnter={() => toggleHoverState(true)}
       className={`w-full cursor-pointer py-[16px] px-[24px] ease-in duration-200 bg-transparent hover:bg-primary rounded-[12px] flex items-center gap-[16px]`}
     >
-      <Icon width={24} height={24} fill={getIconColor()} />
+      <Icon width={24} height={24} fill={iconColor} />
       <p
         className={`${
           isCurrentPath ? "font-semibold" : "font-normal"
-        } text-${getTextColor()}`}
+        } text-${textColor}`}
       >
         {title}
       </p>

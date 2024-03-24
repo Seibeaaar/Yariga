@@ -17,7 +17,7 @@ type ProfilePopUpProps = {
 const ProfilePopUp: FC<ProfilePopUpProps> = ({ isOpen, closePopup }) => {
   const { theme, changeTheme } = useContext(ThemeContext);
   const navigate = useNavigate();
-  const popupRef = useRef(null);
+  const popupRef = useRef<HTMLDivElement>(null);
 
   const HEADER_POPUP_OPTIONS = [
     {
@@ -43,15 +43,18 @@ const ProfilePopUp: FC<ProfilePopUpProps> = ({ isOpen, closePopup }) => {
 
   useEffect(() => {
     const listener = (e: MouseEvent) => {
-      if (isOpen && popupRef.current && !popupRef.current.contains(e.target)) {
-        console.log("allo");
-        console.log(popupRef.current);
-        closePopup();
+      if (isOpen && popupRef.current) {
+        e.target instanceof HTMLElement &&
+          !popupRef.current.contains(e.target) &&
+          closePopup();
       }
+      return null;
     };
     window.addEventListener("click", listener);
     return () => window.removeEventListener("click", listener);
   }, [popupRef, isOpen]);
+
+  const ThemeIcon = theme === "dark" ? DarkModeIcon : LightModeIcon;
 
   return (
     <div
@@ -79,11 +82,7 @@ const ProfilePopUp: FC<ProfilePopUpProps> = ({ isOpen, closePopup }) => {
         onClick={() => changeTheme(theme === "dark" ? "light" : "dark")}
         className="cursor-pointer text-secondary-light dark:text-secondary-dark transition-all hover:text-primary flex p-[16px] items-center gap-[12px] w-full"
       >
-        {theme === "dark" ? (
-          <DarkModeIcon fontSize="inherit" />
-        ) : (
-          <LightModeIcon fontSize="inherit" />
-        )}
+        <ThemeIcon fontSize="inherit" />
         <p className="text-sm text-primary-light dark:text-primary-dark font-medium">
           Mode: {theme === "dark" ? "dark" : "light"}
         </p>
