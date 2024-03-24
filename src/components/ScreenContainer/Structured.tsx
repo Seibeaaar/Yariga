@@ -12,7 +12,7 @@ const StructuredContainer: FC<ScreenContainerProps> = ({
       <SideBar />
       <section className="flex-grow">
         <Header />
-        {children}
+        <div className="h-full bg-primary-dark dark:bg-black">{children}</div>
       </section>
     </main>
   );

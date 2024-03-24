@@ -8,6 +8,7 @@ import {
   completeProfile,
 } from "../thunks/profile";
 import router from "@/router";
+import { PURGE } from "redux-persist";
 
 export type ProfileState = {
   pending: boolean;
@@ -30,6 +31,9 @@ const profileSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    builder.addCase(PURGE, () => {
+      return initialState;
+    });
     builder.addCase(executeLoginRequest.pending, (state) => {
       state.pending = true;
       state.error = false;

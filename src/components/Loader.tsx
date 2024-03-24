@@ -10,7 +10,7 @@ const Loader: FC<LoaderProps> = ({ transparent = true }) => (
     <div
       className={`w-full h-full ${
         transparent ? "opacity-70" : ""
-      } bg-light dark:bg-black z-0 absolute`}
+      } bg-light dark:bg-bg-black z-0 absolute`}
     />
     <img
       src={Logo}

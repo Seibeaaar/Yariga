@@ -10,7 +10,7 @@ import {
 export type AppTheme = "light" | "dark";
 
 export const ThemeContext = createContext({
-  theme: "light",
+  theme: "light" as AppTheme,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   changeTheme: (_value: AppTheme) => {},
 });

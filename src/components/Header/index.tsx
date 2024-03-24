@@ -2,18 +2,27 @@ import { useSelector } from "react-redux";
 import { Avatar } from "@mui/material";
 import { RootState } from "@/redux/store";
 import { getAvatarFallback, getFullName } from "@/utils/profile";
-import { useNavigate } from "react-router";
+import ProfilePopUp from "./ProfilePopup";
+import { useState } from "react";
 
 const Header = () => {
   const { profile } = useSelector((state: RootState) => state.profile);
-  const navigate = useNavigate();
+  const [popUpOpen, setPopUpOpen] = useState(false);
 
-  const goToProfile = () => navigate("/profile");
+  const togglePopUp = () => {
+    setPopUpOpen(!popUpOpen);
+  };
+
   return (
-    <header className="bg-primary-dark h-[70px] py-[16px] dark:bg-primary-light">
-      <div className="flex items-center gap-[12px]">
+    <header className="pl-[24px] pr-[72px] bg-white flex items-center justify-between h-[70px] py-[16px] dark:bg-bg-black">
+      <div></div>
+      <div className="flex relative items-center gap-[12px] ">
+        <ProfilePopUp
+          closePopup={() => setPopUpOpen(false)}
+          isOpen={popUpOpen}
+        />
         <Avatar
-          onClick={goToProfile}
+          onClick={togglePopUp}
           className="cursor-pointer"
           alt={getFullName(profile!)}
           src={profile?.avatar}
