@@ -5,6 +5,7 @@ import { getAvatarFallback, getFullName } from "@/utils/profile";
 import ProfilePopUp from "./ProfilePopup";
 import { useState, MouseEvent as ReactMouseEvent } from "react";
 import { PROFILE_ROLE_TITLES } from "@/constants/profile";
+import SearchBar from "../Search";
 
 const Header = () => {
   const { profile } = useSelector((state: RootState) => state.profile);
@@ -16,8 +17,8 @@ const Header = () => {
   };
 
   return (
-    <header className="pl-[24px] pr-[72px] bg-white flex items-center justify-between h-[70px] py-[16px] dark:bg-bg-black">
-      <div />
+    <header className="lg:pl-[24px] pr-[23px] lg:pr-[72px] bg-white flex items-center justify-between h-[70px] py-[16px] dark:bg-bg-black">
+      <SearchBar />
       <div className="flex relative items-center gap-[12px] ">
         <ProfilePopUp
           closePopup={() => setPopUpOpen(false)}

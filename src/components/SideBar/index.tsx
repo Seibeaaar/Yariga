@@ -19,7 +19,7 @@ const SideBar = () => {
     return (
       <>
         <aside
-          className={`h-[70px] p-[23px] flex overflow-hidden bg-white dark:bg-bg-black relative z-[2]`}
+          className={`h-[70px] p-[23px] flex items-center justify-center overflow-hidden bg-white dark:bg-bg-black relative z-[2]`}
         >
           <BurgerMenu onClick={toggleNavMenu} />
         </aside>
