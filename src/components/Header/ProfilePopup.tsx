@@ -80,7 +80,7 @@ const ProfilePopUp: FC<ProfilePopUpProps> = ({ isOpen, closePopup }) => {
       })}
       <div
         onClick={() => changeTheme(theme === "dark" ? "light" : "dark")}
-        className="cursor-pointer text-secondary-light dark:text-secondary-dark transition-all hover:text-primary flex p-[16px] items-center gap-[12px] w-full"
+        className="cursor-pointer text-secondary-light dark:text-secondary-dark transition-all hover:text-primary hover:dark:text-primary flex p-[16px] items-center gap-[12px] w-full"
       >
         <ThemeIcon fontSize="inherit" />
         <p className="text-sm text-primary-light dark:text-primary-dark font-medium">
