@@ -20,17 +20,17 @@ const BurgerMenu: FC<BurgerMenuProps> = ({ onClick }) => {
       <div
         className={`${
           isOpen ? "rotate-[37.5deg]" : "rotate-0"
-        } transition-all h-[3px] bg-white origin-left`}
+        } transition-all h-[3px] dark:bg-white bg-bg-black origin-left`}
       ></div>
       <div
         className={`${
           isOpen ? "translate-x-full opacity-0" : "translate-x-0 opacity-100"
-        } transition-all h-[3px] bg-white`}
+        } transition-all h-[3px] dark:bg-white bg-bg-black`}
       ></div>
       <div
         className={`${
           isOpen ? "-rotate-[37.5deg]" : "rotate-0"
-        } transition-all h-[3px] bg-white origin-left`}
+        } transition-all h-[3px] dark:bg-white bg-bg-black origin-left`}
       ></div>
     </div>
   );
