@@ -18,7 +18,8 @@ export default {
         secondary: "#CFC8FF",
         danger: "#F45252",
         "border-dark": "#272B30",
-        "border-light": "#E4E4E4"
+        "border-light": "#E4E4E4",
+        black: '#111315'
       },
       keyframes: {
         heartbeat: {

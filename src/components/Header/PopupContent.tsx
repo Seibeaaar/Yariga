@@ -1,5 +1,5 @@
 /// <reference types="vite-plugin-svgr/client" />
-import { useContext, FC, useRef, useEffect } from "react";
+import { useContext, FC } from "react";
 import ProfileIcon from "@/assets/icons/Profile.svg?react";
 import SettingsIcon from "@/assets/icons/Settings.svg?react";
 import LogoutIcon from "@/assets/icons/Logout.svg?react";
@@ -9,15 +9,9 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import { persistor } from "@/redux/store";
 
-type ProfilePopUpProps = {
-  isOpen: boolean;
-  closePopup: () => void;
-};
-
-const ProfilePopUp: FC<ProfilePopUpProps> = ({ isOpen, closePopup }) => {
+const ProfilePopupContent: FC = () => {
   const { theme, changeTheme } = useContext(ThemeContext);
   const navigate = useNavigate();
-  const popupRef = useRef<HTMLDivElement>(null);
 
   const HEADER_POPUP_OPTIONS = [
     {
@@ -41,28 +35,10 @@ const ProfilePopUp: FC<ProfilePopUpProps> = ({ isOpen, closePopup }) => {
     },
   ];
 
-  useEffect(() => {
-    const listener = (e: MouseEvent) => {
-      if (isOpen && popupRef.current) {
-        e.target instanceof HTMLElement &&
-          !popupRef.current.contains(e.target) &&
-          closePopup();
-      }
-      return null;
-    };
-    window.addEventListener("click", listener);
-    return () => window.removeEventListener("click", listener);
-  }, [popupRef, isOpen]);
-
   const ThemeIcon = theme === "dark" ? DarkModeIcon : LightModeIcon;
 
   return (
-    <div
-      ref={popupRef}
-      className={`transition-transform origin-top ${
-        isOpen ? "scale-y-1" : "scale-y-0"
-      } absolute top-[56px] bg-white dark:bg-bg-black rounded-[10px] w-[192px]`}
-    >
+    <>
       {HEADER_POPUP_OPTIONS.map((option) => {
         const Icon = option.icon;
         return (
@@ -87,8 +63,8 @@ const ProfilePopUp: FC<ProfilePopUpProps> = ({ isOpen, closePopup }) => {
           Mode: {theme === "dark" ? "dark" : "light"}
         </p>
       </div>
-    </div>
+    </>
   );
 };
 
-export default ProfilePopUp;
+export default ProfilePopupContent;
