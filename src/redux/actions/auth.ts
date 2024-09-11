@@ -13,7 +13,3 @@ export const signUp = (payload: SignUpData) => ({
   type: SIGN_UP_REQUEST,
   payload,
 });
-
-export const authViaGoogle = () => ({
-  type: GOOGLE_AUTH,
-});

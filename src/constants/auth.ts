@@ -10,3 +10,11 @@ export const AUTH_REDIRECT_CONFIG = {
     path: '/',
   },
 };
+
+export const PASSWORD_REQUIREMENTS = [
+  'From 6 to 16 characters',
+  'At least one uppercase letter',
+  'At least one lowercase letter',
+  'At least one digit',
+  'At least one special character',
+];

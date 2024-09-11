@@ -12,6 +12,7 @@ import { signUp } from '@/redux/actions/auth';
 import GoogleButton from '../GoogleButton';
 import Loader from '../Loader';
 import Popup from '../Popup';
+import PasswordRequirements from '../PasswordRequirements';
 
 const SignUpForm = () => {
   const {
@@ -92,14 +93,17 @@ const SignUpForm = () => {
           control={control}
           name="password"
           render={({ field: { onChange, value } }) => (
-            <Input
-              label="Password"
-              type="password"
-              onChange={onChange}
-              value={value}
-              placeholder="Your password"
-              error={errors.password?.message}
-            />
+            <div className="flex items-end gap-[8px]">
+              <Input
+                label="Password"
+                type="password"
+                onChange={onChange}
+                value={value}
+                placeholder="Your password"
+                error={errors.password?.message}
+              />
+              <PasswordRequirements />
+            </div>
           )}
         />
         <div className="my-[20px] flex flex-col gap-[24px]">
