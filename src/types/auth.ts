@@ -4,3 +4,10 @@ export type SignUpData = {
   firstName: string;
   lastName: string;
 };
+
+export type LoginData = {
+  password: string;
+  email: string;
+};
+
+export type AuthRedirectMode = 'signUp' | 'login';
