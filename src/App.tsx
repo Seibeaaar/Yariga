@@ -1,12 +1,12 @@
-import Button from './components/Button';
-import Input from './components/Input';
+import { RouterProvider } from 'react-router-dom';
+import ThemeContextProvider from './customization/ThemeContext';
+import routes from './routes';
 
 function App() {
   return (
-    <>
-      <Input />
-      <Button variant="text" text="Hello" />
-    </>
+    <ThemeContextProvider>
+      <RouterProvider router={routes} />
+    </ThemeContextProvider>
   );
 }
 
