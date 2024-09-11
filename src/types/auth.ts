@@ -1,3 +1,5 @@
+import { User } from './user';
+
 export type SignUpData = {
   password: string;
   email: string;
@@ -11,3 +13,8 @@ export type LoginData = {
 };
 
 export type AuthRedirectMode = 'signUp' | 'login';
+
+export type AuthRequestResponse = {
+  user: User;
+  token: string;
+};

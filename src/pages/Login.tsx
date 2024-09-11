@@ -10,11 +10,17 @@ const LoginPage = () => {
       <div className="flex items-center w-screen h-screen">
         <AnimatedBlock
           tag="section"
-          initial={{
-            opacity: 0,
+          animationProps={{
+            initial: {
+              opacity: 0,
+            },
+            animate: {
+              opacity: 1,
+            },
+            transition: {
+              duration: 1,
+            },
           }}
-          animate={{ opacity: 1 }}
-          duration={1}
           className="flex-grow flex items-center justify-center"
         >
           <div className="w-full lg:w-2/3 px-[24px] lg:p-0">

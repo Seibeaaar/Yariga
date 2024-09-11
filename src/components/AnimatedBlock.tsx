@@ -1,39 +1,25 @@
-import { motion } from 'framer-motion';
+import { motion, AnimationProps } from 'framer-motion';
 import { ReactNode } from 'react';
 
 type AnimatedBlockProps<T extends keyof JSX.IntrinsicElements> =
   JSX.IntrinsicElements[T] & {
-    children: ReactNode;
-    animated?: boolean;
+    children?: ReactNode;
     tag?: keyof JSX.IntrinsicElements;
-    initial?: object;
-    animate?: object;
-    duration?: number;
-    delay?: number;
     className?: string;
+    animationProps?: AnimationProps;
   };
 
 const AnimatedBlock = <T extends keyof JSX.IntrinsicElements>({
-  animated = true,
   tag = 'div',
   children,
-  initial = {},
-  animate = {},
-  duration = 0,
-  delay = 0,
+  animationProps = {},
   className,
+  ...rest
 }: AnimatedBlockProps<T>) => {
   const MotionTag = motion(tag);
-  const animationProps = animated
-    ? {
-        initial,
-        animate,
-        transition: { duration, delay },
-      }
-    : {};
 
   return (
-    <MotionTag className={className} {...animationProps}>
+    <MotionTag className={className} {...animationProps} {...rest}>
       {children}
     </MotionTag>
   );
