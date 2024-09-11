@@ -5,8 +5,10 @@ import { LoginData, SignUpData } from '@/types/auth';
 import { AuthRequestResponse } from '@/types/auth';
 import { LOGIN_REQUEST, SIGN_UP_REQUEST } from '../actions/auth';
 import { PayloadAction } from '@reduxjs/toolkit';
+import router from '@/routes';
 
 import { generateErrorMesaage } from '@/utils/redux';
+import { setUser } from '../reducers/user';
 
 function* loginSaga(
   action: PayloadAction<LoginData>,
@@ -17,7 +19,10 @@ function* loginSaga(
     const { payload } = action;
     const { user, token } = yield call(loginRequest, payload);
 
-    console.log(user, token);
+    localStorage.setItem('token', token);
+    yield put(setUser(user));
+
+    router.navigate('/dashboard');
   } catch (e) {
     yield put(authError(generateErrorMesaage(e)));
   } finally {
@@ -33,7 +38,10 @@ function* signUpSaga(
     yield put(authPending(true));
     const { payload } = action;
     const { user, token } = yield call(signUpRequest, payload);
-    console.log(user, token);
+    localStorage.setItem('token', token);
+    yield put(setUser(user));
+
+    router.navigate('/complete-profile');
   } catch (e) {
     yield put(authError(generateErrorMesaage(e)));
   } finally {

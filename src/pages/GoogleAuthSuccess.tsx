@@ -6,6 +6,7 @@ import Loader from '@/components/Loader';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/redux';
 import { authViaGoogleError } from '@/redux/reducers/auth';
+import { setUser } from '@/redux/reducers/user';
 
 const GoogleAuthSuccessPage = () => {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ const GoogleAuthSuccessPage = () => {
 
     if (token && user) {
       localStorage.setItem('token', token);
+      dispatch(setUser(user));
       navigate('/dashboard');
     } else {
       dispatch(authViaGoogleError('Missing data from Google'));
