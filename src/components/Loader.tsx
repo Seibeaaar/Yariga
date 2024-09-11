@@ -9,7 +9,7 @@ type LoaderProps = {
 const Loader: FC<LoaderProps> = ({ showLoader }) => {
   if (!showLoader) return null;
   return (
-    <div className="fixed z-[1000] w-screen h-screen flex justify-center items-center">
+    <div className="fixed z-[1000] top-0 left-0 w-screen h-screen flex justify-center items-center">
       <div className={`w-full h-full bg-black z-0 absolute`} />
       <AnimatedBlock
         tag="img"

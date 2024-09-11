@@ -5,6 +5,11 @@ import Input from '@/components/Input';
 import Button from '@/components/Button';
 import { LoginData } from '@/types/auth';
 import GoogleIcon from '@/assets/icons/Google.svg';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '@/redux';
+import Popup from '../Popup';
+import Loader from '../Loader';
+import { login } from '@/redux/actions/auth';
 
 const LoginForm = () => {
   const {
@@ -19,45 +24,61 @@ const LoginForm = () => {
     resolver: yupResolver(LOGIN_VALIDATION_SCHEMA),
   });
 
-  const onLogin = (data: LoginData) => console.log(data);
+  const dispatch = useDispatch<AppDispatch>();
+  const { authError, authPending } = useSelector(
+    (state: RootState) => state.auth,
+  );
+
+  const onLogin = (data: LoginData) => dispatch(login(data));
 
   return (
-    <form onSubmit={handleSubmit(onLogin)} className="mt-[36px]">
-      <Controller
-        control={control}
-        name="email"
-        render={({ field: { onChange } }) => (
-          <Input
-            type="email"
-            label="Email"
-            onChange={onChange}
-            placeholder="Your email"
-            error={errors.email?.message}
-          />
-        )}
+    <>
+      <Loader showLoader={authPending} />
+      <Popup
+        title="Oops. Something went wrong"
+        content={authError as string}
+        showPopup={!!authError}
+        vertical="top"
+        horizontal="right"
+        severity="error"
       />
-      <Controller
-        control={control}
-        name="password"
-        render={({ field: { onChange } }) => (
-          <Input
-            label="Password"
-            type="password"
-            onChange={onChange}
-            placeholder="Your password"
-            error={errors.password?.message}
-          />
-        )}
-      />
-      <div className="my-[20px] flex flex-col gap-[24px]">
-        <Button type="submit" text="Sign Up" />
-        <Button
-          variant="outlined"
-          leftIcon={GoogleIcon}
-          text="Continue with Google"
+      <form onSubmit={handleSubmit(onLogin)} className="mt-[36px]">
+        <Controller
+          control={control}
+          name="email"
+          render={({ field: { onChange } }) => (
+            <Input
+              type="email"
+              label="Email"
+              onChange={onChange}
+              placeholder="Your email"
+              error={errors.email?.message}
+            />
+          )}
         />
-      </div>
-    </form>
+        <Controller
+          control={control}
+          name="password"
+          render={({ field: { onChange } }) => (
+            <Input
+              label="Password"
+              type="password"
+              onChange={onChange}
+              placeholder="Your password"
+              error={errors.password?.message}
+            />
+          )}
+        />
+        <div className="my-[20px] flex flex-col gap-[24px]">
+          <Button type="submit" text="Login" />
+          <Button
+            variant="outlined"
+            leftIcon={GoogleIcon}
+            text="Continue with Google"
+          />
+        </div>
+      </form>
+    </>
   );
 };
 
