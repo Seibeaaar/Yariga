@@ -4,10 +4,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
 import { LoginData } from '@/types/auth';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '@/redux';
 import { login } from '@/redux/actions/auth';
 import GoogleButton from '../GoogleButton';
+import Loader from '../Loader';
+import Popup from '../Popup';
+import { selectAuthError, selectAuthPending } from '@/redux/selectors/auth';
 
 const LoginForm = () => {
   const {
@@ -25,39 +28,55 @@ const LoginForm = () => {
   const dispatch = useDispatch<AppDispatch>();
   const onLogin = (data: LoginData) => dispatch(login(data));
 
+  const authPending = useSelector(selectAuthPending);
+  const authError = useSelector(selectAuthError);
+
   return (
-    <form onSubmit={handleSubmit(onLogin)} className="mt-[36px]">
-      <Controller
-        control={control}
-        name="email"
-        render={({ field: { onChange } }) => (
-          <Input
-            type="email"
-            label="Email"
-            onChange={onChange}
-            placeholder="Your email"
-            error={errors.email?.message}
-          />
-        )}
+    <>
+      <Loader showLoader={authPending} />
+      <Popup
+        title="Oops. Something went wrong"
+        content={authError as string}
+        showPopup={!!authError}
+        vertical="top"
+        horizontal="right"
+        severity="error"
       />
-      <Controller
-        control={control}
-        name="password"
-        render={({ field: { onChange } }) => (
-          <Input
-            label="Password"
-            type="password"
-            onChange={onChange}
-            placeholder="Your password"
-            error={errors.password?.message}
-          />
-        )}
-      />
-      <div className="my-[20px] flex flex-col gap-[24px]">
-        <Button type="submit" text="Login" />
-        <GoogleButton />
-      </div>
-    </form>
+      <form onSubmit={handleSubmit(onLogin)} className="mt-[36px]">
+        <Controller
+          control={control}
+          name="email"
+          render={({ field: { onChange, value } }) => (
+            <Input
+              type="email"
+              label="Email"
+              onChange={onChange}
+              value={value}
+              placeholder="Your email"
+              error={errors.email?.message}
+            />
+          )}
+        />
+        <Controller
+          control={control}
+          name="password"
+          render={({ field: { onChange, value } }) => (
+            <Input
+              label="Password"
+              type="password"
+              onChange={onChange}
+              value={value}
+              placeholder="Your password"
+              error={errors.password?.message}
+            />
+          )}
+        />
+        <div className="my-[20px] flex flex-col gap-[24px]">
+          <Button type="submit" text="Login" />
+          <GoogleButton />
+        </div>
+      </form>
+    </>
   );
 };
 

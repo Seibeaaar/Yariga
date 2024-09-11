@@ -1,30 +1,18 @@
 import { useSelector } from 'react-redux';
-import { RootState } from '@/redux';
 
 import NonAuthorizedScreen from '@/components/ScreenContainer/NonAuth';
 import SkyscraperImage from '@/assets/images/Skyscraper.webp';
 import LoginForm from '@/components/Login/Form';
 import AuthRedirect from '@/components/AuthRedirect';
 import AnimatedBlock from '@/components/AnimatedBlock';
-import Loader from '@/components/Loader';
 import Popup from '@/components/Popup';
+import { selectAuthViaGoogleError } from '@/redux/selectors/auth';
 
 const LoginPage = () => {
-  const { authError, authViaGoogleError, authPending } = useSelector(
-    (state: RootState) => state.auth,
-  );
+  const authViaGoogleError = useSelector(selectAuthViaGoogleError);
 
   return (
     <NonAuthorizedScreen>
-      <Loader showLoader={authPending} />
-      <Popup
-        title="Oops. Something went wrong"
-        content={authError as string}
-        showPopup={!!authError}
-        vertical="top"
-        horizontal="right"
-        severity="error"
-      />
       <Popup
         title="Oops. Something went wrong"
         content={authViaGoogleError as string}

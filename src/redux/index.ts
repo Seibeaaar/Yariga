@@ -9,6 +9,7 @@ const sagaMiddleware = createSagaMiddleware();
 const persistConfig = {
   key: 'root',
   storage,
+  blacklist: ['auth'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
