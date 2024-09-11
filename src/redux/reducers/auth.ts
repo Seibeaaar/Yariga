@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-type AuthReducerInitialState = {
+export type AuthReducerInitialState = {
   authPending: boolean;
   authError: string | null;
   authViaGooglePending: boolean;

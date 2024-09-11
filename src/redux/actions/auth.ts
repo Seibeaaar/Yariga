@@ -14,7 +14,6 @@ export const signUp = (payload: SignUpData) => ({
   payload,
 });
 
-export const authViaGoogle = (token: string) => ({
+export const authViaGoogle = () => ({
   type: GOOGLE_AUTH,
-  payload: token,
 });

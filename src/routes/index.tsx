@@ -1,6 +1,7 @@
 import SignUpPage from '@/pages/SignUp';
 import LoginPage from '@/pages/Login';
 import { createBrowserRouter } from 'react-router-dom';
+import GoogleAuthSuccessPage from '@/pages/GoogleAuthSuccess';
 
 const router = createBrowserRouter([
   {
@@ -10,6 +11,10 @@ const router = createBrowserRouter([
   {
     path: '/sign-up',
     element: <SignUpPage />,
+  },
+  {
+    path: '/auth/success',
+    element: <GoogleAuthSuccessPage />,
   },
 ]);
 

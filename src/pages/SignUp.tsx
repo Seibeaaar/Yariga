@@ -1,12 +1,29 @@
+import { useSelector } from 'react-redux';
+import { RootState } from '@/redux';
+
 import NonAuthorizedScreen from '@/components/ScreenContainer/NonAuth';
 import SkyscraperImage from '@/assets/images/Skyscraper.webp';
 import SignUpForm from '@/components/SignUp/Form';
 import AuthRedirect from '@/components/AuthRedirect';
 import AnimatedBlock from '@/components/AnimatedBlock';
+import Loader from '@/components/Loader';
+import Popup from '@/components/Popup';
 
 const SignUpPage = () => {
+  const { authPending, authError } = useSelector(
+    (state: RootState) => state.auth,
+  );
   return (
     <NonAuthorizedScreen>
+      <Loader showLoader={authPending} />
+      <Popup
+        vertical="top"
+        horizontal="right"
+        title="Oops. Something wrong"
+        severity="error"
+        showPopup={!!authError}
+        content={authError as string}
+      />
       <div className="flex items-center w-screen h-screen">
         <AnimatedBlock
           tag="section"
