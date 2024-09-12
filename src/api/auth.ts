@@ -14,8 +14,3 @@ export const signUpRequest = async (
   const result = await instance.post('/auth/signUp', data);
   return result.data;
 };
-
-export const authViaGoogleRequest = async (): Promise<AuthRequestResponse> => {
-  const response = await instance.get('/auth/google');
-  return response.data;
-};

@@ -13,7 +13,7 @@ const initialState: AuthReducerInitialState = {
 };
 
 export const authSlice = createSlice({
-  name: 'profile',
+  name: 'auth',
   initialState,
   reducers: {
     authPending: (state, { payload }) => {
