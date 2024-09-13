@@ -1,3 +1,5 @@
+import { MuiIcon } from './components';
+
 export type User = {
   firstName: string;
   lastName: string;
@@ -14,3 +16,9 @@ export enum USER_ROLE {
   Landlord = 'landlord',
   Tenant = 'tenant',
 }
+
+export type UserRoleOption = {
+  icon: MuiIcon;
+  role: USER_ROLE;
+  title: string;
+};
