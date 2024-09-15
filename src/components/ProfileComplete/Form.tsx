@@ -81,6 +81,7 @@ const ProfileCompleteForm = () => {
               component={ForwardedInput}
               value={value}
               onChange={onChange}
+              placeholder="dd.mm.yyyy"
               label="Date of birth"
               error={errors.dateOfBirth?.message}
             />
@@ -96,6 +97,7 @@ const ProfileCompleteForm = () => {
               component={ForwardedInput}
               value={value}
               onChange={onChange}
+              placeholder="Valid phone number (e.g. +1 (111) 111-1111)"
               label="Phone number (United States)"
               error={errors.phoneNumber?.message}
             />
