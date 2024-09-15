@@ -5,26 +5,51 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import ForwardedInput from '@/components/Input/Forwarded';
 import Button from '@/components/Button';
 import { USER_ROLE } from '@/types/user';
+import Loader from '../Loader';
+import Popup from '../Popup';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectUserCompleteError,
+  selectUserCompletePending,
+} from '@/redux/selectors/user';
+import { completeUser } from '@/redux/actions/user';
+import { UserCompleteRequest } from '@/types/user';
 
 import { USER_ROLE_OPTIONS } from '@/constants/user';
 import UserRoleCard from './RoleCard';
+import { AppDispatch } from '@/redux';
 
 const ProfileCompleteForm = () => {
   const {
     control,
     formState: { errors },
+    handleSubmit,
   } = useForm({
-    resolver: yupResolver(PROFILE_COMPLETE_SCHEMA),
     defaultValues: {
       dateOfBirth: '',
       role: USER_ROLE.Tenant,
       phoneNumber: '',
     },
+    resolver: yupResolver(PROFILE_COMPLETE_SCHEMA),
   });
+  const dispatch = useDispatch<AppDispatch>();
+  const userCompletePending = useSelector(selectUserCompletePending);
+  const userCompleteError = useSelector(selectUserCompleteError);
+
+  const onSubmit = (data: UserCompleteRequest) => dispatch(completeUser(data));
 
   return (
     <>
-      <form className="mt-[36px]">
+      <Loader showLoader={userCompletePending} />
+      <Popup
+        title="Oops. Something went wrong"
+        content={userCompleteError as string}
+        showPopup={!!userCompleteError}
+        vertical="top"
+        horizontal="right"
+        severity="error"
+      />
+      <form onSubmit={handleSubmit(onSubmit)} className="mt-[36px]">
         <div>
           <p className="text-sm font-medium mb-[4px]">
             You want to join Yariga to:
@@ -72,12 +97,12 @@ const ProfileCompleteForm = () => {
               value={value}
               onChange={onChange}
               label="Phone number (United States)"
-              error={errors.dateOfBirth?.message}
+              error={errors.phoneNumber?.message}
             />
           )}
         />
         <div className="my-[20px] flex flex-col gap-[24px]">
-          <Button text="Complete profile" />
+          <Button type="submit" text="Complete profile" />
         </div>
       </form>
     </>

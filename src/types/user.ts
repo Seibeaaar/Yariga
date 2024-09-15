@@ -1,5 +1,11 @@
 import { MuiIcon } from './components';
 
+export type UserCompleteRequest = {
+  dateOfBirth: string;
+  phoneNumber: string;
+  role: USER_ROLE;
+};
+
 export type User = {
   firstName: string;
   lastName: string;
