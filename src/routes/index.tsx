@@ -2,7 +2,8 @@ import SignUpPage from '@/pages/SignUp';
 import LoginPage from '@/pages/Login';
 import { createBrowserRouter } from 'react-router-dom';
 import GoogleAuthSuccessPage from '@/pages/GoogleAuthSuccess';
-import ProfileCompleteScreen from '@/pages/ProfileComplete';
+import ProfileCompletePage from '@/pages/ProfileComplete';
+import PreferencesPage from '@/pages/Preferences';
 
 const router = createBrowserRouter([
   {
@@ -19,7 +20,11 @@ const router = createBrowserRouter([
   },
   {
     path: '/complete-profile',
-    element: <ProfileCompleteScreen />,
+    element: <ProfileCompletePage />,
+  },
+  {
+    path: '/set-preferences',
+    element: <PreferencesPage />,
   },
 ]);
 
