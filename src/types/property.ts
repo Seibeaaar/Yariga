@@ -30,8 +30,8 @@ export enum PROPERTY_STATUS {
 }
 
 type MinMaxPair = {
-  min: number;
-  max: number;
+  min?: number;
+  max?: number;
 };
 
 export type PropertyFilters = {

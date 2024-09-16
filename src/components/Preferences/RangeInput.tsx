@@ -1,22 +1,21 @@
 import Input from '@/components/Input';
-import { FC } from 'react';
-import { Control, Controller } from 'react-hook-form';
+import { Control, Controller, FieldValues, Path } from 'react-hook-form';
 
-type RangeInputProps = {
+type RangeInputProps<T extends FieldValues> = {
   label: string;
-  lowestName: string;
-  highestName: string;
+  lowestName: Path<T>;
+  highestName: Path<T>;
   lowestError: string;
   highestError: string;
   max: number;
   min: number;
   prefix: React.ReactNode;
-  control: Control;
+  control: Control<T>;
   className?: string;
   disabled?: boolean;
 };
 
-const RangeInput: FC<RangeInputProps> = ({
+const RangeInput = <T extends FieldValues>({
   prefix,
   max,
   min,
@@ -28,7 +27,7 @@ const RangeInput: FC<RangeInputProps> = ({
   highestName,
   className = '',
   disabled = false,
-}) => {
+}: RangeInputProps<T>) => {
   return (
     <div className={`w-full lg:w-[calc(50%-16px)] ${className}`}>
       <h4 className="text-lg font-medium">{label}:</h4>

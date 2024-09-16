@@ -1,5 +1,8 @@
 import { Controller, useForm, useWatch } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch } from '@/redux';
+import { setPreferences } from '@/redux/actions/user';
 import {
   SquareFoot,
   Money,
@@ -36,15 +39,23 @@ import {
   PROPERTY_FACILITY,
   PROPERTY_PAYMENT_PERIOD,
   PROPERTY_TYPE,
+  PropertyFilters,
 } from '@/types/property';
 import RangeInput from './RangeInput';
 import { AGREEMENT_TYPE } from '@/types/agreement';
+import Loader from '../Loader';
+import Popup from '../Popup';
+import {
+  selectSetPreferencesPending,
+  selectsetPreferencesError,
+} from '@/redux/selectors/user';
 
 const PropertyPreferencesForm = () => {
   const {
     control,
     setValue,
     formState: { errors },
+    handleSubmit,
   } = useForm({
     resolver: yupResolver(PROPERTY_PREFERENCES_VALIDATION_SCHEMA),
     defaultValues: {
@@ -54,6 +65,10 @@ const PropertyPreferencesForm = () => {
       paymemtPeriod: [],
     },
   });
+
+  const dispatch = useDispatch<AppDispatch>();
+  const setPreferencesPending = useSelector(selectSetPreferencesPending);
+  const setPreferencesError = useSelector(selectsetPreferencesError);
 
   const facilities = useWatch({
     control,
@@ -104,9 +119,23 @@ const PropertyPreferencesForm = () => {
     setValue('paymemtPeriod', paymentPeriodSelected);
   };
 
+  const onSubmit = (data: PropertyFilters) => dispatch(setPreferences(data));
+
   return (
     <>
-      <form className="mx-auto w-full px-[24px] md:w-3/4 md:p-0 mt-[24px] flex flex-col gap-[36px]">
+      <Loader showLoader={setPreferencesPending} />
+      <Popup
+        title="Oops. Something went wrong"
+        content={setPreferencesError as string}
+        showPopup={!!setPreferencesError}
+        vertical="top"
+        horizontal="right"
+        severity="error"
+      />
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="mx-auto w-full px-[24px] md:w-3/4 md:p-0 mt-[24px] flex flex-col gap-[36px]"
+      >
         <Controller
           control={control}
           name="agreementType"
