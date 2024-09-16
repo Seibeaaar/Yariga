@@ -49,6 +49,7 @@ import {
   selectSetPreferencesPending,
   selectsetPreferencesError,
 } from '@/redux/selectors/user';
+import AnimatedBlock from '../AnimatedBlock';
 
 const PropertyPreferencesForm = () => {
   const {
@@ -140,7 +141,22 @@ const PropertyPreferencesForm = () => {
           control={control}
           name="agreementType"
           render={() => (
-            <div>
+            <AnimatedBlock
+              tag="div"
+              animationProps={{
+                initial: {
+                  opacity: 0,
+                  x: -200,
+                },
+                animate: {
+                  opacity: 1,
+                  x: 0,
+                },
+                transition: {
+                  duration: 1,
+                },
+              }}
+            >
               <h4 className="text-lg font-medium mb-[4px]">
                 You're here looking for a:
               </h4>
@@ -153,14 +169,29 @@ const PropertyPreferencesForm = () => {
                   />
                 ))}
               </div>
-            </div>
+            </AnimatedBlock>
           )}
         />
         <Controller
           control={control}
           name="propertyType"
           render={() => (
-            <div>
+            <AnimatedBlock
+              animationProps={{
+                initial: {
+                  opacity: 0,
+                  x: -200,
+                },
+                animate: {
+                  opacity: 1,
+                  x: 0,
+                },
+                transition: {
+                  duration: 1,
+                  delay: 0.25,
+                },
+              }}
+            >
               <h4 className="text-lg font-medium mb-[4px]">
                 Property type should be:
               </h4>
@@ -173,14 +204,29 @@ const PropertyPreferencesForm = () => {
                   />
                 ))}
               </div>
-            </div>
+            </AnimatedBlock>
           )}
         />
         <Controller
           control={control}
           name="paymemtPeriod"
           render={() => (
-            <div>
+            <AnimatedBlock
+              animationProps={{
+                initial: {
+                  opacity: 0,
+                  x: -200,
+                },
+                animate: {
+                  opacity: 1,
+                  x: 0,
+                },
+                transition: {
+                  duration: 1,
+                  delay: 0.5,
+                },
+              }}
+            >
               <h4 className="text-lg font-medium mb-[4px]">
                 You prefer to pay:
               </h4>
@@ -193,10 +239,26 @@ const PropertyPreferencesForm = () => {
                   />
                 ))}
               </div>
-            </div>
+            </AnimatedBlock>
           )}
         />
-        <div className="flex lg:flex-wrap lg:flex-row flex-col gap-[16px]">
+        <AnimatedBlock
+          animationProps={{
+            initial: {
+              opacity: 0,
+              x: -200,
+            },
+            animate: {
+              opacity: 1,
+              x: 0,
+            },
+            transition: {
+              duration: 1,
+              delay: 0.75,
+            },
+          }}
+          className="flex lg:flex-wrap lg:flex-row flex-col gap-[16px]"
+        >
           <RangeInput
             lowestError={errors.area?.min?.message ?? ''}
             highestError={errors.area?.max?.message ?? ''}
@@ -263,12 +325,27 @@ const PropertyPreferencesForm = () => {
             control={control}
             label="Floor level"
           />
-        </div>
+        </AnimatedBlock>
         <Controller
           control={control}
           name="facilities"
           render={({ field: { value } }) => (
-            <div>
+            <AnimatedBlock
+              animationProps={{
+                initial: {
+                  opacity: 0,
+                  x: -200,
+                },
+                animate: {
+                  opacity: 1,
+                  x: 0,
+                },
+                transition: {
+                  duration: 1,
+                  delay: 1,
+                },
+              }}
+            >
               <h4 className="text-lg font-medium mb-[4px]">
                 Property of your choice should have:
               </h4>
@@ -281,12 +358,27 @@ const PropertyPreferencesForm = () => {
                   />
                 ))}
               </div>
-            </div>
+            </AnimatedBlock>
           )}
         />
-        <div>
+        <AnimatedBlock
+          animationProps={{
+            initial: {
+              opacity: 0,
+              x: -200,
+            },
+            animate: {
+              opacity: 1,
+              x: 0,
+            },
+            transition: {
+              duration: 1,
+              delay: 1.25,
+            },
+          }}
+        >
           <Button type="submit" text="Set your preferences" />
-        </div>
+        </AnimatedBlock>
       </form>
     </>
   );
