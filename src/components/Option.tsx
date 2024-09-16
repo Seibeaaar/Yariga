@@ -18,7 +18,7 @@ const Option: FC<OptionProps> = ({
   const Icon = icon;
   const selectedStyles = 'bg-primary text-white border-primary';
   const nonSelectedStyles =
-    'hover:border-primary hover:text-primary text-primary-light dark:text-primary-dark hover:border-primary border-border-light dark:border-border-dark';
+    'hover:border-primary hover:text-primary text-primary-light dark:text-primary-dark dark:hover:border-primary dark:hover:text-primary border-border-light dark:border-border-dark';
 
   return (
     <div

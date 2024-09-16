@@ -35,13 +35,27 @@ export const PROPERTY_PREFERENCES_VALIDATION_SCHEMA = yup.object({
   rooms: buildMinMaxValidation(MIN_ROOMS, MAX_ROOMS, 'rooms'),
   rating: buildMinMaxValidation(MIN_RATING, MAX_RATING, 'rating'),
   agreementType: yup
-    .mixed<AGREEMENT_TYPE>()
-    .oneOf(Object.values(AGREEMENT_TYPE)),
-  propertyType: yup.mixed<PROPERTY_TYPE>().oneOf(Object.values(PROPERTY_TYPE)),
+    .array()
+    .ensure()
+    .required()
+    .of(yup.mixed<AGREEMENT_TYPE>().oneOf(Object.values(AGREEMENT_TYPE))),
+  propertyType: yup
+    .array()
+    .ensure()
+    .required()
+    .of(yup.mixed<PROPERTY_TYPE>().oneOf(Object.values(PROPERTY_TYPE))),
   facilities: yup
     .array()
+    .ensure()
+    .required()
     .of(yup.mixed<PROPERTY_FACILITY>().oneOf(Object.values(PROPERTY_FACILITY))),
   paymemtPeriod: yup
-    .mixed<PROPERTY_PAYMENT_PERIOD>()
-    .oneOf(Object.values(PROPERTY_PAYMENT_PERIOD)),
+    .array()
+    .ensure()
+    .required()
+    .of(
+      yup
+        .mixed<PROPERTY_PAYMENT_PERIOD>()
+        .oneOf(Object.values(PROPERTY_PAYMENT_PERIOD)),
+    ),
 });

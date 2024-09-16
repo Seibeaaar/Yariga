@@ -32,20 +32,13 @@ import {
 } from '@/constants/common';
 import Option from '../Option';
 import { toggleValue } from '@/utils/common';
-import { PROPERTY_FACILITY, PROPERTY_TYPE } from '@/types/property';
+import {
+  PROPERTY_FACILITY,
+  PROPERTY_PAYMENT_PERIOD,
+  PROPERTY_TYPE,
+} from '@/types/property';
 import RangeInput from './RangeInput';
-
-// Agreement type - x
-// Property type - x
-// Payment period - x
-// Area - x
-// Price - x
-// Rating
-// Rooms - x
-// Beds - x
-// Floors - x
-// Floor level - x
-// Facilities - x
+import { AGREEMENT_TYPE } from '@/types/agreement';
 
 const PropertyPreferencesForm = () => {
   const {
@@ -56,6 +49,9 @@ const PropertyPreferencesForm = () => {
     resolver: yupResolver(PROPERTY_PREFERENCES_VALIDATION_SCHEMA),
     defaultValues: {
       facilities: [],
+      agreementType: [],
+      propertyType: [],
+      paymemtPeriod: [],
     },
   });
 
@@ -67,10 +63,45 @@ const PropertyPreferencesForm = () => {
     control,
     name: 'propertyType',
   });
+  const agreementType = useWatch({
+    control,
+    name: 'agreementType',
+  });
+  const paymentPeriod = useWatch({
+    control,
+    name: 'paymemtPeriod',
+  });
 
   const onFacilitiesSelect = (value: PROPERTY_FACILITY) => {
-    const facilitiesSelected = toggleValue(facilities ?? [], value);
+    const facilitiesSelected = toggleValue<PROPERTY_FACILITY>(
+      facilities,
+      value,
+    );
     setValue('facilities', facilitiesSelected);
+  };
+
+  const onAgreementTypeSelect = (value: AGREEMENT_TYPE) => {
+    const agreementTypesSelected = toggleValue<AGREEMENT_TYPE>(
+      agreementType,
+      value,
+    );
+    setValue('agreementType', agreementTypesSelected);
+  };
+
+  const onPropertyTypeSelect = (value: PROPERTY_TYPE) => {
+    const propertyTypesSelected = toggleValue<PROPERTY_TYPE>(
+      propertyType,
+      value,
+    );
+    setValue('propertyType', propertyTypesSelected);
+  };
+
+  const onPaymentPeriodSelect = (value: PROPERTY_PAYMENT_PERIOD) => {
+    const paymentPeriodSelected = toggleValue<PROPERTY_PAYMENT_PERIOD>(
+      paymentPeriod,
+      value,
+    );
+    setValue('paymemtPeriod', paymentPeriodSelected);
   };
 
   return (
@@ -79,7 +110,7 @@ const PropertyPreferencesForm = () => {
         <Controller
           control={control}
           name="agreementType"
-          render={({ field: { onChange, value } }) => (
+          render={() => (
             <div>
               <h4 className="text-lg font-medium mb-[4px]">
                 You're here looking for a:
@@ -87,9 +118,9 @@ const PropertyPreferencesForm = () => {
               <div className="flex items-center gap-[16px] flex-wrap">
                 {AGREEMENT_TYPE_OPTIONS.map((option) => (
                   <Option
-                    selected={value === option.value}
+                    selected={agreementType.includes(option.value)}
                     option={option}
-                    onSelect={() => onChange(option.value)}
+                    onSelect={() => onAgreementTypeSelect(option.value)}
                   />
                 ))}
               </div>
@@ -99,7 +130,7 @@ const PropertyPreferencesForm = () => {
         <Controller
           control={control}
           name="propertyType"
-          render={({ field: { onChange, value } }) => (
+          render={() => (
             <div>
               <h4 className="text-lg font-medium mb-[4px]">
                 Property type should be:
@@ -107,9 +138,9 @@ const PropertyPreferencesForm = () => {
               <div className="flex items-center gap-[16px] flex-wrap">
                 {PROPERTY_TYPE_OPTIONS.map((option) => (
                   <Option
-                    selected={value === option.value}
+                    selected={propertyType.includes(option.value)}
                     option={option}
-                    onSelect={() => onChange(option.value)}
+                    onSelect={() => onPropertyTypeSelect(option.value)}
                   />
                 ))}
               </div>
@@ -119,7 +150,7 @@ const PropertyPreferencesForm = () => {
         <Controller
           control={control}
           name="paymemtPeriod"
-          render={({ field: { onChange, value } }) => (
+          render={() => (
             <div>
               <h4 className="text-lg font-medium mb-[4px]">
                 You prefer to pay:
@@ -127,9 +158,9 @@ const PropertyPreferencesForm = () => {
               <div className="flex items-center gap-[16px] flex-wrap">
                 {PAYMENT_PERIOD_OPTIONS.map((option) => (
                   <Option
-                    selected={value === option.value}
+                    selected={paymentPeriod.includes(option.value)}
                     option={option}
-                    onSelect={() => onChange(option.value)}
+                    onSelect={() => onPaymentPeriodSelect(option.value)}
                   />
                 ))}
               </div>
@@ -201,7 +232,6 @@ const PropertyPreferencesForm = () => {
             max={MAX_FLOOR_LEVEL}
             prefix={<LooksOne />}
             control={control}
-            disabled={propertyType === PROPERTY_TYPE.House}
             label="Floor level"
           />
         </div>
@@ -216,7 +246,7 @@ const PropertyPreferencesForm = () => {
               <div className="flex items-center gap-[16px] flex-wrap">
                 {PROPERTY_FACILITIES_OPTIONS.map((option) => (
                   <Option
-                    selected={(value ?? []).includes(option.value)}
+                    selected={value.includes(option.value)}
                     option={option}
                     onSelect={() => onFacilitiesSelect(option.value)}
                   />
