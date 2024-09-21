@@ -1,17 +1,22 @@
 import NonAuthorizedScreen from '@/components/ScreenContainer/NonAuth';
-import SkyscraperImage from '@/assets/images/Skyscraper.webp';
-import SignUpForm from '@/components/SignUp/Form';
-import AuthRedirect from '@/components/AuthRedirect';
+import ProfileCompleteImage from '@/assets/images/ProfileComplete.webp';
 import AnimatedBlock from '@/components/AnimatedBlock';
+
+import ProfileCompleteForm from '@/components/ProfileComplete/Form';
 import useScreenOrientation from '@/hooks/useScreenOrientation';
 
-const SignUpPage = () => {
+const ProfileCompleteScreen = () => {
   const { isMobileLandscape } = useScreenOrientation();
   return (
     <NonAuthorizedScreen>
       <div
-        className={`flex items-center w-screen ${isMobileLandscape ? 'h-auto' : 'h-screen'}`}
+        className={`flex items-center ${isMobileLandscape ? 'h-auto pt-[36px] pb-[16px]' : 'h-screen py-0'} w-screen`}
       >
+        <img
+          src={ProfileCompleteImage}
+          alt="Person completing a form"
+          className="w-1/2 h-full hidden lg:block"
+        />
         <AnimatedBlock
           tag="section"
           animationProps={{
@@ -28,22 +33,16 @@ const SignUpPage = () => {
           className="flex-grow flex items-center justify-center"
         >
           <div className="w-full sm:w-3/4 xl:w-2/3 px-[24px] md:p-0">
-            <h1 className="text-4xl font-bold">Welcome to Yariga</h1>
+            <h1 className="text-4xl font-bold">Complete your profile</h1>
             <p className="text-secondary-light dark:text-secondary-dark">
-              Please enter your details to join our community
+              Next step requires additional info for your Yariga profile
             </p>
-            <SignUpForm />
-            <AuthRedirect mode="signUp" />
+            <ProfileCompleteForm />
           </div>
         </AnimatedBlock>
-        <img
-          src={SkyscraperImage}
-          alt="Skyscraper"
-          className="w-1/2 h-full hidden lg:block"
-        />
       </div>
     </NonAuthorizedScreen>
   );
 };
 
-export default SignUpPage;
+export default ProfileCompleteScreen;

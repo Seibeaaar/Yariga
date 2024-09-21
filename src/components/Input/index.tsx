@@ -1,12 +1,7 @@
-import { FC, InputHTMLAttributes, ReactNode, useState } from 'react';
+import { FC, useState } from 'react';
+import { InputProps } from '@/types/input';
 
-type InputProps = InputHTMLAttributes<HTMLInputElement> & {
-  label?: string;
-  prefixIcon?: ReactNode;
-  error?: string;
-};
-
-const Input: FC<InputProps> = (props) => {
+const BasicInput: FC<InputProps> = (props) => {
   const [focused, setFocused] = useState<boolean>(false);
 
   const calculateBorderStyle = () => {
@@ -46,4 +41,4 @@ const Input: FC<InputProps> = (props) => {
   );
 };
 
-export default Input;
+export default BasicInput;

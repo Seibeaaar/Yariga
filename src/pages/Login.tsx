@@ -7,9 +7,11 @@ import AuthRedirect from '@/components/AuthRedirect';
 import AnimatedBlock from '@/components/AnimatedBlock';
 import Popup from '@/components/Popup';
 import { selectAuthViaGoogleError } from '@/redux/selectors/auth';
+import useScreenOrientation from '@/hooks/useScreenOrientation';
 
 const LoginPage = () => {
   const authViaGoogleError = useSelector(selectAuthViaGoogleError);
+  const { isMobileLandscape } = useScreenOrientation();
 
   return (
     <NonAuthorizedScreen>
@@ -21,7 +23,9 @@ const LoginPage = () => {
         horizontal="right"
         severity="error"
       />
-      <div className="flex items-center w-screen h-screen">
+      <div
+        className={`flex items-center w-screen ${isMobileLandscape ? 'h-auto' : 'h-screen'}`}
+      >
         <AnimatedBlock
           tag="section"
           animationProps={{
@@ -37,7 +41,7 @@ const LoginPage = () => {
           }}
           className="flex-grow flex items-center justify-center"
         >
-          <div className="w-full lg:w-2/3 px-[24px] lg:p-0">
+          <div className="w-full sm:w-3/4 xl:w-2/3 px-[24px] md:p-0">
             <h1 className="text-4xl font-bold">Welcome back</h1>
             <p className="text-secondary-light dark:text-secondary-dark">
               Please enter your details
@@ -49,7 +53,7 @@ const LoginPage = () => {
         <img
           src={SkyscraperImage}
           alt="Skyscraper"
-          className="w-1/2 h-full hidden md:block"
+          className="w-1/2 h-full hidden lg:block"
         />
       </div>
     </NonAuthorizedScreen>

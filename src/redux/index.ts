@@ -1,16 +1,18 @@
 import createSagaMiddleware from '@redux-saga/core';
 import { configureStore } from '@reduxjs/toolkit';
+import { getPersistConfig } from 'redux-deep-persist';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import rootReducer from './reducers';
 import rootSaga from './sagas';
 
 const sagaMiddleware = createSagaMiddleware();
-const persistConfig = {
+const persistConfig = getPersistConfig({
   key: 'root',
   storage,
-  blacklist: ['auth'],
-};
+  blacklist: ['auth', 'user.userCompleteError'],
+  rootReducer,
+});
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
