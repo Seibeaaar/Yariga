@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
-import { InputProps } from '@/types/input';
+import { TextAreaProps } from '@/types/input';
 
-const Input: FC<InputProps> = (props) => {
+const Textarea: FC<TextAreaProps> = (props) => {
   const [focused, setFocused] = useState<boolean>(false);
 
   const calculateBorderStyle = () => {
@@ -26,8 +26,7 @@ const Input: FC<InputProps> = (props) => {
       <div
         className={`py-[10px] px-[12px] border flex gap-[8px] ${calculateBorderStyle()} rounded-[8px]`}
       >
-        {props.prefixIcon}
-        <input
+        <textarea
           className="dark:[color-scheme:dark] bg-transparent w-full outline-none border-none"
           {...props}
           onFocus={focus}
@@ -41,4 +40,4 @@ const Input: FC<InputProps> = (props) => {
   );
 };
 
-export default Input;
+export default Textarea;
