@@ -1,4 +1,5 @@
 import { Controller, useForm, useWatch } from 'react-hook-form';
+import { FC } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '@/redux';
@@ -51,7 +52,13 @@ import {
 } from '@/redux/selectors/user';
 import AnimatedBlock from '../AnimatedBlock';
 
-const PropertyPreferencesForm = () => {
+type PropertyPreferencesFormProps = {
+  animated?: boolean;
+};
+
+const PropertyPreferencesForm: FC<PropertyPreferencesFormProps> = ({
+  animated = false,
+}) => {
   const {
     control,
     setValue,
@@ -122,6 +129,13 @@ const PropertyPreferencesForm = () => {
 
   const onSubmit = (data: PropertyFilters) => dispatch(setPreferences(data));
 
+  const initialAnimatedProps = animated
+    ? {
+        x: -200,
+        opacity: 0,
+      }
+    : false;
+
   return (
     <>
       <Loader showLoader={setPreferencesPending} />
@@ -144,10 +158,7 @@ const PropertyPreferencesForm = () => {
             <AnimatedBlock
               tag="div"
               animationProps={{
-                initial: {
-                  opacity: 0,
-                  x: -200,
-                },
+                initial: initialAnimatedProps,
                 animate: {
                   opacity: 1,
                   x: 0,
@@ -178,10 +189,7 @@ const PropertyPreferencesForm = () => {
           render={() => (
             <AnimatedBlock
               animationProps={{
-                initial: {
-                  opacity: 0,
-                  x: -200,
-                },
+                initial: initialAnimatedProps,
                 animate: {
                   opacity: 1,
                   x: 0,
@@ -213,10 +221,7 @@ const PropertyPreferencesForm = () => {
           render={() => (
             <AnimatedBlock
               animationProps={{
-                initial: {
-                  opacity: 0,
-                  x: -200,
-                },
+                initial: initialAnimatedProps,
                 animate: {
                   opacity: 1,
                   x: 0,
@@ -244,10 +249,7 @@ const PropertyPreferencesForm = () => {
         />
         <AnimatedBlock
           animationProps={{
-            initial: {
-              opacity: 0,
-              x: -200,
-            },
+            initial: initialAnimatedProps,
             animate: {
               opacity: 1,
               x: 0,
@@ -332,10 +334,7 @@ const PropertyPreferencesForm = () => {
           render={({ field: { value } }) => (
             <AnimatedBlock
               animationProps={{
-                initial: {
-                  opacity: 0,
-                  x: -200,
-                },
+                initial: initialAnimatedProps,
                 animate: {
                   opacity: 1,
                   x: 0,
@@ -363,10 +362,7 @@ const PropertyPreferencesForm = () => {
         />
         <AnimatedBlock
           animationProps={{
-            initial: {
-              opacity: 0,
-              x: -200,
-            },
+            initial: initialAnimatedProps,
             animate: {
               opacity: 1,
               x: 0,

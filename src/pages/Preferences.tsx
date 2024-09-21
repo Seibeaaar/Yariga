@@ -27,7 +27,7 @@ const PreferencesPage = () => {
             Describe your preferences so we can find best options for you
           </h3>
         </AnimatedBlock>
-        <PropertyPreferencesForm />
+        <PropertyPreferencesForm animated />
       </div>
     </NonAuthorizedScreen>
   );
