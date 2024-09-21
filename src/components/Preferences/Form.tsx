@@ -3,7 +3,6 @@ import { FC } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '@/redux';
-import { setPreferences } from '@/redux/actions/user';
 import {
   SquareFoot,
   Money,
@@ -51,13 +50,16 @@ import {
   selectsetPreferencesError,
 } from '@/redux/selectors/user';
 import AnimatedBlock from '../AnimatedBlock';
+import { PayloadAction } from '@reduxjs/toolkit';
 
 type PropertyPreferencesFormProps = {
   animated?: boolean;
+  onSubmit(payload: PropertyFilters): PayloadAction<PropertyFilters>;
 };
 
 const PropertyPreferencesForm: FC<PropertyPreferencesFormProps> = ({
   animated = false,
+  onSubmit,
 }) => {
   const {
     control,
@@ -127,7 +129,7 @@ const PropertyPreferencesForm: FC<PropertyPreferencesFormProps> = ({
     setValue('paymemtPeriod', paymentPeriodSelected);
   };
 
-  const onSubmit = (data: PropertyFilters) => dispatch(setPreferences(data));
+  const onFormSubmit = (data: PropertyFilters) => dispatch(onSubmit(data));
 
   const initialAnimatedProps = animated
     ? {
@@ -148,7 +150,7 @@ const PropertyPreferencesForm: FC<PropertyPreferencesFormProps> = ({
         severity="error"
       />
       <form
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(onFormSubmit)}
         className="mx-auto w-full px-[24px] md:w-3/4 md:p-0 mt-[24px] flex flex-col gap-[36px]"
       >
         <Controller

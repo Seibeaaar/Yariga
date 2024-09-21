@@ -1,3 +1,4 @@
+import { setPreferences } from '@/redux/actions/user';
 import NonAuthorizedScreen from '@/components/ScreenContainer/NonAuth';
 import PropertyPreferencesForm from '@/components/Preferences/Form';
 import AnimatedBlock from '@/components/AnimatedBlock';
@@ -27,7 +28,7 @@ const PreferencesPage = () => {
             Describe your preferences so we can find best options for you
           </h3>
         </AnimatedBlock>
-        <PropertyPreferencesForm animated />
+        <PropertyPreferencesForm animated onSubmit={setPreferences} />
       </div>
     </NonAuthorizedScreen>
   );
