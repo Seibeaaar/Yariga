@@ -1,8 +1,16 @@
 import NonAuthorizedScreen from '@/components/ScreenContainer/NonAuth';
 import AnimatedBlock from '@/components/AnimatedBlock';
 import PropertyForm from '@/components/Property/Form';
+import { useSelector } from 'react-redux';
+import {
+  selectAddPropertyError,
+  selectAddPropertyPending,
+} from '@/redux/selectors/property/own';
+import { addProperty } from '@/redux/actions/property';
 
 const FirstPropertyPage = () => {
+  const addPropertyError = useSelector(selectAddPropertyError);
+  const addPropertyPending = useSelector(selectAddPropertyPending);
   return (
     <NonAuthorizedScreen>
       <div className="pt-[36px] pb-[28px]">
@@ -27,7 +35,13 @@ const FirstPropertyPage = () => {
             Add your first property so we can show it to potential tenants
           </h3>
         </AnimatedBlock>
-        <PropertyForm animated error={null} pending={false} />
+        <PropertyForm
+          error={addPropertyError}
+          pending={addPropertyPending}
+          onSubmit={addProperty}
+          animated
+          isFirstProperty
+        />
       </div>
     </NonAuthorizedScreen>
   );

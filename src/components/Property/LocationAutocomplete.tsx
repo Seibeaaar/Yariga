@@ -2,12 +2,13 @@ import { ChangeEvent, FC, useState } from 'react';
 import usePlacesService from 'react-google-autocomplete/lib/usePlacesAutocompleteService';
 import Input from '../Input';
 import { PropertyLocation } from '@/types/property';
+import { InputProps } from '@/types/input';
 
-type LocationAutocompleteProps = {
+type LocationAutocompleteProps = InputProps & {
   onSelect(location: PropertyLocation): void;
 };
 
-const LocationAutocomplete: FC<LocationAutocompleteProps> = ({ onSelect }) => {
+const LocationAutocomplete: FC<LocationAutocompleteProps> = (props) => {
   const [inputValue, setInputValue] = useState('');
   const { placesService, placePredictions, getPlacePredictions } =
     usePlacesService({
@@ -34,7 +35,7 @@ const LocationAutocomplete: FC<LocationAutocompleteProps> = ({ onSelect }) => {
         const lat = details.geometry?.location?.lat();
         const lon = details.geometry?.location?.lng();
         const address = details.formatted_address;
-        onSelect({
+        props.onSelect({
           lat,
           lon,
           title: address,
@@ -52,6 +53,7 @@ const LocationAutocomplete: FC<LocationAutocompleteProps> = ({ onSelect }) => {
       <Input
         value={inputValue}
         onChange={onInputChange}
+        {...props}
         label="Property location"
         placeholder="Enter location of your property"
       />

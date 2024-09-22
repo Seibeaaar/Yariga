@@ -1,3 +1,4 @@
+import { ACCEPTED_IMAGE_FORMATS } from '@/constants/common';
 import {
   MAX_AREA,
   MAX_BEDS,
@@ -106,4 +107,19 @@ export const PROPERTY_DATA_VALIDATION_SCHEMA = yup.object({
     .required()
     .ensure()
     .of(yup.string().required().oneOf(Object.values(PROPERTY_FACILITY))),
+  photos: yup
+    .array()
+    .required()
+    .ensure()
+    .of(
+      yup
+        .mixed<File>()
+        .required()
+        .test('size', 'File is too large', (value: File) => {
+          return value && value.size <= 5 * 1024 * 1024;
+        })
+        .test('type', (value: File) =>
+          ACCEPTED_IMAGE_FORMATS.includes(value.type),
+        ),
+    ),
 });

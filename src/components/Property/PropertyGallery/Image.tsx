@@ -15,7 +15,7 @@ const PropertyGalleryImage: FC<PropertyGalleryImageProps> = ({
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="w-full md:max-lg:w-[calc(50%-8px)] lg:w-[calc(20%-13px)] md:max-lg:[&:not(:nth-child(2n))]:mr-[16px] lg:[&:not(:nth-child(5n))]:mr-[16px] h-[360px] lg:h-[240px] cursor-pointer relative rounded-[10px] overflow-hidden"
+      className="w-full md:max-lg:w-[calc(50%-8px)] lg:w-[calc(25%-12px)] xl:w-[calc(20%-13px)] md:max-lg:[&:not(:nth-child(2n))]:mr-[16px] lg:max-xl:[&:not(:nth-child(4n))]:mr-[16px] xl:[&:not(:nth-child(5n))]:mr-[16px] h-[360px] lg:h-[240px] cursor-pointer relative rounded-[10px] overflow-hidden"
     >
       <img
         src={URL.createObjectURL(image)}

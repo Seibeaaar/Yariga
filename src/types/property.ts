@@ -68,5 +68,21 @@ export type PropertyData = {
   rooms: number;
   floors: number;
   floorLevel: number;
+};
+
+export type PropertyDataRequest = PropertyData & {
+  photos: File[];
+};
+
+export type Property = PropertyData & {
+  id: string;
+  owner: string;
+  status: PROPERTY_STATUS;
+  rating: number;
+  votes: number;
   photos: string[];
+};
+
+export type AddPropertyPayload = PropertyDataRequest & {
+  isFirstProperty: boolean;
 };
