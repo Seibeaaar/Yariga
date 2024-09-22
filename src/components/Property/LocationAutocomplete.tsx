@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, useState } from 'react';
 import usePlacesService from 'react-google-autocomplete/lib/usePlacesAutocompleteService';
-import Input from './Input';
+import Input from '../Input';
 import { PropertyLocation } from '@/types/property';
 
 type LocationAutocompleteProps = {

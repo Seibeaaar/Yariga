@@ -13,7 +13,8 @@ import {
 import Input from '../Input';
 import Textarea from '../Textarea';
 import AnimatedBlock from '../AnimatedBlock';
-import LocationAutocomplete from '../LocationAutocomplete';
+import LocationAutocomplete from './LocationAutocomplete';
+import PropertyGallery from './PropertyGallery';
 import {
   AGREEMENT_TYPE_OPTIONS,
   PAYMENT_PERIOD_OPTIONS,
@@ -54,6 +55,22 @@ const PropertyForm: FC<PropertyFormProps> = ({ animated = false }) => {
   return (
     <>
       <form className="mx-auto w-full px-[24px] md:w-3/4 md:p-0 mt-[24px]">
+        <AnimatedBlock
+          tag="div"
+          animationProps={{
+            initial: initialAnimatedProps,
+            animate: {
+              opacity: 1,
+              x: 0,
+            },
+            transition: {
+              duration: 1,
+              delay: 0,
+            },
+          }}
+        >
+          <PropertyGallery />
+        </AnimatedBlock>
         <AnimatedBlock
           tag="div"
           animationProps={{

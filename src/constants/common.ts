@@ -53,3 +53,5 @@ export const PAYMENT_PERIOD_OPTIONS = [
     label: 'Yearly',
   },
 ];
+
+export const ACCEPTED_IMAGE_FORMATS = ['png', 'jpeg', 'jpg', 'webp'];
