@@ -1,6 +1,7 @@
 import NonAuthorizedScreen from '@/components/ScreenContainer/NonAuth';
 import ProfilePicutreUpload from '@/components/ProfilePicture/Upload';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import {
   selectAddProfilePictureError,
   selectSetPreferencesPending,
@@ -10,8 +11,12 @@ import Loader from '@/components/Loader';
 import Popup from '@/components/Popup';
 
 const ProfilePicturePage = () => {
+  const navigate = useNavigate();
   const addProfilePictureError = useSelector(selectAddProfilePictureError);
   const addProfilePicturePending = useSelector(selectSetPreferencesPending);
+
+  const onSkipClick = () => navigate('/set-preferences');
+
   return (
     <NonAuthorizedScreen>
       <Loader showLoader={addProfilePicturePending} />
@@ -34,7 +39,7 @@ const ProfilePicturePage = () => {
         </div>
         <section className="w-full px-[24px] md:w-2/3 lg:w-1/2 md:px-0 flex flex-col justify-end flex-grow mx-auto animate-slideBottom">
           <ProfilePicutreUpload />
-          <Button text="Skip for now" variant="text" />
+          <Button text="Skip for now" variant="text" onClick={onSkipClick} />
         </section>
       </div>
     </NonAuthorizedScreen>

@@ -42,10 +42,10 @@ const ProfilePicutreUpload = () => {
 
   const uploadDimensionStyles = () => {
     if (isMobileLandscape) {
-      return 'w-[270px] md:w-[360px] lg:w-[480px] h-[270px] md:h-[360px] lg:h-[480px] my-[24px]';
+      return 'w-[270px] md:w-[360px] lg:w-[420px] h-[270px] md:h-[360px] lg:h-[420px] my-[24px]';
     }
 
-    return 'max-w-[270px] max-h-[270px] md:max-w-[360px] md:max-h-[360px] lg:max-w-[450px] lg:max-h-[450px] w-full h-full';
+    return 'max-w-[270px] max-h-[270px] md:max-w-[360px] md:max-h-[360px] lg:max-w-[420px] lg:max-h-[420px] w-full h-full';
   };
 
   return (
