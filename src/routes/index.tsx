@@ -4,6 +4,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import GoogleAuthSuccessPage from '@/pages/GoogleAuthSuccess';
 import ProfileCompletePage from '@/pages/ProfileComplete';
 import PreferencesPage from '@/pages/Preferences';
+import FirstPropertyPage from '@/pages/FirstProperty';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: '/set-preferences',
     element: <PreferencesPage />,
+  },
+  {
+    path: '/first-property',
+    element: <FirstPropertyPage />,
   },
 ]);
 

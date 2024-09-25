@@ -47,3 +47,42 @@ export type PropertyFilters = {
   rating?: MinMaxPair;
   facilities?: PROPERTY_FACILITY[];
 };
+
+export type PropertyLocation = {
+  lat: number;
+  lon: number;
+  title: string;
+};
+
+export type PropertyData = {
+  title: string;
+  description: string;
+  location: PropertyLocation;
+  type: PROPERTY_TYPE;
+  agreementType: AGREEMENT_TYPE;
+  amount: number;
+  area: number;
+  facilities: PROPERTY_FACILITY[];
+  paymentPeriod: PROPERTY_PAYMENT_PERIOD;
+  beds: number;
+  rooms: number;
+  floors: number;
+  floorLevel: number;
+};
+
+export type PropertyDataRequest = PropertyData & {
+  photos: File[];
+};
+
+export type Property = PropertyData & {
+  id: string;
+  owner: string;
+  status: PROPERTY_STATUS;
+  rating: number;
+  votes: number;
+  photos: string[];
+};
+
+export type AddPropertyPayload = PropertyDataRequest & {
+  isFirstProperty: boolean;
+};

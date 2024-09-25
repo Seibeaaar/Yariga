@@ -5,7 +5,7 @@ export default {
   theme: {
     extend: {
       keyframes: {
-        heartbeatFrame: {
+        heartbeat: {
           "0%, 100%": {
             transform: "scale(1)",
           },
@@ -13,9 +13,20 @@ export default {
             transform: "scale(2.5)",
           },
         },
+        slideLeft: {
+          '0%': {
+            marginLeft: -200,
+            opacity: 0
+          },
+          '100%': {
+            marginLeft: 0,
+            opacity: 1
+          }
+        }
       },
       animation: {
-        heartbeat: "heartbeatFrame 3s linear infinite",
+        heartbeat: "heartbeat 3s linear infinite",
+        slideLeft: "slideLeft 1s linear"
       },
       colors: {
         primary: "#475BE8",

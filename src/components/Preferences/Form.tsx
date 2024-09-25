@@ -33,7 +33,7 @@ import {
   AGREEMENT_TYPE_OPTIONS,
   PAYMENT_PERIOD_OPTIONS,
 } from '@/constants/common';
-import Option from '../Option';
+import Option from '../OptionFormField/Option';
 import { toggleValue } from '@/utils/common';
 import {
   PROPERTY_FACILITY,
