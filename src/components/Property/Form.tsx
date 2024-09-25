@@ -24,17 +24,12 @@ import {
   PROPERTY_FACILITIES_OPTIONS,
   PROPERTY_TYPE_OPTIONS,
 } from '@/constants/property';
-import Option from '../Option';
-import { toggleValue } from '@/utils/common';
 import Loader from '../Loader';
 import Popup from '../Popup';
-import {
-  AddPropertyPayload,
-  PROPERTY_FACILITY,
-  PropertyDataRequest,
-} from '@/types/property';
+import { AddPropertyPayload, PropertyDataRequest } from '@/types/property';
 import Button from '../Button';
 import { PayloadAction } from '@reduxjs/toolkit';
+import OptionFormField from '../OptionFormField';
 
 type PropertyFormProps = {
   animated?: boolean;
@@ -71,13 +66,14 @@ const PropertyForm: FC<PropertyFormProps> = ({
     }
   };
 
-  const onPropertyFormSubmit = (data: PropertyDataRequest) =>
-    dispatch(
+  const onPropertyFormSubmit = (data: PropertyDataRequest) => {
+    return dispatch(
       onSubmit({
         ...data,
         isFirstProperty,
       }),
     );
+  };
 
   return (
     <>
@@ -99,7 +95,10 @@ const PropertyForm: FC<PropertyFormProps> = ({
           name="photos"
           render={({ field: { onChange } }) => (
             <div className={buildAnimationStyles('animate-slideLeft')}>
-              <PropertyGallery onGalleryChange={onChange} />
+              <PropertyGallery
+                onGalleryChange={onChange}
+                error={errors.photos?.message}
+              />
             </div>
           )}
         />
@@ -157,7 +156,7 @@ const PropertyForm: FC<PropertyFormProps> = ({
             </div>
           )}
         />
-        <div className="flex flex-col gap-[16px]">
+        <div className="mt-[16px]">
           <Controller
             control={control}
             name="type"
@@ -167,18 +166,13 @@ const PropertyForm: FC<PropertyFormProps> = ({
                   'animate-[slideLeft_2s_linear]',
                 )}
               >
-                <p className="text-sm font-medium mb-[4px]">
-                  You property is a:
-                </p>
-                <div className="flex items-center gap-[16px] flex-wrap">
-                  {PROPERTY_TYPE_OPTIONS.map((option) => (
-                    <Option
-                      selected={value === option.value}
-                      option={option}
-                      onSelect={() => onChange(option.value)}
-                    />
-                  ))}
-                </div>
+                <OptionFormField
+                  onSelect={onChange}
+                  selected={value}
+                  error={errors.type?.message}
+                  label="Your property is a:"
+                  options={PROPERTY_TYPE_OPTIONS}
+                />
               </div>
             )}
           />
@@ -191,18 +185,13 @@ const PropertyForm: FC<PropertyFormProps> = ({
                   'animate-[slideLeft_2.25s_linear]',
                 )}
               >
-                <p className="text-sm font-medium mb-[4px]">
-                  You prefer to receive payment:
-                </p>
-                <div className="flex items-center gap-[16px] flex-wrap">
-                  {PAYMENT_PERIOD_OPTIONS.map((option) => (
-                    <Option
-                      selected={value === option.value}
-                      option={option}
-                      onSelect={() => onChange(option.value)}
-                    />
-                  ))}
-                </div>
+                <OptionFormField
+                  onSelect={onChange}
+                  selected={value}
+                  error={errors.paymentPeriod?.message}
+                  label="You prefer to receive payment:"
+                  options={PAYMENT_PERIOD_OPTIONS}
+                />
               </div>
             )}
           />
@@ -215,18 +204,13 @@ const PropertyForm: FC<PropertyFormProps> = ({
                   'animate-[slideLeft_2.5s_linear]',
                 )}
               >
-                <p className="text-sm font-medium mb-[4px]">
-                  You want to conclude an agreement of:
-                </p>
-                <div className="flex items-center gap-[16px] flex-wrap">
-                  {AGREEMENT_TYPE_OPTIONS.map((option) => (
-                    <Option
-                      selected={value === option.value}
-                      option={option}
-                      onSelect={() => onChange(option.value)}
-                    />
-                  ))}
-                </div>
+                <OptionFormField
+                  onSelect={onChange}
+                  selected={value}
+                  error={errors.agreementType?.message}
+                  label="You want to conclude an agreement of:"
+                  options={AGREEMENT_TYPE_OPTIONS}
+                />
               </div>
             )}
           />
@@ -239,127 +223,123 @@ const PropertyForm: FC<PropertyFormProps> = ({
                   'animate-[slideLeft_2.75s_linear]',
                 )}
               >
-                <p className="text-sm font-medium mb-[4px]">
-                  You property provides next facilities:
-                </p>
-                <div className="flex items-center gap-[16px] flex-wrap">
-                  {PROPERTY_FACILITIES_OPTIONS.map((option) => (
-                    <Option
-                      selected={value.includes(option.value)}
-                      option={option}
-                      onSelect={() => {
-                        const newValue = toggleValue<PROPERTY_FACILITY>(
-                          value,
-                          option.value,
-                        );
-                        onChange(newValue);
-                      }}
-                    />
-                  ))}
-                </div>
+                <OptionFormField
+                  onSelect={onChange}
+                  selected={value}
+                  error={errors.facilities?.message}
+                  label="Your property provides next facilities:"
+                  options={PROPERTY_FACILITIES_OPTIONS}
+                  multi
+                />
               </div>
             )}
           />
-          <div
-            className={`flex items-center flex-col md:flex-row md:flex-wrap gap-x-[16px] ${buildAnimationStyles('animate-[slideLeft_3s_linear]')}`}
-          >
-            <Controller
-              control={control}
-              name="area"
-              render={({ field: { onChange } }) => (
-                <div className="w-full md:w-[calc(50%-16px)]">
-                  <Input
-                    label="Area"
-                    type="number"
-                    onChange={onChange}
-                    placeholder="Property's area"
-                    prefixIcon={<SquareFoot />}
-                    error={errors.area?.message}
-                  />
-                </div>
-              )}
-            />
-            <Controller
-              control={control}
-              name="amount"
-              render={({ field: { onChange } }) => (
-                <div className="w-full md:w-[calc(50%-16px)]">
-                  <Input
-                    label="Amount"
-                    type="number"
-                    onChange={onChange}
-                    placeholder="Property's price"
-                    prefixIcon={<Money />}
-                    error={errors.amount?.message}
-                  />
-                </div>
-              )}
-            />
-            <Controller
-              control={control}
-              name="beds"
-              render={({ field: { onChange } }) => (
-                <div className="w-full md:w-[calc(50%-16px)]">
-                  <Input
-                    label="Beds"
-                    type="number"
-                    onChange={onChange}
-                    placeholder="Number of beds"
-                    prefixIcon={<Bed />}
-                    error={errors.beds?.message}
-                  />
-                </div>
-              )}
-            />
-            <Controller
-              control={control}
-              name="rooms"
-              render={({ field: { onChange } }) => (
-                <div className="w-full md:w-[calc(50%-16px)]">
-                  <Input
-                    label="Rooms"
-                    type="number"
-                    onChange={onChange}
-                    placeholder="Number of rooms"
-                    prefixIcon={<Room />}
-                    error={errors.rooms?.message}
-                  />
-                </div>
-              )}
-            />
-            <Controller
-              control={control}
-              name="floors"
-              render={({ field: { onChange } }) => (
-                <div className="w-full md:w-[calc(50%-16px)]">
-                  <Input
-                    label="Floors"
-                    type="number"
-                    onChange={onChange}
-                    placeholder="Number of floors"
-                    prefixIcon={<LooksOne />}
-                    error={errors.floors?.message}
-                  />
-                </div>
-              )}
-            />
-            <Controller
-              control={control}
-              name="floorLevel"
-              render={({ field: { onChange } }) => (
-                <div className="w-full md:w-[calc(50%-16px)]">
-                  <Input
-                    label="Floor level"
-                    type="number"
-                    onChange={onChange}
-                    placeholder="Property's floor level"
-                    prefixIcon={<Roofing />}
-                    error={errors.floorLevel?.message}
-                  />
-                </div>
-              )}
-            />
-          </div>
+        </div>
+        <div
+          className={`flex flex-col md:flex-row md:flex-wrap gap-x-[16px] ${buildAnimationStyles('animate-[slideLeft_3s_linear]')} items-stretch`}
+        >
+          <Controller
+            control={control}
+            name="area"
+            render={({ field: { onChange, value } }) => (
+              <div className="w-full md:w-[calc(50%-16px)]">
+                <Input
+                  label="Area"
+                  type="number"
+                  value={value}
+                  onChange={onChange}
+                  placeholder="Property's area"
+                  prefixIcon={<SquareFoot />}
+                  error={errors.area?.message}
+                />
+              </div>
+            )}
+          />
+          <Controller
+            control={control}
+            name="amount"
+            render={({ field: { onChange, value } }) => (
+              <div className="w-full md:w-[calc(50%-16px)]">
+                <Input
+                  label="Amount"
+                  type="number"
+                  value={value}
+                  onChange={onChange}
+                  placeholder="Property's price"
+                  prefixIcon={<Money />}
+                  error={errors.amount?.message}
+                />
+              </div>
+            )}
+          />
+          <Controller
+            control={control}
+            name="beds"
+            render={({ field: { onChange, value } }) => (
+              <div className="w-full md:w-[calc(50%-16px)]">
+                <Input
+                  label="Beds"
+                  type="number"
+                  value={value}
+                  onChange={onChange}
+                  placeholder="Number of beds"
+                  prefixIcon={<Bed />}
+                  error={errors.beds?.message}
+                />
+              </div>
+            )}
+          />
+          <Controller
+            control={control}
+            name="rooms"
+            render={({ field: { onChange, value } }) => (
+              <div className="w-full md:w-[calc(50%-16px)]">
+                <Input
+                  label="Rooms"
+                  type="number"
+                  value={value}
+                  onChange={onChange}
+                  placeholder="Number of rooms"
+                  prefixIcon={<Room />}
+                  error={errors.rooms?.message}
+                />
+              </div>
+            )}
+          />
+          <Controller
+            control={control}
+            name="floors"
+            render={({ field: { onChange, value } }) => (
+              <div className="w-full md:w-[calc(50%-16px)]">
+                <Input
+                  label="Floors"
+                  type="number"
+                  value={value}
+                  onChange={onChange}
+                  placeholder="Number of floors"
+                  prefixIcon={<LooksOne />}
+                  error={errors.floors?.message}
+                />
+              </div>
+            )}
+          />
+          <Controller
+            control={control}
+            name="floorLevel"
+            render={({ field: { onChange, value } }) => (
+              <div className="w-full md:w-[calc(50%-16px)]">
+                <Input
+                  label="Floor level"
+                  type="number"
+                  value={value}
+                  onChange={onChange}
+                  placeholder="Property's floor level"
+                  prefixIcon={<Roofing />}
+                  error={errors.floorLevel?.message}
+                />
+              </div>
+            )}
+          />
         </div>
         <div
           className={`mt-[20px] ${buildAnimationStyles('animate-[slideLeft_3.5s_linear]')}`}

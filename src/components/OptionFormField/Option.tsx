@@ -1,20 +1,19 @@
 import { SelectableOption } from '@/types/components';
-import { FC } from 'react';
 
-type OptionProps = {
+type OptionProps<T> = {
   selected: boolean;
   onSelect: () => void;
   className?: string;
-  option: SelectableOption;
+  option: SelectableOption<T>;
   multi?: boolean;
 };
 
-const Option: FC<OptionProps> = ({
+const Option = <T,>({
   selected,
   onSelect,
   option: { icon, label },
   className = '',
-}) => {
+}: OptionProps<T>) => {
   const Icon = icon;
   const selectedStyles = 'bg-primary text-white border-primary';
   const nonSelectedStyles =

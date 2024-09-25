@@ -19,7 +19,7 @@ const Input: FC<InputProps> = (props) => {
   const blur = () => setFocused(false);
 
   return (
-    <div className="mt-[10px] w-full">
+    <div className="w-full">
       {props.label ? (
         <p className="text-sm font-medium mb-[4px]">{props.label}</p>
       ) : null}
