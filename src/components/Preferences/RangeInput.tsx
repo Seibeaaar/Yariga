@@ -39,6 +39,7 @@ const RangeInput = <T extends FieldValues>({
             <Input
               value={value}
               placeholder="From"
+              type="number"
               onChange={onChange}
               error={lowestError}
               prefixIcon={prefix}
@@ -56,6 +57,7 @@ const RangeInput = <T extends FieldValues>({
             <Input
               value={value}
               placeholder="To"
+              type="number"
               onChange={onChange}
               error={highestError}
               prefixIcon={prefix}

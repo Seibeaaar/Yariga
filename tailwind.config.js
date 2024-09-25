@@ -15,11 +15,11 @@ export default {
         },
         slideLeft: {
           '0%': {
-            marginLeft: -200,
+            transform: 'translateX(-200px)',
             opacity: 0
           },
           '100%': {
-            marginLeft: 0,
+            transform: 'translateX(0)',
             opacity: 1
           }
         }

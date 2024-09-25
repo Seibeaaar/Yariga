@@ -1,4 +1,4 @@
-import { Controller, useForm, useWatch } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { FC } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
@@ -33,23 +33,15 @@ import {
   AGREEMENT_TYPE_OPTIONS,
   PAYMENT_PERIOD_OPTIONS,
 } from '@/constants/common';
-import Option from '../OptionFormField/Option';
-import { toggleValue } from '@/utils/common';
-import {
-  PROPERTY_FACILITY,
-  PROPERTY_PAYMENT_PERIOD,
-  PROPERTY_TYPE,
-  PropertyFilters,
-} from '@/types/property';
+import { PropertyFilters } from '@/types/property';
 import RangeInput from './RangeInput';
-import { AGREEMENT_TYPE } from '@/types/agreement';
 import Loader from '../Loader';
 import Popup from '../Popup';
 import {
   selectSetPreferencesPending,
   selectsetPreferencesError,
 } from '@/redux/selectors/user';
-import AnimatedBlock from '../AnimatedBlock';
+import OptionFormField from '../OptionFormField';
 import { PayloadAction } from '@reduxjs/toolkit';
 
 type PropertyPreferencesFormProps = {
@@ -63,7 +55,6 @@ const PropertyPreferencesForm: FC<PropertyPreferencesFormProps> = ({
 }) => {
   const {
     control,
-    setValue,
     formState: { errors },
     handleSubmit,
   } = useForm({
@@ -80,63 +71,13 @@ const PropertyPreferencesForm: FC<PropertyPreferencesFormProps> = ({
   const setPreferencesPending = useSelector(selectSetPreferencesPending);
   const setPreferencesError = useSelector(selectsetPreferencesError);
 
-  const facilities = useWatch({
-    control,
-    name: 'facilities',
-  });
-  const propertyType = useWatch({
-    control,
-    name: 'propertyType',
-  });
-  const agreementType = useWatch({
-    control,
-    name: 'agreementType',
-  });
-  const paymentPeriod = useWatch({
-    control,
-    name: 'paymemtPeriod',
-  });
-
-  const onFacilitiesSelect = (value: PROPERTY_FACILITY) => {
-    const facilitiesSelected = toggleValue<PROPERTY_FACILITY>(
-      facilities,
-      value,
-    );
-    setValue('facilities', facilitiesSelected);
-  };
-
-  const onAgreementTypeSelect = (value: AGREEMENT_TYPE) => {
-    const agreementTypesSelected = toggleValue<AGREEMENT_TYPE>(
-      agreementType,
-      value,
-    );
-    setValue('agreementType', agreementTypesSelected);
-  };
-
-  const onPropertyTypeSelect = (value: PROPERTY_TYPE) => {
-    const propertyTypesSelected = toggleValue<PROPERTY_TYPE>(
-      propertyType,
-      value,
-    );
-    setValue('propertyType', propertyTypesSelected);
-  };
-
-  const onPaymentPeriodSelect = (value: PROPERTY_PAYMENT_PERIOD) => {
-    const paymentPeriodSelected = toggleValue<PROPERTY_PAYMENT_PERIOD>(
-      paymentPeriod,
-      value,
-    );
-    setValue('paymemtPeriod', paymentPeriodSelected);
-  };
-
   const onFormSubmit = (data: PropertyFilters) => dispatch(onSubmit(data));
 
-  const initialAnimatedProps = animated
-    ? {
-        x: -200,
-        opacity: 0,
-      }
-    : false;
+  const buildAnimationStyles = (style: string) => {
+    if (animated) {
+      return style;
+    }
+  };
 
   return (
     <>
@@ -156,112 +97,63 @@ const PropertyPreferencesForm: FC<PropertyPreferencesFormProps> = ({
         <Controller
           control={control}
           name="agreementType"
-          render={() => (
-            <AnimatedBlock
-              tag="div"
-              animationProps={{
-                initial: initialAnimatedProps,
-                animate: {
-                  opacity: 1,
-                  x: 0,
-                },
-                transition: {
-                  duration: 1,
-                },
-              }}
-            >
-              <h4 className="text-lg font-medium mb-[4px]">
-                You're here looking for a:
-              </h4>
-              <div className="flex items-center gap-[16px] flex-wrap">
-                {AGREEMENT_TYPE_OPTIONS.map((option) => (
-                  <Option
-                    selected={agreementType.includes(option.value)}
-                    option={option}
-                    onSelect={() => onAgreementTypeSelect(option.value)}
-                  />
-                ))}
-              </div>
-            </AnimatedBlock>
+          render={({ field: { onChange, value } }) => (
+            <div className={buildAnimationStyles('animate-slideLeft')}>
+              <OptionFormField
+                options={AGREEMENT_TYPE_OPTIONS}
+                selected={value}
+                onSelect={onChange}
+                label="You're here looking for a:"
+                multi
+                error={errors.agreementType?.message}
+              />
+            </div>
           )}
         />
         <Controller
           control={control}
           name="propertyType"
-          render={() => (
-            <AnimatedBlock
-              animationProps={{
-                initial: initialAnimatedProps,
-                animate: {
-                  opacity: 1,
-                  x: 0,
-                },
-                transition: {
-                  duration: 1,
-                  delay: 0.25,
-                },
-              }}
+          render={({ field: { onChange, value } }) => (
+            <div
+              className={buildAnimationStyles(
+                'animate-[slideLeft_1.25s_linear]',
+              )}
             >
-              <h4 className="text-lg font-medium mb-[4px]">
-                Property type should be:
-              </h4>
-              <div className="flex items-center gap-[16px] flex-wrap">
-                {PROPERTY_TYPE_OPTIONS.map((option) => (
-                  <Option
-                    selected={propertyType.includes(option.value)}
-                    option={option}
-                    onSelect={() => onPropertyTypeSelect(option.value)}
-                  />
-                ))}
-              </div>
-            </AnimatedBlock>
+              <OptionFormField
+                options={PROPERTY_TYPE_OPTIONS}
+                selected={value}
+                onSelect={onChange}
+                label="Property type should be:"
+                multi
+                error={errors.propertyType?.message}
+              />
+            </div>
           )}
         />
         <Controller
           control={control}
           name="paymemtPeriod"
-          render={() => (
-            <AnimatedBlock
-              animationProps={{
-                initial: initialAnimatedProps,
-                animate: {
-                  opacity: 1,
-                  x: 0,
-                },
-                transition: {
-                  duration: 1,
-                  delay: 0.5,
-                },
-              }}
+          render={({ field: { onChange, value } }) => (
+            <div
+              className={buildAnimationStyles(
+                'animate-[slideLeft_1.5s_linear]',
+              )}
             >
-              <h4 className="text-lg font-medium mb-[4px]">
-                You prefer to pay:
-              </h4>
-              <div className="flex items-center gap-[16px] flex-wrap">
-                {PAYMENT_PERIOD_OPTIONS.map((option) => (
-                  <Option
-                    selected={paymentPeriod.includes(option.value)}
-                    option={option}
-                    onSelect={() => onPaymentPeriodSelect(option.value)}
-                  />
-                ))}
-              </div>
-            </AnimatedBlock>
+              <OptionFormField
+                options={PAYMENT_PERIOD_OPTIONS}
+                selected={value}
+                onSelect={onChange}
+                label="You prefer to pay:"
+                multi
+                error={errors.paymemtPeriod?.message}
+              />
+            </div>
           )}
         />
-        <AnimatedBlock
-          animationProps={{
-            initial: initialAnimatedProps,
-            animate: {
-              opacity: 1,
-              x: 0,
-            },
-            transition: {
-              duration: 1,
-              delay: 0.75,
-            },
-          }}
-          className="flex lg:flex-wrap lg:flex-row flex-col gap-[16px]"
+        <div
+          className={`flex lg:flex-wrap lg:flex-row flex-col gap-[16px] ${buildAnimationStyles(
+            'animate-[slideLeft_1.5s_linear]',
+          )}`}
         >
           <RangeInput
             lowestError={errors.area?.min?.message ?? ''}
@@ -329,54 +221,30 @@ const PropertyPreferencesForm: FC<PropertyPreferencesFormProps> = ({
             control={control}
             label="Floor level"
           />
-        </AnimatedBlock>
+        </div>
         <Controller
           control={control}
           name="facilities"
-          render={({ field: { value } }) => (
-            <AnimatedBlock
-              animationProps={{
-                initial: initialAnimatedProps,
-                animate: {
-                  opacity: 1,
-                  x: 0,
-                },
-                transition: {
-                  duration: 1,
-                  delay: 1,
-                },
-              }}
+          render={({ field: { value, onChange } }) => (
+            <div
+              className={buildAnimationStyles('animate-[slideLeft_2s_linear]')}
             >
-              <h4 className="text-lg font-medium mb-[4px]">
-                Property of your choice should have:
-              </h4>
-              <div className="flex items-center gap-[16px] flex-wrap">
-                {PROPERTY_FACILITIES_OPTIONS.map((option) => (
-                  <Option
-                    selected={value.includes(option.value)}
-                    option={option}
-                    onSelect={() => onFacilitiesSelect(option.value)}
-                  />
-                ))}
-              </div>
-            </AnimatedBlock>
+              <OptionFormField
+                options={PROPERTY_FACILITIES_OPTIONS}
+                selected={value}
+                onSelect={onChange}
+                label="Property of your choice should have:"
+                multi
+                error={errors.facilities?.message}
+              />
+            </div>
           )}
         />
-        <AnimatedBlock
-          animationProps={{
-            initial: initialAnimatedProps,
-            animate: {
-              opacity: 1,
-              x: 0,
-            },
-            transition: {
-              duration: 1,
-              delay: 1.25,
-            },
-          }}
+        <div
+          className={buildAnimationStyles('animate-[slideLeft_2.25s_linear]')}
         >
           <Button type="submit" text="Set your preferences" />
-        </AnimatedBlock>
+        </div>
       </form>
     </>
   );
