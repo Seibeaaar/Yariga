@@ -1,6 +1,5 @@
 import {
   DashboardOutlined,
-  AccountCircleOutlined,
   CorporateFareOutlined,
   HandshakeOutlined,
   StarBorderOutlined,
@@ -32,10 +31,5 @@ export const NAV_LINKS = [
     label: 'Reviews',
     route: '/reviews',
     icon: StarBorderOutlined,
-  },
-  {
-    label: 'My profile',
-    route: '/profile',
-    icon: AccountCircleOutlined,
   },
 ];

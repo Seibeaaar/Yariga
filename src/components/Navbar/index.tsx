@@ -12,9 +12,9 @@ const Navbar = () => {
     >
       <div
         onClick={toggleNavbarState}
-        className={`transition-all flex items-center ${collapsed ? 'ml-[16px] gap-0' : 'ml-0 gap-[16px]'} py-[15px] mb-[25px] cursor-pointer`}
+        className={`transition-all flex items-center h-[70px] ${collapsed ? 'ml-[16px] gap-0' : 'ml-0 gap-[16px]'} py-[15px] mb-[25px] cursor-pointer`}
       >
-        <img src={Logo} alt="Logo" />
+        <img src={Logo} className="w-[40px] h-[40px]" alt="Logo" />
         {collapsed ? null : <h3 className="font-bold text-2xl">Yariga</h3>}
       </div>
       {NAV_LINKS.map((link) => (
