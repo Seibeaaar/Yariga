@@ -7,6 +7,8 @@ export type UserReducerInitialState = {
   userCompleteError: string | null;
   setPreferencesError: string | null;
   setPreferencesPending: boolean;
+  addProfilePictureError: string | null;
+  addProfilePicturePending: boolean;
 };
 
 const initialState: UserReducerInitialState = {
@@ -15,6 +17,8 @@ const initialState: UserReducerInitialState = {
   userCompletePending: false,
   setPreferencesError: null,
   setPreferencesPending: false,
+  addProfilePictureError: null,
+  addProfilePicturePending: false,
 };
 
 export const userSlice = createSlice({
@@ -36,6 +40,12 @@ export const userSlice = createSlice({
     setPreferencesPending: (state, { payload }) => {
       state.setPreferencesPending = payload;
     },
+    addProfilePicturePending: (state, { payload }) => {
+      state.addProfilePicturePending = payload;
+    },
+    addProfilePictureError: (state, { payload }) => {
+      state.addProfilePictureError = payload;
+    },
   },
 });
 
@@ -45,6 +55,8 @@ export const {
   setUserCompletePending,
   setPreferencesError,
   setPreferencesPending,
+  addProfilePictureError,
+  addProfilePicturePending,
 } = userSlice.actions;
 
 export default userSlice.reducer;

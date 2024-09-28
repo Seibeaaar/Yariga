@@ -15,18 +15,40 @@ export default {
         },
         slideLeft: {
           '0%': {
-            transform: 'translateX(-200px)',
+            transform: 'translateX(-100px)',
             opacity: 0
           },
           '100%': {
             transform: 'translateX(0)',
             opacity: 1
           }
-        }
+        },
+        slideTop: {
+          '0%': {
+            transform: 'translateY(-100px)',
+            opacity: 0
+          },
+          '100%': {
+            transform: 'translateY(0)',
+            opacity: 1
+          }
+        },
+        slideBottom: {
+          '0%': {
+            transform: 'translateY(100px)',
+            opacity: 0
+          },
+          '100%': {
+            transform: 'translateY(0)',
+            opacity: 1
+          }
+        },
       },
       animation: {
         heartbeat: "heartbeat 3s linear infinite",
-        slideLeft: "slideLeft 1s linear"
+        slideLeft: "slideLeft 1s linear",
+        slideBottom: "slideBottom 1s linear",
+        slideTop: "slideTop 1s linear"
       },
       colors: {
         primary: "#475BE8",

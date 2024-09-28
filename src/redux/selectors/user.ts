@@ -16,6 +16,16 @@ export const selectsetPreferencesError = createSelector(
   (user) => user.setPreferencesError,
 );
 
+export const selectAddProfilePicturePending = createSelector(
+  [(state: RootState) => state.user],
+  (user) => user.addProfilePicturePending,
+);
+
+export const selectAddProfilePictureError = createSelector(
+  [(state: RootState) => state.user],
+  (user) => user.addProfilePictureError,
+);
+
 export const selectSetPreferencesPending = createSelector(
   [(state: RootState) => state.user],
   (user) => user.setPreferencesPending,

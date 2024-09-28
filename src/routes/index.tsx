@@ -5,6 +5,7 @@ import GoogleAuthSuccessPage from '@/pages/GoogleAuthSuccess';
 import ProfileCompletePage from '@/pages/ProfileComplete';
 import PreferencesPage from '@/pages/Preferences';
 import FirstPropertyPage from '@/pages/FirstProperty';
+import ProfilePicturePage from '@/pages/ProfilePicture';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: '/first-property',
     element: <FirstPropertyPage />,
+  },
+  {
+    path: '/profile-picture',
+    element: <ProfilePicturePage />,
   },
 ]);
 

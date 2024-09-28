@@ -28,3 +28,7 @@ export type UserRoleOption = {
   role: USER_ROLE;
   title: string;
 };
+
+export type ProfilePictureRequest = {
+  photo: File;
+};
