@@ -14,11 +14,11 @@ const AuthedScreenContainer: FC<AuthedScreenContainerProps> = ({
   return (
     <main className="text-primary-light dark:text-primary-dark flex">
       <Navbar />
-      <div className="flex-grow">
+      <div className="flex flex-col flex-grow">
         <header className="bg-white dark:bg-black flex items-center justify-end pr-[20px] py-[15px] h-[70px]">
           <ProfileBadge />
         </header>
-        <section className="bg-bg-light dark:bg-bg-dark w-full p-[15px]">
+        <section className="bg-bg-light flex-grow dark:bg-bg-dark w-full p-[15px]">
           {title ? <h1 className="text-2xl font-bold">{title}</h1> : null}
           {children}
         </section>

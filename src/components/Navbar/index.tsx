@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { NAV_LINKS } from '@/constants/navigation';
 import Logo from '@/assets/icons/Logo.svg';
 import NavbarLink from './Link';
 
 const Navbar = () => {
   const [collapsed, setCollapsed] = useState<boolean>(false);
+  const location = useLocation();
   const toggleNavbarState = () => setCollapsed(!collapsed);
   return (
     <nav
@@ -22,7 +24,7 @@ const Navbar = () => {
           collapsed={collapsed}
           link={link}
           key={link.route}
-          active={false}
+          active={link.route === location.pathname}
         />
       ))}
     </nav>

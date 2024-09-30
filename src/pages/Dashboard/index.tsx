@@ -1,19 +1,37 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '@/redux';
 import { getStats } from '@/redux/actions/user';
 import AuthedScreenContainer from '@/components/ScreenContainer/Auth';
 import LandlordDashboard from './Landlord';
+import TenantDashboard from './Tenant';
+import { selectUser } from '@/redux/selectors/user';
+import { USER_ROLE } from '@/types/user';
 
 const Dashboard = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const user = useSelector(selectUser);
 
   useEffect(() => {
-    dispatch(getStats());
-  }, []);
+    if (user) {
+      dispatch(getStats());
+    }
+  }, [dispatch, user]);
+
+  const renderDashboardContent = () => {
+    if (!user) {
+      return null;
+    }
+
+    return user.role === USER_ROLE.Landlord ? (
+      <LandlordDashboard />
+    ) : (
+      <TenantDashboard />
+    );
+  };
   return (
     <AuthedScreenContainer title="Dashboard">
-      <LandlordDashboard />
+      {renderDashboardContent()}
     </AuthedScreenContainer>
   );
 };
