@@ -10,7 +10,11 @@ const sagaMiddleware = createSagaMiddleware();
 const persistConfig = getPersistConfig({
   key: 'root',
   storage,
-  whitelist: ['user.user', 'ownProperties.properties'],
+  whitelist: [
+    'user.user',
+    'ownProperties.properties',
+    'agreement.totalByInterval',
+  ],
   rootReducer,
 });
 
