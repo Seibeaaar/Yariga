@@ -14,6 +14,7 @@ const persistConfig = getPersistConfig({
     'user.user',
     'ownProperties.properties',
     'agreement.totalByInterval',
+    'user.userStats',
   ],
   rootReducer,
 });

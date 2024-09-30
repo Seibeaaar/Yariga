@@ -4,6 +4,6 @@ import instance from '.';
 export const getTotalByIntervalRequest = async (
   interval: AGREEMENT_TOTAL_INTERVAL,
 ): Promise<TotalByInterval[]> => {
-  const result = await instance.get(`/agreements/total?interval=${interval}`);
+  const result = await instance.get(`/agreement/total?interval=${interval}`);
   return result.data;
 };

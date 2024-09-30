@@ -1,36 +1,21 @@
 import { useContext, FC } from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip } from 'recharts';
 import { COLORS } from '@/constants/styles';
+import { RiseLoader } from 'react-spinners';
 import { ThemeContext } from '@/customization/ThemeContext';
+import { TotalByInterval } from '@/types/agreement';
 
 type AgreementChartProps = {
   chartWidth: number;
+  totalByInterval: TotalByInterval[];
+  pending: boolean;
 };
 
-const barData = [
-  {
-    name: 'May',
-    value: 250,
-  },
-  {
-    name: 'June',
-    value: 170,
-  },
-  {
-    name: 'July',
-    value: 120,
-  },
-  {
-    name: 'August',
-    value: 329,
-  },
-  {
-    name: 'September',
-    value: 128,
-  },
-];
-
-const AgreementTotalChart: FC<AgreementChartProps> = ({ chartWidth }) => {
+const AgreementTotalChart: FC<AgreementChartProps> = ({
+  chartWidth,
+  totalByInterval,
+  pending,
+}) => {
   const { isDarkTheme } = useContext(ThemeContext);
 
   const formatTooltipInfo = (value: string) => ['', `$${value}`];
@@ -42,28 +27,47 @@ const AgreementTotalChart: FC<AgreementChartProps> = ({ chartWidth }) => {
   const itemStyle = {
     color: isDarkTheme ? COLORS['secondary-dark'] : COLORS['secondary-light'],
   };
+  const loaderColor = isDarkTheme
+    ? COLORS['primary-dark']
+    : COLORS['primary-light'];
+
+  const renderContent = () => {
+    if (pending) {
+      return <RiseLoader size={20} color={loaderColor} />;
+    }
+
+    if (totalByInterval.length === 0) {
+      return <p className="text-xl">No data found</p>;
+    }
+
+    return (
+      <BarChart data={totalByInterval} width={chartWidth} height={200}>
+        <Bar radius={4} dataKey="value" fill={COLORS.primary} />
+        <Tooltip
+          itemStyle={itemStyle}
+          cursor={false}
+          formatter={formatTooltipInfo}
+          contentStyle={contentStyle}
+          separator=""
+          labelClassName="text-secondary-light dark:text-secondary-dark"
+        />
+        <YAxis
+          hide
+          padding={{
+            bottom: 12,
+          }}
+          dataKey="value"
+          tickSize={0}
+        />
+        <XAxis axisLine={false} dataKey="name" tickSize={0} />
+      </BarChart>
+    );
+  };
 
   return (
-    <BarChart data={barData} width={chartWidth} height={200}>
-      <Bar radius={4} dataKey="value" fill={COLORS.primary} />
-      <Tooltip
-        itemStyle={itemStyle}
-        cursor={false}
-        formatter={formatTooltipInfo}
-        contentStyle={contentStyle}
-        separator=""
-        labelClassName="text-secondary-light dark:text-secondary-dark"
-      />
-      <YAxis
-        hide
-        padding={{
-          bottom: 12,
-        }}
-        dataKey="value"
-        tickSize={0}
-      />
-      <XAxis axisLine={false} dataKey="name" tickSize={0} />
-    </BarChart>
+    <article className="h-[200px] flex items-center justify-center">
+      {renderContent()}
+    </article>
   );
 };
 
