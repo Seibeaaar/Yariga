@@ -32,3 +32,18 @@ export type UserRoleOption = {
 export type ProfilePictureRequest = {
   photo: File;
 };
+
+export type LandlordStats = {
+  propertiesForSale: number;
+  propertiesForRent: number;
+  agreementsTotal: number;
+  agreementsCount: number;
+  tenantsCount: number;
+};
+
+export type TenantStats = {
+  propertiesRented: number;
+  propertiesPurchased: number;
+  agreementsTotal: number;
+  agreementsCount: number;
+};

@@ -1,6 +1,12 @@
 import { PropertyFilters } from '@/types/property';
 import instance from '.';
-import { ProfilePictureRequest, User, UserCompleteRequest } from '@/types/user';
+import {
+  LandlordStats,
+  ProfilePictureRequest,
+  TenantStats,
+  User,
+  UserCompleteRequest,
+} from '@/types/user';
 
 export const completeUserRequest = async (
   data: UserCompleteRequest,
@@ -25,5 +31,12 @@ export const addProfilePictureRequest = async (
     },
   });
 
+  return result.data;
+};
+
+export const getUserStatsRequest = async (): Promise<
+  LandlordStats | TenantStats
+> => {
+  const result = await instance.get('/user/stats');
   return result.data;
 };

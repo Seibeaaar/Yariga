@@ -2,6 +2,7 @@ import {
   completeUserRequest,
   setPreferencesRequest,
   addProfilePictureRequest,
+  getUserStatsRequest,
 } from '@/api/user';
 import { takeLatest, put, call } from 'redux-saga/effects';
 import {
@@ -12,13 +13,23 @@ import {
   setPreferencesPending,
   addProfilePictureError,
   addProfilePicturePending,
+  getStatsPending,
+  getStatsError,
+  setUserStats,
 } from '../reducers/user';
-import { ProfilePictureRequest, User, UserCompleteRequest } from '@/types/user';
+import {
+  LandlordStats,
+  ProfilePictureRequest,
+  TenantStats,
+  User,
+  UserCompleteRequest,
+} from '@/types/user';
 import { PropertyFilters } from '@/types/property';
 import {
   COMPLETE_USER,
   SET_PREFERENCES,
   ADD_PROFILE_PICTURE,
+  GET_STATS,
 } from '../actions/user';
 import { PayloadAction } from '@reduxjs/toolkit';
 
@@ -70,8 +81,27 @@ function* addProfilePictureSaga(
   }
 }
 
+function* getUserStatsSaga(): Generator<
+  unknown,
+  void,
+  LandlordStats | TenantStats
+> {
+  try {
+    yield put(getStatsError(null));
+    yield put(getStatsPending(true));
+
+    const userStats = yield call(getUserStatsRequest);
+    yield put(setUserStats(userStats));
+  } catch (e) {
+    yield put(getStatsError(generateErrorMesaage(e)));
+  } finally {
+    yield put(getStatsPending(false));
+  }
+}
+
 export default function* () {
   yield takeLatest(COMPLETE_USER, completeUserSaga);
   yield takeLatest(SET_PREFERENCES, setPreferencesSaga);
   yield takeLatest(ADD_PROFILE_PICTURE, addProfilePictureSaga);
+  yield takeLatest(GET_STATS, getUserStatsSaga);
 }

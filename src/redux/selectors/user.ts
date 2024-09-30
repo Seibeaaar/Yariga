@@ -35,3 +35,18 @@ export const selectSetPreferencesPending = createSelector(
   [(state: RootState) => state.user],
   (user) => user.setPreferencesPending,
 );
+
+export const selectGetUserStatsPending = createSelector(
+  [(state: RootState) => state.user],
+  (user) => user.getStatsPending,
+);
+
+export const selectGetUserStatsError = createSelector(
+  [(state: RootState) => state.user],
+  (user) => user.getStatsError,
+);
+
+export const selectUserStats = createSelector(
+  [(state: RootState) => state.user],
+  (user) => user.userStats,
+);

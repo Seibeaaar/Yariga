@@ -1,4 +1,4 @@
-import { User } from '@/types/user';
+import { LandlordStats, TenantStats, User } from '@/types/user';
 import { createSlice } from '@reduxjs/toolkit';
 
 export type UserReducerInitialState = {
@@ -9,6 +9,9 @@ export type UserReducerInitialState = {
   setPreferencesPending: boolean;
   addProfilePictureError: string | null;
   addProfilePicturePending: boolean;
+  getStatsPending: boolean;
+  getStatsError: string | null;
+  userStats: LandlordStats | TenantStats | null;
 };
 
 const initialState: UserReducerInitialState = {
@@ -19,6 +22,9 @@ const initialState: UserReducerInitialState = {
   setPreferencesPending: false,
   addProfilePictureError: null,
   addProfilePicturePending: false,
+  getStatsError: null,
+  getStatsPending: false,
+  userStats: null,
 };
 
 export const userSlice = createSlice({
@@ -46,6 +52,15 @@ export const userSlice = createSlice({
     addProfilePictureError: (state, { payload }) => {
       state.addProfilePictureError = payload;
     },
+    setUserStats: (state, { payload }) => {
+      state.userStats = payload;
+    },
+    getStatsPending: (state, { payload }) => {
+      state.getStatsPending = payload;
+    },
+    getStatsError: (state, { payload }) => {
+      state.getStatsError = payload;
+    },
   },
 });
 
@@ -57,6 +72,9 @@ export const {
   setPreferencesPending,
   addProfilePictureError,
   addProfilePicturePending,
+  getStatsError,
+  getStatsPending,
+  setUserStats,
 } = userSlice.actions;
 
 export default userSlice.reducer;

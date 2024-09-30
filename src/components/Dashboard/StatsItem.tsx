@@ -3,21 +3,30 @@ import Widget from '../Widget';
 import CountUp from 'react-countup';
 
 type StatsItemProps = {
-  value: number;
+  value?: number;
   label: string;
+  pending: boolean;
 };
 
-const StatsItem: FC<StatsItemProps> = ({ value, label }) => {
+const StatsItem: FC<StatsItemProps> = ({ value, label, pending }) => {
+  const renderStatsContent = () => {
+    if (pending) {
+      return <p className="leading-8">Calculating...</p>;
+    }
+
+    if (value === undefined) {
+      return <p className="text-2xl">N/A</p>;
+    }
+
+    return <CountUp end={value} className="text-2xl" />;
+  };
   return (
     <Widget className="flex items-center justify-between flex-grow">
       <div>
         <p className="text-sm text-secondary-light dark:text-secondary-dark">
           {label}
         </p>
-        <CountUp
-          end={value}
-          className="text-2xl text-primary-light dark:text-primary-dark"
-        />
+        {renderStatsContent()}
       </div>
     </Widget>
   );
