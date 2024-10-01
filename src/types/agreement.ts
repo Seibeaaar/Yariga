@@ -1,3 +1,5 @@
+import { Property } from './property';
+
 export enum AGREEMENT_TYPE {
   Sale = 'sale',
   Rent = 'rent',
@@ -29,7 +31,7 @@ export type Agreement = {
   landlord: string;
   updatedAt: string | null;
   createdAt: string;
-  property: string;
+  property: Property;
   amount: number;
   type: AGREEMENT_TYPE;
   status: AGREEMENT_STATUS;

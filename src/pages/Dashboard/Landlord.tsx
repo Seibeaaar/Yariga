@@ -6,6 +6,7 @@ import {
 import AgreementTotalWidget from '@/components/Dashboard/AgreementTotal';
 import StatsItem from '@/components/Dashboard/StatsItem';
 import { LandlordStats } from '@/types/user';
+import LatestAgreementsWidget from '@/components/Dashboard/LatestAgreements';
 
 const LandlordDashboard = () => {
   const userStats = useSelector(selectUserStats) as LandlordStats | null;
@@ -34,7 +35,10 @@ const LandlordDashboard = () => {
           label="Total agreements"
         />
       </div>
-      <AgreementTotalWidget />
+      <div className="flex gap-[16px] items-stretch">
+        <AgreementTotalWidget />
+        <LatestAgreementsWidget />
+      </div>
     </>
   );
 };
