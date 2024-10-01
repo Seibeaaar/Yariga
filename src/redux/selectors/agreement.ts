@@ -15,3 +15,18 @@ export const selectTotalByInterval = createSelector(
   [(state: RootState) => state.agreement],
   (agreement) => agreement.totalByInterval,
 );
+
+export const selectGetLatestAgreementsPending = createSelector(
+  [(state: RootState) => state.agreement],
+  (agreement) => agreement.getLatestAgreementsPending,
+);
+
+export const selectGetLatestAgreementsError = createSelector(
+  [(state: RootState) => state.agreement],
+  (agreement) => agreement.getLatestAgreementsError,
+);
+
+export const selectLatestAgreements = createSelector(
+  [(state: RootState) => state.agreement],
+  (agreement) => agreement.latestAgreements,
+);
