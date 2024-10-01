@@ -43,7 +43,7 @@ function* getMyPropertiesSaga(
     yield put(getMyPropertiesPending(true));
 
     const myProperties = yield call(getMyPropertiesReuest, action.payload);
-    yield put(setOwnProperties(myProperties));
+    yield put(setOwnProperties(myProperties.results));
   } catch (e) {
     yield put(getMyPropertiesError(generateErrorMesaage(e)));
   } finally {

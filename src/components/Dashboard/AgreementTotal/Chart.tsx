@@ -4,6 +4,7 @@ import { COLORS } from '@/constants/styles';
 import { RiseLoader } from 'react-spinners';
 import { ThemeContext } from '@/customization/ThemeContext';
 import { TotalByInterval } from '@/types/agreement';
+import CustomLoader from '@/components/CustomLoader';
 
 type AgreementChartProps = {
   chartWidth: number;
@@ -27,13 +28,10 @@ const AgreementTotalChart: FC<AgreementChartProps> = ({
   const itemStyle = {
     color: isDarkTheme ? COLORS['secondary-dark'] : COLORS['secondary-light'],
   };
-  const loaderColor = isDarkTheme
-    ? COLORS['primary-dark']
-    : COLORS['primary-light'];
 
   const renderContent = () => {
     if (pending) {
-      return <RiseLoader size={20} color={loaderColor} />;
+      return <CustomLoader loader={RiseLoader} size={20} />;
     }
 
     if (totalByInterval.length === 0) {

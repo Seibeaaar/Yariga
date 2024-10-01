@@ -7,13 +7,14 @@ import AgreementTotalWidget from '@/components/Dashboard/AgreementTotal';
 import StatsItem from '@/components/Dashboard/StatsItem';
 import { LandlordStats } from '@/types/user';
 import LatestAgreementsWidget from '@/components/Dashboard/LatestAgreements';
+import MyPropertiesList from '@/components/Dashboard/MyPropertiesList';
 
 const LandlordDashboard = () => {
   const userStats = useSelector(selectUserStats) as LandlordStats | null;
   const getStatsPending = useSelector(selectGetUserStatsPending);
   return (
     <>
-      <div className="flex items-center gap-[16px] my-[24px]">
+      <div className="flex items-center gap-[16px] mt-[24px]">
         <StatsItem
           pending={getStatsPending}
           value={userStats?.propertiesForSale}
@@ -35,10 +36,11 @@ const LandlordDashboard = () => {
           label="Total agreements"
         />
       </div>
-      <div className="flex gap-[16px] items-stretch">
+      <div className="flex gap-[16px] items-stretch my-[24px]">
         <AgreementTotalWidget />
         <LatestAgreementsWidget />
       </div>
+      <MyPropertiesList />
     </>
   );
 };

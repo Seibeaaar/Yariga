@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '@/redux';
 import { PropagateLoader } from 'react-spinners';
@@ -9,12 +9,10 @@ import {
 } from '@/redux/selectors/agreement';
 import Widget from '../Widget';
 import { formatAmountDisplay } from '@/utils/agreement';
-import { ThemeContext } from '@/customization/ThemeContext';
-import { COLORS } from '@/constants/styles';
+import CustomLoader from '../CustomLoader';
 
 const LatestAgreementsWidget = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { isDarkTheme } = useContext(ThemeContext);
   const latestAgreements = useSelector(selectLatestAgreements);
   const getLatestAgreementsPending = useSelector(
     selectGetLatestAgreementsPending,
@@ -24,15 +22,11 @@ const LatestAgreementsWidget = () => {
     dispatch(getLatestAgreements());
   }, [dispatch]);
 
-  const loaderColor = isDarkTheme
-    ? COLORS['primary-dark']
-    : COLORS['primary-light'];
-
   const renderContent = () => {
     if (getLatestAgreementsPending) {
       return (
         <div className="flex-grow items-center justify-center flex">
-          <PropagateLoader color={loaderColor} />
+          <CustomLoader loader={PropagateLoader} />
         </div>
       );
     }
@@ -80,7 +74,7 @@ const LatestAgreementsWidget = () => {
   return (
     <Widget className="flex flex-col flex-grow">
       <div className="flex items-center justify-between mb-[24px]">
-        <h6 className="font-bold text-lg">Latest agreements</h6>
+        <h6 className="font-semibold text-lg">Latest agreements</h6>
       </div>
       {renderContent()}
     </Widget>
