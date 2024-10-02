@@ -20,3 +20,10 @@ export const getMyPropertiesReuest = async (
   const result = await instance.get(`/property/mine?page=${page}`);
   return result.data;
 };
+
+export const getRecommendationsRequest = async (
+  page: number,
+): Promise<PaginatedResponse<Property>> => {
+  const result = await instance.get(`/property/recommendations?page=${page}`);
+  return result.data;
+};
