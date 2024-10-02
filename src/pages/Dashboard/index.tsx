@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '@/redux';
 import { getStats } from '@/redux/actions/user';
-import { getMyProperties } from '@/redux/actions/property';
+import { getMyProperties, getRecommendations } from '@/redux/actions/property';
 import AuthedScreenContainer from '@/components/ScreenContainer/Auth';
 import LandlordDashboard from './Landlord';
 import TenantDashboard from './Tenant';
@@ -17,7 +17,9 @@ const Dashboard = () => {
     if (user) {
       dispatch(getStats());
       if (user.role === USER_ROLE.Landlord) {
-        dispatch(getMyProperties(1));
+        dispatch(getMyProperties());
+      } else {
+        dispatch(getRecommendations());
       }
     }
   }, [dispatch, user]);
