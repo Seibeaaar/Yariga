@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { PropagateLoader } from 'react-spinners';
 import {
@@ -7,8 +8,13 @@ import {
 import Widget from '../Widget';
 import { formatAmountDisplay } from '@/utils/agreement';
 import CustomLoader from '../CustomLoader';
+import { USER_ROLE } from '@/types/user';
 
-const LatestAgreementsWidget = () => {
+type LatestAgreementsProps = {
+  userRole: USER_ROLE;
+};
+
+const LatestAgreementsWidget: FC<LatestAgreementsProps> = ({ userRole }) => {
   const latestAgreements = useSelector(selectLatestAgreements);
   const getLatestAgreementsPending = useSelector(
     selectGetLatestAgreementsPending,
@@ -54,7 +60,7 @@ const LatestAgreementsWidget = () => {
                 </div>
               </div>
               <p className="text-primary text-lg">
-                +{formatAmountDisplay(amount)}
+                {formatAmountDisplay(amount, userRole === USER_ROLE.Landlord)}
               </p>
             </div>
           );

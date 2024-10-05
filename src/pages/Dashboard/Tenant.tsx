@@ -6,7 +6,7 @@ import {
 import AgreementTotalWidget from '@/components/Dashboard/AgreementTotal';
 import StatsItem from '@/components/Dashboard/StatsItem';
 import LatestAgreementsWidget from '@/components/Dashboard/LatestAgreements';
-import { TenantStats } from '@/types/user';
+import { TenantStats, USER_ROLE } from '@/types/user';
 import RecommendationsList from '@/components/Dashboard/RecommendationsList';
 
 const TenantDashboard = () => {
@@ -33,7 +33,7 @@ const TenantDashboard = () => {
       </div>
       <div className="flex gap-[16px] items-stretch my-[24px]">
         <AgreementTotalWidget />
-        <LatestAgreementsWidget />
+        <LatestAgreementsWidget userRole={USER_ROLE.Tenant} />
       </div>
       <RecommendationsList />
     </>

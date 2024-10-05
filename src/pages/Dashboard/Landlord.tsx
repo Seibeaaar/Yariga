@@ -5,7 +5,7 @@ import {
 } from '@/redux/selectors/user';
 import AgreementTotalWidget from '@/components/Dashboard/AgreementTotal';
 import StatsItem from '@/components/Dashboard/StatsItem';
-import { LandlordStats } from '@/types/user';
+import { LandlordStats, USER_ROLE } from '@/types/user';
 import LatestAgreementsWidget from '@/components/Dashboard/LatestAgreements';
 import MyPropertiesList from '@/components/Dashboard/MyPropertiesList';
 
@@ -38,7 +38,7 @@ const LandlordDashboard = () => {
       </div>
       <div className="flex gap-[16px] items-stretch my-[24px]">
         <AgreementTotalWidget />
-        <LatestAgreementsWidget />
+        <LatestAgreementsWidget userRole={USER_ROLE.Landlord} />
       </div>
       <MyPropertiesList />
     </>

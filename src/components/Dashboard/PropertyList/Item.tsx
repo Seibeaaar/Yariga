@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { Property } from '@/types/property';
 import { Place } from '@mui/icons-material';
+import { formatPropertyPrice } from '@/utils/property';
 
 type DashboardPropertyItemProps = {
   property: Property;
@@ -27,7 +28,9 @@ const DashboardPropertyItem: FC<DashboardPropertyItemProps> = ({
           </div>
         </div>
         <div className="px-[10px] py-[8px] bg-secondary rounded-[4px]">
-          <p className="text-primary text-xs">${property.amount}</p>
+          <p className="text-primary text-xs">
+            ${formatPropertyPrice(property.amount)}
+          </p>
         </div>
       </div>
     </div>

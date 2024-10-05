@@ -1,4 +1,4 @@
-export const formatAmountDisplay = (amount: number) => {
+export const formatAmountDisplay = (amount: number, isProfit: boolean) => {
   const million = Math.pow(10, 6);
   const thousand = Math.pow(10, 3);
 
@@ -11,5 +11,7 @@ export const formatAmountDisplay = (amount: number) => {
     displayedAmount = `${amount}`;
   }
 
-  return `$${displayedAmount}`;
+  const mathSign = isProfit ? '+' : '-';
+
+  return `${mathSign}$${displayedAmount}`;
 };
