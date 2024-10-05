@@ -38,37 +38,20 @@ export const PROPERTY_PREFERENCES_VALIDATION_SCHEMA = yup.object({
     .array()
     .ensure()
     .required()
-    .of(
-      yup
-        .mixed<AGREEMENT_TYPE>()
-        .oneOf(Object.values(AGREEMENT_TYPE))
-        .required(),
-    ),
+    .of(yup.string().oneOf(Object.values(AGREEMENT_TYPE)).required()),
   propertyType: yup
     .array()
     .ensure()
     .required()
-    .of(
-      yup.mixed<PROPERTY_TYPE>().oneOf(Object.values(PROPERTY_TYPE)).required(),
-    ),
+    .of(yup.string().oneOf(Object.values(PROPERTY_TYPE)).required()),
   facilities: yup
     .array()
     .ensure()
     .required()
-    .of(
-      yup
-        .mixed<PROPERTY_FACILITY>()
-        .oneOf(Object.values(PROPERTY_FACILITY))
-        .required(),
-    ),
-  paymemtPeriod: yup
+    .of(yup.string().oneOf(Object.values(PROPERTY_FACILITY)).required()),
+  paymentPeriod: yup
     .array()
     .ensure()
     .required()
-    .of(
-      yup
-        .mixed<PROPERTY_PAYMENT_PERIOD>()
-        .oneOf(Object.values(PROPERTY_PAYMENT_PERIOD))
-        .required(),
-    ),
+    .of(yup.string().oneOf(Object.values(PROPERTY_PAYMENT_PERIOD)).required()),
 });
