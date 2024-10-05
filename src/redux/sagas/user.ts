@@ -16,6 +16,7 @@ import {
   getStatsPending,
   getStatsError,
   setUserStats,
+  setPreferencesSuccess,
 } from '../reducers/user';
 import {
   LandlordStats,
@@ -56,8 +57,11 @@ function* setPreferencesSaga(
   try {
     yield put(setPreferencesError(null));
     yield put(setPreferencesPending(true));
+    yield put(setPreferencesSuccess(false));
+
     const user = yield call(setPreferencesRequest, action.payload);
     yield put(setUser(user));
+    yield put(setPreferencesSuccess(true));
   } catch (e) {
     yield put(setPreferencesError(generateErrorMesaage(e)));
   } finally {

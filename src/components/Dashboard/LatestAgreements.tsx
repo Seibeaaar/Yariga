@@ -1,8 +1,5 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch } from '@/redux';
+import { useSelector } from 'react-redux';
 import { PropagateLoader } from 'react-spinners';
-import { getLatestAgreements } from '@/redux/actions/agreement';
 import {
   selectGetLatestAgreementsPending,
   selectLatestAgreements,
@@ -12,15 +9,10 @@ import { formatAmountDisplay } from '@/utils/agreement';
 import CustomLoader from '../CustomLoader';
 
 const LatestAgreementsWidget = () => {
-  const dispatch = useDispatch<AppDispatch>();
   const latestAgreements = useSelector(selectLatestAgreements);
   const getLatestAgreementsPending = useSelector(
     selectGetLatestAgreementsPending,
   );
-
-  useEffect(() => {
-    dispatch(getLatestAgreements());
-  }, [dispatch]);
 
   const renderContent = () => {
     if (getLatestAgreementsPending) {

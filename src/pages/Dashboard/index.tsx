@@ -8,6 +8,7 @@ import LandlordDashboard from './Landlord';
 import TenantDashboard from './Tenant';
 import { selectUser } from '@/redux/selectors/user';
 import { USER_ROLE } from '@/types/user';
+import { getLatestAgreements } from '@/redux/actions/agreement';
 
 const Dashboard = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -16,13 +17,14 @@ const Dashboard = () => {
   useEffect(() => {
     if (user) {
       dispatch(getStats());
+      dispatch(getLatestAgreements());
       if (user.role === USER_ROLE.Landlord) {
         dispatch(getMyProperties());
       } else {
         dispatch(getRecommendations());
       }
     }
-  }, [dispatch, user]);
+  }, [dispatch]);
 
   const renderDashboardContent = () => {
     if (!user) {
