@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { AppDispatch } from '@/redux';
+import { getRecommendations } from '@/redux/actions/property';
 import DashboardPropertyList from '../PropertyList';
 import { Tune } from '@mui/icons-material';
 import Widget from '@/components/Widget';
@@ -8,16 +10,23 @@ import {
   selectGetRecommendationsPending,
 } from '@/redux/selectors/property/recommendations';
 import PreferencesModal from './PreferencesModal';
+import Pagination from '@/components/Pagination';
 
 const RecommendationsList = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  const recommendations = useSelector(selectRecommendations);
+  const { results, page, pages, total } = useSelector(selectRecommendations);
   const getRecommendationsPending = useSelector(
     selectGetRecommendationsPending,
   );
+  const dispatch = useDispatch<AppDispatch>();
 
   const onModalClose = () => setModalOpen(false);
   const openModal = () => setModalOpen(true);
+
+  const onPageChange = (page: number) => {
+    dispatch(getRecommendations(page));
+  };
+
   return (
     <>
       <PreferencesModal onClose={onModalClose} open={modalOpen} />
@@ -40,8 +49,14 @@ const RecommendationsList = () => {
         </div>
         <DashboardPropertyList
           pending={getRecommendationsPending}
-          properties={recommendations}
+          properties={results}
           placeholder="No recommendations for you so far"
+        />
+        <Pagination
+          onChange={onPageChange}
+          activePage={page}
+          pages={pages}
+          total={total}
         />
       </Widget>
     </>

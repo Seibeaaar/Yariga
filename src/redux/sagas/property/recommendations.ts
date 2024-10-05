@@ -22,7 +22,7 @@ function* getRecommendationsSaga(
       getRecommendationsRequest,
       action.payload,
     );
-    yield put(setRecommendations(recommendations.results));
+    yield put(setRecommendations(recommendations));
   } catch (e) {
     yield put(getRecommendationsError(generateErrorMesaage(e)));
   } finally {
