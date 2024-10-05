@@ -153,7 +153,7 @@ const PropertyPreferencesForm: FC<PropertyPreferencesFormProps> = ({
           )}
         />
         <div
-          className={`flex lg:flex-wrap lg:flex-row flex-col gap-[16px] ${buildAnimationStyles(
+          className={`flex lg:flex-wrap lg:flex-row flex-col justify-between gap-y-[16px] ${buildAnimationStyles(
             'animate-[slideLeft_1.5s_linear]',
           )}`}
         >

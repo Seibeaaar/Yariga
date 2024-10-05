@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import DashboardPropertyList from './PropertyList';
+import DashboardPropertyList from '../PropertyList';
 import { Tune } from '@mui/icons-material';
-import Widget from '../Widget';
+import Widget from '@/components/Widget';
 import {
   selectRecommendations,
   selectGetRecommendationsPending,

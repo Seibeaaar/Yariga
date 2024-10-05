@@ -1,4 +1,6 @@
+import { AuthProvider } from './auth';
 import { MuiIcon } from './components';
+import { Property, PropertyFilters } from './property';
 
 export type UserCompleteRequest = {
   dateOfBirth: string;
@@ -9,13 +11,26 @@ export type UserCompleteRequest = {
 export type User = {
   firstName: string;
   lastName: string;
-  email: {
-    value: string;
-    verified: true;
-  };
+  email: string;
   role: USER_ROLE;
   dateOfBirth: string;
-  profilePicture?: string;
+  profilePicture: string | null;
+  phoneNumber: string;
+  id: string;
+  joinedAt: string;
+  updatedAt?: string;
+  provider: AuthProvider;
+  rating: number;
+  votes: number;
+};
+
+export type Tenant = User & {
+  preferences: PropertyFilters;
+};
+
+export type Landlord = User & {
+  tenants: Tenant[];
+  properties: Property[];
 };
 
 export enum USER_ROLE {

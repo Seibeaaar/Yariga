@@ -1,8 +1,8 @@
-import { LandlordStats, TenantStats, User } from '@/types/user';
+import { Landlord, LandlordStats, Tenant, TenantStats } from '@/types/user';
 import { createSlice } from '@reduxjs/toolkit';
 
 export type UserReducerInitialState = {
-  user: User | null;
+  user: Landlord | Tenant | null;
   userCompletePending: boolean;
   userCompleteError: string | null;
   setPreferencesError: string | null;
