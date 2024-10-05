@@ -9,9 +9,8 @@ export const addProperty = (payload: AddPropertyPayload) => ({
   payload,
 });
 
-export const getMyProperties = (payload: number = 1) => ({
+export const getMyProperties = () => ({
   type: GET_MY_PROPERTIES,
-  payload,
 });
 
 export const getRecommendations = (payload: number = 1) => ({

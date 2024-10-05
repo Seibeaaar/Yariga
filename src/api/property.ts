@@ -14,10 +14,8 @@ export const addPropertyRequest = async (
   return result.data;
 };
 
-export const getMyPropertiesReuest = async (
-  page: number,
-): Promise<PaginatedResponse<Property>> => {
-  const result = await instance.get(`/property/mine?page=${page}`);
+export const getMyPropertiesReuest = async (): Promise<Property[]> => {
+  const result = await instance.get(`/property/mine`);
   return result.data;
 };
 

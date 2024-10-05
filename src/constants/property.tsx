@@ -95,3 +95,8 @@ export const PROPERTY_TYPE_OPTIONS = [
     icon: Apartment,
   },
 ];
+
+export const MY_PROPERTIES_DESKTOP_DISPLAY_THRESHOLD = 6;
+export const MY_PROPERTIES_MOBILE_DISPLAY_THRESHOLD = 3;
+
+export const PROPERTIES_OWNED_LIMIT = 25;

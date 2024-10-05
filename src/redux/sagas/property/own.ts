@@ -13,7 +13,6 @@ import {
 } from '@/redux/reducers/property/own';
 import { generateErrorMesaage } from '@/utils/redux';
 import router from '@/routes';
-import { PaginatedResponse } from '@/types/common';
 
 function* addPropertySaga(
   action: PayloadAction<AddPropertyPayload>,
@@ -35,15 +34,13 @@ function* addPropertySaga(
   }
 }
 
-function* getMyPropertiesSaga(
-  action: PayloadAction<number>,
-): Generator<unknown, void, PaginatedResponse<Property>> {
+function* getMyPropertiesSaga(): Generator<unknown, void, Property[]> {
   try {
     yield put(getMyPropertiesError(null));
     yield put(getMyPropertiesPending(true));
 
-    const myProperties = yield call(getMyPropertiesReuest, action.payload);
-    yield put(setOwnProperties(myProperties.results));
+    const myProperties = yield call(getMyPropertiesReuest);
+    yield put(setOwnProperties(myProperties));
   } catch (e) {
     yield put(getMyPropertiesError(generateErrorMesaage(e)));
   } finally {
