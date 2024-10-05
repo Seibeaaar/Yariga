@@ -5,7 +5,9 @@ import {
 } from '@/redux/selectors/user';
 import AgreementTotalWidget from '@/components/Dashboard/AgreementTotal';
 import StatsItem from '@/components/Dashboard/StatsItem';
+import LatestAgreementsWidget from '@/components/Dashboard/LatestAgreements';
 import { TenantStats } from '@/types/user';
+import RecommendationsList from '@/components/Dashboard/RecommendationsList';
 
 const TenantDashboard = () => {
   const userStats = useSelector(selectUserStats) as TenantStats | null;
@@ -29,7 +31,11 @@ const TenantDashboard = () => {
           label="Successful agreements"
         />
       </div>
-      <AgreementTotalWidget />
+      <div className="flex gap-[16px] items-stretch my-[24px]">
+        <AgreementTotalWidget />
+        <LatestAgreementsWidget />
+      </div>
+      <RecommendationsList />
     </>
   );
 };

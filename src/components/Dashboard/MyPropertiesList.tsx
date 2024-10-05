@@ -14,6 +14,7 @@ const MyPropertiesList = () => {
       <h5 className="text-lg font-semibold mb-[16px]">My properties</h5>
       <DashboardPropertyList
         pending={getMyPropertiesPending}
+        placeholder="No poroperties of yours so far"
         properties={myProperties}
       />
     </Widget>

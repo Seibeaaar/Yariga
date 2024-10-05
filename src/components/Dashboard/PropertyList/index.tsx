@@ -7,11 +7,13 @@ import CustomLoader from '@/components/CustomLoader';
 type DashboardPropertyListProps = {
   properties: Property[];
   pending: boolean;
+  placeholder: string;
 };
 
 const DashboardPropertyList: FC<DashboardPropertyListProps> = ({
   properties,
   pending,
+  placeholder,
 }) => {
   const renderContent = () => {
     if (pending) {
@@ -25,7 +27,7 @@ const DashboardPropertyList: FC<DashboardPropertyListProps> = ({
     if (properties.length === 0) {
       return (
         <div className="flex items-center justify-center h-[192px]">
-          <p className="text-xl">No properties of yours so far</p>
+          <p className="text-xl">{placeholder}</p>
         </div>
       );
     }
