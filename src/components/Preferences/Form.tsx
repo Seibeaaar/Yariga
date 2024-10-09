@@ -47,11 +47,18 @@ import { PayloadAction } from '@reduxjs/toolkit';
 type PropertyPreferencesFormProps = {
   animated?: boolean;
   onSubmit(payload: PropertyFilters): PayloadAction<PropertyFilters>;
+  defaultValues?: PropertyFilters;
 };
 
 const PropertyPreferencesForm: FC<PropertyPreferencesFormProps> = ({
   animated = false,
   onSubmit,
+  defaultValues = {
+    facilities: [],
+    agreementType: [],
+    propertyType: [],
+    paymentPeriod: [],
+  },
 }) => {
   const {
     control,
@@ -59,12 +66,7 @@ const PropertyPreferencesForm: FC<PropertyPreferencesFormProps> = ({
     handleSubmit,
   } = useForm({
     resolver: yupResolver(PROPERTY_PREFERENCES_VALIDATION_SCHEMA),
-    defaultValues: {
-      facilities: [],
-      agreementType: [],
-      propertyType: [],
-      paymemtPeriod: [],
-    },
+    defaultValues,
   });
 
   const dispatch = useDispatch<AppDispatch>();
@@ -92,7 +94,7 @@ const PropertyPreferencesForm: FC<PropertyPreferencesFormProps> = ({
       />
       <form
         onSubmit={handleSubmit(onFormSubmit)}
-        className="mx-auto w-full px-[24px] md:w-3/4 md:p-0 mt-[24px] flex flex-col gap-[36px]"
+        className="w-full flex flex-col gap-[24px]"
       >
         <Controller
           control={control}
@@ -132,7 +134,7 @@ const PropertyPreferencesForm: FC<PropertyPreferencesFormProps> = ({
         />
         <Controller
           control={control}
-          name="paymemtPeriod"
+          name="paymentPeriod"
           render={({ field: { onChange, value } }) => (
             <div
               className={buildAnimationStyles(
@@ -145,13 +147,13 @@ const PropertyPreferencesForm: FC<PropertyPreferencesFormProps> = ({
                 onSelect={onChange}
                 label="You prefer to pay:"
                 multi
-                error={errors.paymemtPeriod?.message}
+                error={errors.paymentPeriod?.message}
               />
             </div>
           )}
         />
         <div
-          className={`flex lg:flex-wrap lg:flex-row flex-col gap-[16px] ${buildAnimationStyles(
+          className={`flex lg:flex-wrap lg:flex-row flex-col justify-between gap-y-[16px] ${buildAnimationStyles(
             'animate-[slideLeft_1.5s_linear]',
           )}`}
         >

@@ -13,3 +13,8 @@ export const USER_ROLE_OPTIONS = [
     title: 'Sell or rent out property for your profit',
   },
 ];
+
+export const ROLE_NAME = {
+  [USER_ROLE.Tenant]: 'Tenant',
+  [USER_ROLE.Landlord]: 'Landlord',
+};

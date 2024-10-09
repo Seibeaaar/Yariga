@@ -1,5 +1,6 @@
 import instance from '.';
 import { PropertyDataRequest, Property } from '@/types/property';
+import { PaginatedResponse } from '@/types/common';
 
 export const addPropertyRequest = async (
   data: PropertyDataRequest,
@@ -10,5 +11,17 @@ export const addPropertyRequest = async (
     },
   });
 
+  return result.data;
+};
+
+export const getMyPropertiesReuest = async (): Promise<Property[]> => {
+  const result = await instance.get(`/property/mine`);
+  return result.data;
+};
+
+export const getRecommendationsRequest = async (
+  page: number,
+): Promise<PaginatedResponse<Property>> => {
+  const result = await instance.get(`/property/recommendations?page=${page}`);
   return result.data;
 };

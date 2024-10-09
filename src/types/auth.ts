@@ -18,3 +18,5 @@ export type AuthRequestResponse = {
   user: User;
   token: string;
 };
+
+export type AuthProvider = 'password' | 'google';

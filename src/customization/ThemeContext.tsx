@@ -12,6 +12,7 @@ export const ThemeContext = createContext({
   theme: 'light',
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   changeTheme: (_value: AppTheme) => {},
+  isDarkTheme: false,
 });
 
 type ThemeContextProps = {
@@ -57,6 +58,7 @@ const ThemeContextProvider: FC<ThemeContextProps> = ({ children }) => {
     <ThemeContext.Provider
       value={{
         theme,
+        isDarkTheme: theme === 'dark',
         changeTheme: updateAppTheme,
       }}
     >

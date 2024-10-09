@@ -28,7 +28,9 @@ const PreferencesPage = () => {
             Describe your preferences so we can find best options for you
           </h3>
         </AnimatedBlock>
-        <PropertyPreferencesForm animated onSubmit={setPreferences} />
+        <div className="mx-auto px-[24px] md:w-3/4 md:p-0 mt-[24px]">
+          <PropertyPreferencesForm animated onSubmit={setPreferences} />
+        </div>
       </div>
     </NonAuthorizedScreen>
   );

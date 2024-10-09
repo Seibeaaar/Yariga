@@ -5,12 +5,16 @@ export type OwnPropertiesReducerInitialState = {
   addPropertyPending: boolean;
   addPropertyError: string | null;
   properties: Property[];
+  getMyPropertiesPending: boolean;
+  getMyPropertiesError: string | null;
 };
 
 const initialState: OwnPropertiesReducerInitialState = {
   addPropertyError: null,
   addPropertyPending: false,
   properties: [],
+  getMyPropertiesError: null,
+  getMyPropertiesPending: false,
 };
 
 export const ownPropertiesSlice = createSlice({
@@ -29,6 +33,12 @@ export const ownPropertiesSlice = createSlice({
     addNewProperty: (state, { payload }) => {
       state.properties.push(payload);
     },
+    getMyPropertiesPending: (state, { payload }) => {
+      state.getMyPropertiesPending = payload;
+    },
+    getMyPropertiesError: (state, { payload }) => {
+      state.getMyPropertiesError = payload;
+    },
   },
 });
 
@@ -37,6 +47,8 @@ export const {
   addPropertyPending,
   setOwnProperties,
   addNewProperty,
+  getMyPropertiesError,
+  getMyPropertiesPending,
 } = ownPropertiesSlice.actions;
 
 export default ownPropertiesSlice.reducer;

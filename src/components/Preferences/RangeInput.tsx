@@ -30,7 +30,7 @@ const RangeInput = <T extends FieldValues>({
 }: RangeInputProps<T>) => {
   return (
     <div className={`w-full lg:w-[calc(50%-16px)] ${className}`}>
-      <h4 className="text-lg font-medium">{label}:</h4>
+      <h4 className="text-sm font-medium mb-[4px]">{label}:</h4>
       <div className="flex flex-col sm:flex-row gap-[12px] items-center sm:items-end w-full">
         <Controller
           control={control}

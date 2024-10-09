@@ -35,17 +35,17 @@ type MinMaxPair = {
 };
 
 export type PropertyFilters = {
-  beds?: MinMaxPair;
-  rooms?: MinMaxPair;
-  floors?: MinMaxPair;
-  floorLevel?: MinMaxPair;
-  area?: MinMaxPair;
-  amount?: MinMaxPair;
-  agreementType?: AGREEMENT_TYPE[];
-  paymentPeriod?: PROPERTY_PAYMENT_PERIOD[];
-  propertyType?: PROPERTY_TYPE[];
-  rating?: MinMaxPair;
-  facilities?: PROPERTY_FACILITY[];
+  beds: MinMaxPair;
+  rooms: MinMaxPair;
+  floors: MinMaxPair;
+  floorLevel: MinMaxPair;
+  area: MinMaxPair;
+  amount: MinMaxPair;
+  agreementType: AGREEMENT_TYPE[];
+  propertyType: PROPERTY_TYPE[];
+  rating: MinMaxPair;
+  facilities: PROPERTY_FACILITY[];
+  paymentPeriod: PROPERTY_PAYMENT_PERIOD[];
 };
 
 export type PropertyLocation = {

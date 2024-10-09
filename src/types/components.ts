@@ -7,3 +7,9 @@ export type SelectableOption<T> = {
   label: string;
   value: T;
 };
+
+export type NavbarLinkConfig = {
+  label: string;
+  route: string;
+  icon: MuiIcon;
+};

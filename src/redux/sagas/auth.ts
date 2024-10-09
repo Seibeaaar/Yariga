@@ -3,7 +3,7 @@ import { takeLatest, put, call } from 'redux-saga/effects';
 import { authError, authPending } from '../reducers/auth';
 import { LoginData, SignUpData } from '@/types/auth';
 import { AuthRequestResponse } from '@/types/auth';
-import { LOGIN_REQUEST, SIGN_UP_REQUEST } from '../actions/auth';
+import { LOGIN_REQUEST, SIGN_UP_REQUEST, LOG_OUT } from '../actions/auth';
 import { PayloadAction } from '@reduxjs/toolkit';
 import router from '@/routes';
 
@@ -49,7 +49,14 @@ function* signUpSaga(
   }
 }
 
+function* logoutSaga(): Generator<unknown, void, undefined> {
+  localStorage.removeItem('token');
+  yield put(setUser(null));
+  router.navigate('/');
+}
+
 export default function* () {
   yield takeLatest(LOGIN_REQUEST, loginSaga);
   yield takeLatest(SIGN_UP_REQUEST, signUpSaga);
+  yield takeLatest(LOG_OUT, logoutSaga);
 }
