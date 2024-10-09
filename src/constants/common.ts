@@ -55,3 +55,10 @@ export const PAYMENT_PERIOD_OPTIONS = [
 ];
 
 export const ACCEPTED_IMAGE_FORMATS = ['png', 'jpeg', 'jpg', 'webp'];
+
+export const DEFAULT_PAGINATED_RESPONSE = {
+  results: [],
+  pages: 1,
+  page: 1,
+  total: 0,
+};

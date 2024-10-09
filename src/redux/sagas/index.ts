@@ -3,6 +3,7 @@ import authSaga from './auth';
 import userSaga from './user';
 import ownPropertiesSaga from './property/own';
 import recommendationsSaga from './property/recommendations';
+import searchPropertiesSaga from './property/search';
 import agreementSaga from './agreement';
 
 export default function* rootSaga() {
@@ -12,5 +13,6 @@ export default function* rootSaga() {
     ownPropertiesSaga(),
     agreementSaga(),
     recommendationsSaga(),
+    searchPropertiesSaga(),
   ]);
 }
