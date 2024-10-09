@@ -1,13 +1,9 @@
 import { FC } from 'react';
-import { MuiIcon } from '@/types/components';
+import { NavbarLinkConfig } from '@/types/components';
 import { Link } from 'react-router-dom';
 
 type NavbarLinkProps = {
-  link: {
-    label: string;
-    route: string;
-    icon: MuiIcon;
-  };
+  link: NavbarLinkConfig;
   active: boolean;
   collapsed: boolean;
 };
@@ -32,7 +28,7 @@ const NavbarLink: FC<NavbarLinkProps> = ({ link, active, collapsed }) => {
         }}
         color="inherit"
       />
-      <h5 className={`font-bold absolute ${collapsedStyles}`}>{link.label}</h5>
+      <p className={`font-bold absolute ${collapsedStyles}`}>{link.label}</p>
     </Link>
   );
 };

@@ -1,3 +1,4 @@
+import useWindowSize from '@/hooks/useWindowSize';
 import { createContext, useState, FC, ReactNode } from 'react';
 
 export const NavbarContext = createContext({
@@ -11,7 +12,8 @@ type NavbarContextProps = {
 };
 
 const NavbarContextProvider: FC<NavbarContextProps> = ({ children }) => {
-  const [navbarCollapsed, setNavbarCollapsed] = useState(false);
+  const { width } = useWindowSize();
+  const [navbarCollapsed, setNavbarCollapsed] = useState(width <= 1024);
 
   const toggleNavbar = () => setNavbarCollapsed(!navbarCollapsed);
   const closeNavbar = () => setNavbarCollapsed(false);
