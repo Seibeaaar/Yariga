@@ -21,7 +21,7 @@ const StatsItem: FC<StatsItemProps> = ({ value, label, pending }) => {
     return <CountUp end={value} className="text-2xl" />;
   };
   return (
-    <Widget className="flex items-center justify-between flex-grow">
+    <Widget className="flex w-full md:w-[calc(50%-12px)] lg:w-[calc(25%-12px)] items-center justify-between flex-grow">
       <div>
         <p className="text-sm text-secondary-light dark:text-secondary-dark">
           {label}

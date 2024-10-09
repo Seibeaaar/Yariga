@@ -14,7 +14,7 @@ const LandlordDashboard = () => {
   const getStatsPending = useSelector(selectGetUserStatsPending);
   return (
     <>
-      <div className="flex items-center gap-[16px] mt-[24px]">
+      <div className="flex flex-wrap items-center gap-[16px] mt-[24px]">
         <StatsItem
           pending={getStatsPending}
           value={userStats?.propertiesForSale}
@@ -36,7 +36,7 @@ const LandlordDashboard = () => {
           label="Total agreements"
         />
       </div>
-      <div className="flex gap-[16px] items-stretch my-[24px]">
+      <div className="flex flex-wrap gap-[16px] items-stretch my-[24px]">
         <AgreementTotalWidget />
         <LatestAgreementsWidget userRole={USER_ROLE.Landlord} />
       </div>

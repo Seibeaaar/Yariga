@@ -14,7 +14,7 @@ const TenantDashboard = () => {
   const getStatsPending = useSelector(selectGetUserStatsPending);
   return (
     <>
-      <div className="flex items-center gap-[16px] my-[24px]">
+      <div className="flex flex-wrap items-center gap-[16px] my-[24px]">
         <StatsItem
           pending={getStatsPending}
           value={userStats?.propertiesPurchased}

@@ -11,7 +11,7 @@ const DashboardPropertyItem: FC<DashboardPropertyItemProps> = ({
   property,
 }) => {
   return (
-    <div className="w-[calc(33%-8px)]">
+    <div className="w-full md:w-[calc(50%-8px)] lg:w-[calc(33%-8px)]">
       <img
         className="h-[192px] w-full rounded-[10px]"
         src={property.photos[0]}

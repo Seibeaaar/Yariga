@@ -20,7 +20,7 @@ const AuthContainerContent: FC<AuthContentProps> = ({ children, title }) => {
   };
   return (
     <section
-      className={`transition-all bg-bg-light mt-[70px] dark:bg-bg-dark w-screen p-[15px] flex-grow ${calculateLeftPaddingStyle()}`}
+      className={`transition-all min-h-[calc(100vh-70px)] bg-bg-light mt-[70px] dark:bg-bg-dark w-screen p-[15px] flex-grow ${calculateLeftPaddingStyle()}`}
     >
       {title ? <h1 className="text-2xl font-bold">{title}</h1> : null}
       {children}

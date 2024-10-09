@@ -59,7 +59,7 @@ const AgreementTotal = () => {
   };
 
   return (
-    <Widget className="w-2/3">
+    <Widget className="w-full lg:w-[calc(66%-12px)]">
       <div ref={containerRef} className="w-full">
         <div className="flex justify-between mb-[24px]">
           <div>

@@ -6,7 +6,7 @@ import HeaderBurgerMenu from './BurgerMenu';
 const Header = () => {
   const { width } = useWindowSize();
   return (
-    <header className="bg-white w-full fixed dark:bg-black flex items-center justify-between pr-[20px] py-[15px] h-[70px]">
+    <header className="z-[1000] bg-white w-full fixed dark:bg-black flex items-center justify-between pr-[20px] py-[15px] h-[70px]">
       {width <= 1024 ? <HeaderBurgerMenu /> : <AppLogo />}
       <ProfileBadge />
     </header>
