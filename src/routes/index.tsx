@@ -8,8 +8,7 @@ import FirstPropertyPage from '@/pages/FirstProperty';
 import ProfilePicturePage from '@/pages/ProfilePicture';
 import Dashboard from '@/pages/Dashboard';
 import NotFoundPage from '@/pages/404';
-
-import ProtectedRoute from './ProtectedRoute';
+import PropertySearchPage from '@/pages/PropertySearch';
 
 const router = createBrowserRouter([
   {
@@ -42,11 +41,11 @@ const router = createBrowserRouter([
   },
   {
     path: '/dashboard',
-    element: (
-      <ProtectedRoute>
-        <Dashboard />
-      </ProtectedRoute>
-    ),
+    element: <Dashboard />,
+  },
+  {
+    path: '/properties',
+    element: <PropertySearchPage />,
   },
   {
     path: '*',

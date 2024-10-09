@@ -14,7 +14,8 @@ const GoogleButton = () => {
     <Button
       variant="outlined"
       onClick={onGoogleAuth}
-      leftIcon={GoogleIcon}
+      className="gap-[16px]"
+      leftIcon={<img src={GoogleIcon} />}
       text="Continue with Google"
       type="button"
     />
