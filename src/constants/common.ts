@@ -13,16 +13,26 @@ import {
 export const MIN_RATING = 0;
 export const MAX_RATING = 5;
 
+export const AGREEMENT_TYPE_NAME = {
+  [AGREEMENT_TYPE.Rent]: 'Rent',
+  [AGREEMENT_TYPE.Sale]: 'Sale',
+};
+
+export const AGREEMENT_TYPE_ICON = {
+  [AGREEMENT_TYPE.Rent]: CalendarToday,
+  [AGREEMENT_TYPE.Sale]: RequestQuote,
+};
+
 export const AGREEMENT_TYPE_OPTIONS = [
   {
-    icon: RequestQuote,
+    icon: AGREEMENT_TYPE_ICON[AGREEMENT_TYPE.Sale],
     value: AGREEMENT_TYPE.Sale,
-    label: 'Purchase',
+    label: AGREEMENT_TYPE_NAME[AGREEMENT_TYPE.Sale],
   },
   {
-    icon: CalendarToday,
+    icon: AGREEMENT_TYPE_ICON[AGREEMENT_TYPE.Rent],
     value: AGREEMENT_TYPE.Rent,
-    label: 'Rent',
+    label: AGREEMENT_TYPE_NAME[AGREEMENT_TYPE.Rent],
   },
 ];
 

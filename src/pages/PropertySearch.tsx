@@ -2,6 +2,7 @@ import AuthedScreenContainer from '@/components/ScreenContainer/Auth';
 import Widget from '@/components/Widget';
 import PropertySearchActionItem from '@/components/PropertySearch/ActionItem';
 import PropertySearchbar from '@/components/PropertySearch/Searchbar';
+import PropertiesSearchList from '@/components/PropertySearch/PropertyList';
 
 const PropertySearchPage = () => {
   return (
@@ -13,8 +14,7 @@ const PropertySearchPage = () => {
         <div className="flex items-center justify-between">
           <PropertySearchbar />
         </div>
-        {/* Property list */}
-        {/* Pagination */}
+        <PropertiesSearchList />
       </Widget>
     </AuthedScreenContainer>
   );

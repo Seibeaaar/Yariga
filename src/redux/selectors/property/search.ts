@@ -9,9 +9,9 @@ export const selectGetAllPropertiesPending = createSelector(
   [(state: RootState) => state.searchProperties],
   (search) => search.getAllPropertiesPending,
 );
-export const selectAllProperties = createSelector(
+export const selectResults = createSelector(
   [(state: RootState) => state.searchProperties],
-  (search) => search.allProperties,
+  (search) => search.results,
 );
 
 export const selectSearchPropertiesError = createSelector(
@@ -22,10 +22,6 @@ export const selectSearchPropertiesPending = createSelector(
   [(state: RootState) => state.searchProperties],
   (search) => search.searchPropertiesPending,
 );
-export const selectSearchResults = createSelector(
-  [(state: RootState) => state.searchProperties],
-  (search) => search.searchResults,
-);
 
 export const selectFilterPropertiesPending = createSelector(
   [(state: RootState) => state.searchProperties],
@@ -34,8 +30,4 @@ export const selectFilterPropertiesPending = createSelector(
 export const selectFilterPropertiesError = createSelector(
   [(state: RootState) => state.searchProperties],
   (search) => search.filterPropertiesError,
-);
-export const selectFilterResults = createSelector(
-  [(state: RootState) => state.searchProperties],
-  (search) => search.filterResults,
 );

@@ -83,15 +83,25 @@ export const PROPERTY_FACILITIES_OPTIONS = [
   },
 ];
 
+export const PROPERTY_TYPE_NAME = {
+  [PROPERTY_TYPE.Apartment]: 'Apartment',
+  [PROPERTY_TYPE.House]: 'House',
+};
+
+export const PROPERTY_TYPE_ICON = {
+  [PROPERTY_TYPE.Apartment]: Apartment,
+  [PROPERTY_TYPE.House]: House,
+};
+
 export const PROPERTY_TYPE_OPTIONS = [
   {
-    label: 'House',
-    value: PROPERTY_TYPE.House,
+    label: PROPERTY_TYPE_NAME[PROPERTY_TYPE.House],
+    value: PROPERTY_TYPE_ICON[PROPERTY_TYPE.House],
     icon: House,
   },
   {
-    label: 'Apartment',
-    value: PROPERTY_TYPE.Apartment,
+    label: PROPERTY_TYPE_NAME[PROPERTY_TYPE.Apartment],
+    value: PROPERTY_TYPE_ICON[PROPERTY_TYPE.Apartment],
     icon: Apartment,
   },
 ];

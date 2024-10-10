@@ -5,26 +5,22 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export type SearchPropertyReducerInitialState = {
   getAllPropertiesPending: boolean;
-  allProperties: PaginatedResponse<Property>;
   getAllPropertiesError: string | null;
   searchPropertiesPending: boolean;
   searchPropertiesError: string | null;
-  searchResults: PaginatedResponse<Property>;
   filterPropertiesPending: boolean;
   filterPropertiesError: string | null;
-  filterResults: PaginatedResponse<Property>;
+  results: PaginatedResponse<Property>;
 };
 
 const initialState: SearchPropertyReducerInitialState = {
   getAllPropertiesPending: false,
-  allProperties: DEFAULT_PAGINATED_RESPONSE,
   getAllPropertiesError: null,
   searchPropertiesError: null,
   searchPropertiesPending: false,
-  searchResults: DEFAULT_PAGINATED_RESPONSE,
   filterPropertiesError: null,
   filterPropertiesPending: false,
-  filterResults: DEFAULT_PAGINATED_RESPONSE,
+  results: DEFAULT_PAGINATED_RESPONSE,
 };
 
 export const searchPropertySlice = createSlice({
@@ -37,17 +33,14 @@ export const searchPropertySlice = createSlice({
     getAllPropertiesError: (state, { payload }) => {
       state.getAllPropertiesError = payload;
     },
-    setAllProperties: (state, { payload }) => {
-      state.allProperties = payload;
-    },
     searchPropertiesPending: (state, { payload }) => {
       state.searchPropertiesPending = payload;
     },
     searchPropertiesError: (state, { payload }) => {
       state.searchPropertiesError = payload;
     },
-    setSearchResults: (state, { payload }) => {
-      state.searchResults = payload;
+    setResults: (state, { payload }) => {
+      state.results = payload;
     },
     filterPropertiesPending: (state, { payload }) => {
       state.filterPropertiesPending = payload;
@@ -55,22 +48,17 @@ export const searchPropertySlice = createSlice({
     filterPropertiesError: (state, { payload }) => {
       state.filterPropertiesError = payload;
     },
-    setFilterResults: (state, { payload }) => {
-      state.filterResults = payload;
-    },
   },
 });
 
 export const {
   getAllPropertiesPending,
   getAllPropertiesError,
-  setAllProperties,
+  setResults,
   searchPropertiesError,
   searchPropertiesPending,
-  setFilterResults,
   filterPropertiesError,
   filterPropertiesPending,
-  setSearchResults,
 } = searchPropertySlice.actions;
 
 export default searchPropertySlice.reducer;

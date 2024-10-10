@@ -10,9 +10,7 @@ import {
   GET_ALL_PROPERTIES,
 } from '@/redux/actions/property';
 import {
-  setSearchResults,
-  setAllProperties,
-  setFilterResults,
+  setResults,
   searchPropertiesError,
   searchPropertiesPending,
   getAllPropertiesError,
@@ -37,7 +35,7 @@ function* getAllPropertiesSaga(
     yield put(getAllPropertiesPending(true));
 
     const allProperties = yield call(getAllPropertiesRequest, action.payload);
-    yield put(setAllProperties(allProperties));
+    yield put(setResults(allProperties));
   } catch (e) {
     yield put(getAllPropertiesError(generateErrorMesaage(e)));
   } finally {
@@ -54,7 +52,7 @@ function* searchPropertiesSaga(
     const { query, page } = action.payload;
 
     const searchResults = yield call(searchPropertiesRequest, query, page);
-    yield put(setSearchResults(searchResults));
+    yield put(setResults(searchResults));
   } catch (e) {
     yield put(searchPropertiesError(generateErrorMesaage(e)));
   } finally {
@@ -71,7 +69,7 @@ function* filterPropertiesSaga(
     const { filters, page } = action.payload;
 
     const filterResults = yield call(filterPropertiesRequest, filters, page);
-    yield put(setFilterResults(filterResults));
+    yield put(setResults(filterResults));
   } catch (e) {
     yield put(filterPropertiesError(generateErrorMesaage(e)));
   } finally {
