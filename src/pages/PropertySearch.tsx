@@ -22,6 +22,7 @@ import {
   selectSearchResults,
 } from '@/redux/selectors/property/search';
 import Pagination from '@/components/Pagination';
+import { DEFAULT_PROPERTY_FILTERS } from '@/constants/property';
 
 const PropertySearchPage = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -75,7 +76,7 @@ const PropertySearchPage = () => {
           <PropertyFiltersModal
             submitSuccess={filterSuccess}
             submitText="Apply filters"
-            defaultValues={appliedFilters}
+            defaultValues={appliedFilters ?? DEFAULT_PROPERTY_FILTERS}
             buttonText="Filters"
             onSubmit={setupPropertyFilters}
           />

@@ -8,6 +8,7 @@ import {
   SEARCH_PROPERTIES,
   FILTER_PROPERTIES,
   GET_ALL_PROPERTIES,
+  getAllProperties,
 } from '@/redux/actions/property';
 import {
   setSearchError,
@@ -26,6 +27,8 @@ import {
   SearchPropertyPayload,
 } from '@/types/property';
 import { PaginatedResponse } from '@/types/common';
+import isEqual from 'lodash.isequal';
+import { DEFAULT_PROPERTY_FILTERS } from '@/constants/property';
 
 function* getAllPropertiesSaga(
   action: PayloadAction<number | undefined>,
@@ -78,14 +81,18 @@ function* filterPropertiesSaga(
     yield put(setFilterSuccess(false));
     const { filters, page } = action.payload;
 
-    const filterResults = yield call(filterPropertiesRequest, filters, page);
+    if (isEqual(DEFAULT_PROPERTY_FILTERS, filters)) {
+      yield call(getAllPropertiesSaga, getAllProperties());
+    } else {
+      const filterResults = yield call(filterPropertiesRequest, filters, page);
 
-    yield put(setSearchFilters(filters));
-    yield put(setSearchMode('filter'));
-    yield put(setSearchResults(filterResults));
+      yield put(setSearchFilters(filters));
+      yield put(setSearchMode('filter'));
+      yield put(setSearchResults(filterResults));
+      yield put(setSearchQuery(''));
+    }
+
     yield put(setFilterSuccess(true));
-
-    yield put(setSearchQuery(''));
   } catch (e) {
     yield put(setSearchError(generateErrorMesaage(e)));
   } finally {

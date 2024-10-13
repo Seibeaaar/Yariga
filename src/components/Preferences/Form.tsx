@@ -13,6 +13,7 @@ import {
 import { PROPERTY_PREFERENCES_VALIDATION_SCHEMA } from '@/validators/common';
 import Button from '@/components/Button';
 import {
+  DEFAULT_PROPERTY_FILTERS,
   MAX_AREA,
   MAX_BEDS,
   MAX_FLOORS,
@@ -41,6 +42,7 @@ import {
   selectsetPreferencesError,
 } from '@/redux/selectors/user';
 import OptionFormField from '../OptionFormField';
+import isEqual from 'lodash.isequal';
 
 type PropertyPreferencesFormProps = {
   animated?: boolean;
@@ -52,22 +54,20 @@ type PropertyPreferencesFormProps = {
 const PropertyPreferencesForm: FC<PropertyPreferencesFormProps> = ({
   animated = false,
   onSubmit,
-  defaultValues = {
-    facilities: [],
-    agreementType: [],
-    propertyType: [],
-    paymentPeriod: [],
-  },
+  defaultValues = DEFAULT_PROPERTY_FILTERS,
   submitText,
 }) => {
   const {
     control,
     formState: { errors },
+    watch,
     handleSubmit,
   } = useForm({
     resolver: yupResolver(PROPERTY_PREFERENCES_VALIDATION_SCHEMA),
     defaultValues,
   });
+
+  const formValues = watch();
 
   const setPreferencesPending = useSelector(selectSetPreferencesPending);
   const setPreferencesError = useSelector(selectsetPreferencesError);
@@ -244,7 +244,11 @@ const PropertyPreferencesForm: FC<PropertyPreferencesFormProps> = ({
         <div
           className={buildAnimationStyles('animate-[slideLeft_2.25s_linear]')}
         >
-          <Button type="submit" text={submitText} />
+          <Button
+            disabled={isEqual(formValues, defaultValues)}
+            type="submit"
+            text={submitText}
+          />
         </div>
       </form>
     </>

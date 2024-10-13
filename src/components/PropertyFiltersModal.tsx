@@ -26,7 +26,6 @@ const PropertyFiltersModal = ({
 
   useEffect(() => {
     if (submitSuccess) {
-      console.log('close');
       closeModal();
     }
   }, [submitSuccess]);
@@ -34,7 +33,7 @@ const PropertyFiltersModal = ({
   return (
     <>
       <Modal open={modalOpen} onClose={closeModal}>
-        <div className="mx-auto text-primary-light dark:text-primary-dark my-[24px] w-2/3 rounded-[16px] py-[16px] px-[24px] bg-white dark:bg-black overflow-scroll max-h-[calc(100%-48px)]">
+        <div className="mx-auto text-primary-light dark:text-primary-dark my-[24px] w-[calc(100vw-16px)] md:w-2/3 rounded-[16px] py-[16px] px-[24px] bg-white dark:bg-black overflow-scroll max-h-[calc(100%-48px)]">
           <PropertyPreferencesForm
             defaultValues={defaultValues}
             onSubmit={onSubmit}

@@ -1,4 +1,5 @@
 import { DEFAULT_PAGINATED_RESPONSE } from '@/constants/common';
+import { DEFAULT_PROPERTY_FILTERS } from '@/constants/property';
 import { PaginatedResponse } from '@/types/common';
 import { Property, PropertyFilters } from '@/types/property';
 import { createSlice } from '@reduxjs/toolkit';
@@ -8,7 +9,7 @@ export type SearchPropertyReducerInitialState = {
   error: string | null;
   mode: 'all' | 'search' | 'filter';
   searchQuery: string;
-  filters?: PropertyFilters;
+  filters: PropertyFilters;
   results: PaginatedResponse<Property>;
   filterSuccess: boolean;
 };
@@ -18,7 +19,7 @@ const initialState: SearchPropertyReducerInitialState = {
   pending: false,
   error: null,
   searchQuery: '',
-  filters: undefined,
+  filters: DEFAULT_PROPERTY_FILTERS,
   mode: 'all',
   filterSuccess: false,
 };

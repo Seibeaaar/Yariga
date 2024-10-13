@@ -1,4 +1,8 @@
-import { PROPERTY_FACILITY, PROPERTY_TYPE } from '@/types/property';
+import {
+  PROPERTY_FACILITY,
+  PROPERTY_TYPE,
+  PropertyFilters,
+} from '@/types/property';
 import {
   Wifi,
   Kitchen,
@@ -110,3 +114,38 @@ export const MY_PROPERTIES_DESKTOP_DISPLAY_THRESHOLD = 6;
 export const MY_PROPERTIES_MOBILE_DISPLAY_THRESHOLD = 3;
 
 export const PROPERTIES_OWNED_LIMIT = 25;
+
+export const DEFAULT_PROPERTY_FILTERS: PropertyFilters = {
+  agreementType: [],
+  amount: {
+    min: undefined,
+    max: undefined,
+  },
+  area: {
+    min: undefined,
+    max: undefined,
+  },
+  beds: {
+    min: undefined,
+    max: undefined,
+  },
+  floorLevel: {
+    min: undefined,
+    max: undefined,
+  },
+  floors: {
+    min: undefined,
+    max: undefined,
+  },
+  facilities: [],
+  rating: {
+    min: undefined,
+    max: undefined,
+  },
+  rooms: {
+    min: undefined,
+    max: undefined,
+  },
+  paymentPeriod: [],
+  propertyType: [],
+};
