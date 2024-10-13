@@ -24,13 +24,21 @@ const PropertySearchbar = () => {
             query,
           }),
         );
-      } else if (mode === 'search') {
-        dispatch(getAllProperties());
       }
     }, 500);
 
     return () => clearTimeout(searchDelay);
-  }, [query, dispatch, mode]);
+  }, [query, dispatch]);
+
+  useEffect(() => {
+    const resetDelay = setTimeout(() => {
+      if (mode === 'search' && query.trim().length === 0) {
+        dispatch(getAllProperties());
+      }
+    }, 500);
+
+    return () => clearTimeout(resetDelay);
+  }, [mode, dispatch, query]);
 
   const onSearchInput = (e: ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
@@ -44,7 +52,7 @@ const PropertySearchbar = () => {
       <div
         onFocus={focus}
         onBlur={blur}
-        className={`min-w-[450px] text-secondary-light dark:text-secondary-dark cursor-pointer bg-bg-light dark:bg-bg-dark rounded-[10px] p-[8px] flex items-center gap-[8px] border ${!focused ? 'border-bg-light dark:border-bg-dark' : 'border-primary'}`}
+        className={`flex-grow md:max-w-[450px] text-secondary-light dark:text-secondary-dark cursor-pointer bg-bg-light dark:bg-bg-dark rounded-[10px] px-[8px] py-[6px] flex items-center gap-[8px] border ${!focused ? 'border-bg-light dark:border-bg-dark' : 'border-primary'}`}
       >
         <Search color="inherit" />
         <input

@@ -25,7 +25,7 @@ const PropertySearchItem: FC<PropertySearchItemProps> = ({ property }) => {
     },
   ];
   return (
-    <div className="flex items-stretch gap-[10px]">
+    <div className="flex items-stretch gap-[16px] w-full md:w-[calc(50%-24px)]">
       <img
         src={property.photos[0]}
         className="h-[125px] w-[200px] rounded-[10px]"
