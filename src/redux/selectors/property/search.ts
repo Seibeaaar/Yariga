@@ -29,3 +29,7 @@ export const selectSearchFilterSuccess = createSelector(
   [(state: RootState) => state.searchProperties],
   (search) => search.filterSuccess,
 );
+export const selectIsInitialSearch = createSelector(
+  [(state: RootState) => state.searchProperties],
+  (search) => search.initialSearch,
+);

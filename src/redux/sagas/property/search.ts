@@ -18,6 +18,7 @@ import {
   setSearchQuery,
   setSearchResults,
   setFilterSuccess,
+  setInitialSearch,
 } from '@/redux/reducers/property/search';
 import { generateErrorMesaage } from '@/utils/redux';
 import { PayloadAction } from '@reduxjs/toolkit';
@@ -40,10 +41,11 @@ function* getAllPropertiesSaga(
     const allProperties = yield call(getAllPropertiesRequest, action.payload);
 
     yield put(setSearchMode('all'));
+    yield put(setInitialSearch(false));
     yield put(setSearchResults(allProperties));
 
     yield put(setSearchQuery(''));
-    yield put(setSearchFilters(undefined));
+    yield put(setSearchFilters(DEFAULT_PROPERTY_FILTERS));
   } catch (e) {
     yield put(setSearchError(generateErrorMesaage(e)));
   } finally {
@@ -62,7 +64,7 @@ function* searchPropertiesSaga(
     const searchResults = yield call(searchPropertiesRequest, query, page);
 
     yield put(setSearchQuery(query));
-    yield put(setSearchFilters(undefined));
+    yield put(setSearchFilters(DEFAULT_PROPERTY_FILTERS));
     yield put(setSearchMode('search'));
     yield put(setSearchResults(searchResults));
   } catch (e) {

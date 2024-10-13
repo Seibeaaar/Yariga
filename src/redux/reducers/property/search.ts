@@ -12,6 +12,7 @@ export type SearchPropertyReducerInitialState = {
   filters: PropertyFilters;
   results: PaginatedResponse<Property>;
   filterSuccess: boolean;
+  initialSearch: boolean;
 };
 
 const initialState: SearchPropertyReducerInitialState = {
@@ -22,6 +23,7 @@ const initialState: SearchPropertyReducerInitialState = {
   filters: DEFAULT_PROPERTY_FILTERS,
   mode: 'all',
   filterSuccess: false,
+  initialSearch: true,
 };
 
 export const searchPropertySlice = createSlice({
@@ -49,6 +51,9 @@ export const searchPropertySlice = createSlice({
     setFilterSuccess: (state, { payload }) => {
       state.filterSuccess = payload;
     },
+    setInitialSearch: (state, { payload }) => {
+      state.initialSearch = payload;
+    },
   },
 });
 
@@ -60,6 +65,7 @@ export const {
   setSearchPending,
   setSearchQuery,
   setFilterSuccess,
+  setInitialSearch,
 } = searchPropertySlice.actions;
 
 export default searchPropertySlice.reducer;

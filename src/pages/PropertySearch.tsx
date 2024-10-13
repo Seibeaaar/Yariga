@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { AppDispatch } from '@/redux';
 import {
+  selectIsInitialSearch,
   selectSearchFilterSuccess,
   selectSearchFilters,
   selectSearchMode,
@@ -38,12 +39,13 @@ const PropertySearchPage = () => {
   const searchPending = useSelector(selectSearchPending);
   const searchMode = useSelector(selectSearchMode);
   const searchQuery = useSelector(selectSearchQuery);
+  const isInitialSearch = useSelector(selectIsInitialSearch);
 
   useEffect(() => {
-    if (searchMode === 'all') {
+    if (searchMode === 'all' && isInitialSearch) {
       dispatch(getAllProperties());
     }
-  }, [dispatch, searchMode]);
+  }, [dispatch, searchMode, isInitialSearch]);
 
   const onPageChange = (page: number) => {
     if (searchMode === 'all') {
