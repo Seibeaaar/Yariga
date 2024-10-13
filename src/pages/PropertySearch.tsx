@@ -1,9 +1,7 @@
 import AuthedScreenContainer from '@/components/ScreenContainer/Auth';
 import Widget from '@/components/Widget';
 import PropertySearchActionItem from '@/components/PropertySearch/ActionItem';
-import PropertySearchbar from '@/components/PropertySearch/Searchbar';
 import PropertiesSearchList from '@/components/PropertyList';
-import PropertyFiltersModal from '@/components/PropertyFiltersModal';
 import {
   filterProperties,
   getAllProperties,
@@ -16,7 +14,6 @@ import { AppDispatch } from '@/redux';
 import {
   selectIsInitialSearch,
   selectSearchError,
-  selectSearchFilterSuccess,
   selectSearchFilters,
   selectSearchMode,
   selectSearchPending,
@@ -24,18 +21,11 @@ import {
   selectSearchResults,
 } from '@/redux/selectors/property/search';
 import Pagination from '@/components/Pagination';
-import { DEFAULT_PROPERTY_FILTERS } from '@/constants/property';
 import Popup from '@/components/Popup';
+import PropertySearchHeader from '@/components/PropertySearch/Header';
 
 const PropertySearchPage = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const setupPropertyFilters = (filters: PropertyFilters) =>
-    dispatch(
-      filterProperties({
-        filters,
-      }),
-    );
-  const filterSuccess = useSelector(selectSearchFilterSuccess);
   const appliedFilters = useSelector(selectSearchFilters);
   const { results, total, page, pages } = useSelector(selectSearchResults);
   const searchPending = useSelector(selectSearchPending);
@@ -84,16 +74,7 @@ const PropertySearchPage = () => {
         severity="error"
       />
       <Widget>
-        <div className="flex items-center gap-[10px] justify-between">
-          <PropertySearchbar />
-          <PropertyFiltersModal
-            submitSuccess={filterSuccess}
-            submitText="Apply filters"
-            defaultValues={appliedFilters ?? DEFAULT_PROPERTY_FILTERS}
-            buttonText="Filters"
-            onSubmit={setupPropertyFilters}
-          />
-        </div>
+        <PropertySearchHeader />
         <PropertiesSearchList pending={searchPending} items={results} />
         <Pagination
           total={total}
