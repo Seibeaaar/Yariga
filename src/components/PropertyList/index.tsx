@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { SearchOff } from '@mui/icons-material';
 import PropertySearchItem from './Item';
-import PropertyItemLoader from './ItemLoader';
+import PropertyListLoader from './Loader/index';
 import { Property } from '@/types/property';
 
 type PropertyListProps = {
@@ -12,7 +12,7 @@ type PropertyListProps = {
 const PropertiesSearchList: FC<PropertyListProps> = ({ items, pending }) => {
   const renderContent = () => {
     if (pending) {
-      return <PropertyItemLoader />;
+      return <PropertyListLoader />;
     }
     if (items.length === 0) {
       return (
