@@ -1,11 +1,26 @@
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { AppDispatch } from '@/redux';
+import { getAllProperties } from '@/redux/actions/property';
 import { SearchOff } from '@mui/icons-material';
-import { selectResults } from '@/redux/selectors/property/search';
+import {
+  selectSearchResults,
+  selectSearchMode,
+} from '@/redux/selectors/property/search';
 import Pagination from '@/components/Pagination';
 import PropertySearchItem from './Item';
 
 const PropertiesSearchList = () => {
-  const { results, total, page, pages } = useSelector(selectResults);
+  const { results, total, page, pages } = useSelector(selectSearchResults);
+  const mode = useSelector(selectSearchMode);
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    if (mode === 'all') {
+      dispatch(getAllProperties());
+    }
+  }, [dispatch, mode]);
 
   const renderContent = () => {
     if (results.length === 0) {

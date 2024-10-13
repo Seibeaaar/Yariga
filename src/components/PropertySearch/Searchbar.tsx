@@ -1,12 +1,19 @@
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import {
+  selectSearchMode,
+  selectSearchQuery,
+} from '@/redux/selectors/property/search';
 import { AppDispatch } from '@/redux';
 import { Search } from '@mui/icons-material';
-import { searchProperties } from '@/redux/actions/property';
+import { getAllProperties, searchProperties } from '@/redux/actions/property';
 import { useState, useEffect, ChangeEvent } from 'react';
 
 const PropertySearchbar = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const [query, setQuery] = useState('');
+  const searchQuery = useSelector(selectSearchQuery);
+  const mode = useSelector(selectSearchMode);
+  const [query, setQuery] = useState(searchQuery);
   const [focused, setFocused] = useState(false);
 
   useEffect(() => {
@@ -17,11 +24,13 @@ const PropertySearchbar = () => {
             query,
           }),
         );
+      } else if (mode === 'search') {
+        dispatch(getAllProperties());
       }
     }, 500);
 
     return () => clearTimeout(searchDelay);
-  }, [query, dispatch]);
+  }, [query, dispatch, mode]);
 
   const onSearchInput = (e: ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);

@@ -10,13 +10,12 @@ import {
   GET_ALL_PROPERTIES,
 } from '@/redux/actions/property';
 import {
-  setResults,
-  searchPropertiesError,
-  searchPropertiesPending,
-  getAllPropertiesError,
-  getAllPropertiesPending,
-  filterPropertiesError,
-  filterPropertiesPending,
+  setSearchError,
+  setSearchFilters,
+  setSearchMode,
+  setSearchPending,
+  setSearchQuery,
+  setSearchResults,
 } from '@/redux/reducers/property/search';
 import { generateErrorMesaage } from '@/utils/redux';
 import { PayloadAction } from '@reduxjs/toolkit';
@@ -31,15 +30,16 @@ function* getAllPropertiesSaga(
   action: PayloadAction<number | undefined>,
 ): Generator<unknown, void, PaginatedResponse<Property>> {
   try {
-    yield put(getAllPropertiesError(null));
-    yield put(getAllPropertiesPending(true));
+    yield put(setSearchError(null));
+    yield put(setSearchPending(true));
 
     const allProperties = yield call(getAllPropertiesRequest, action.payload);
-    yield put(setResults(allProperties));
+    yield put(setSearchMode('all'));
+    yield put(setSearchResults(allProperties));
   } catch (e) {
-    yield put(getAllPropertiesError(generateErrorMesaage(e)));
+    yield put(setSearchError(generateErrorMesaage(e)));
   } finally {
-    yield put(getAllPropertiesPending(false));
+    yield put(setSearchPending(false));
   }
 }
 
@@ -47,16 +47,20 @@ function* searchPropertiesSaga(
   action: PayloadAction<SearchPropertyPayload>,
 ): Generator<unknown, void, PaginatedResponse<Property>> {
   try {
-    yield put(searchPropertiesError(null));
-    yield put(searchPropertiesPending(true));
+    yield put(setSearchError(null));
+    yield put(setSearchPending(true));
     const { query, page } = action.payload;
 
     const searchResults = yield call(searchPropertiesRequest, query, page);
-    yield put(setResults(searchResults));
+
+    yield put(setSearchQuery(query));
+    yield put(setSearchFilters(null));
+    yield put(setSearchMode('search'));
+    yield put(setSearchResults(searchResults));
   } catch (e) {
-    yield put(searchPropertiesError(generateErrorMesaage(e)));
+    yield put(setSearchError(generateErrorMesaage(e)));
   } finally {
-    yield put(searchPropertiesPending(false));
+    yield put(setSearchPending(false));
   }
 }
 
@@ -64,16 +68,20 @@ function* filterPropertiesSaga(
   action: PayloadAction<FilterPropertyPayload>,
 ): Generator<unknown, void, PaginatedResponse<Property>> {
   try {
-    yield put(filterPropertiesError(null));
-    yield put(filterPropertiesPending(true));
+    yield put(setSearchError(null));
+    yield put(setSearchPending(true));
     const { filters, page } = action.payload;
 
     const filterResults = yield call(filterPropertiesRequest, filters, page);
-    yield put(setResults(filterResults));
+
+    yield put(setSearchFilters(filters));
+    yield put(setSearchMode('filter'));
+    yield put(setSearchQuery(''));
+    yield put(setSearchResults(filterResults));
   } catch (e) {
-    yield put(filterPropertiesError(generateErrorMesaage(e)));
+    yield put(setSearchError(generateErrorMesaage(e)));
   } finally {
-    yield put(filterPropertiesPending(false));
+    yield put(setSearchPending(false));
   }
 }
 

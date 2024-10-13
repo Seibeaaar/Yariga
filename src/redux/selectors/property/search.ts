@@ -1,33 +1,27 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '../..';
 
-export const selectGetAllPropertiesError = createSelector(
-  [(state: RootState) => state.searchProperties],
-  (search) => search.getAllPropertiesError,
-);
-export const selectGetAllPropertiesPending = createSelector(
-  [(state: RootState) => state.searchProperties],
-  (search) => search.getAllPropertiesPending,
-);
-export const selectResults = createSelector(
+export const selectSearchResults = createSelector(
   [(state: RootState) => state.searchProperties],
   (search) => search.results,
 );
-
-export const selectSearchPropertiesError = createSelector(
+export const selectSearchPending = createSelector(
   [(state: RootState) => state.searchProperties],
-  (search) => search.searchPropertiesError,
+  (search) => search.pending,
 );
-export const selectSearchPropertiesPending = createSelector(
+export const selectSearchError = createSelector(
   [(state: RootState) => state.searchProperties],
-  (search) => search.searchPropertiesPending,
+  (search) => search.error,
 );
-
-export const selectFilterPropertiesPending = createSelector(
+export const selectSearchMode = createSelector(
   [(state: RootState) => state.searchProperties],
-  (search) => search.filterPropertiesPending,
+  (search) => search.mode,
 );
-export const selectFilterPropertiesError = createSelector(
+export const selectSearchQuery = createSelector(
   [(state: RootState) => state.searchProperties],
-  (search) => search.filterPropertiesError,
+  (search) => search.searchQuery,
+);
+export const selectSearchFilters = createSelector(
+  [(state: RootState) => state.searchProperties],
+  (search) => search.filters,
 );
