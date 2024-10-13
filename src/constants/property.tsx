@@ -1,4 +1,8 @@
-import { PROPERTY_FACILITY, PROPERTY_TYPE } from '@/types/property';
+import {
+  PROPERTY_FACILITY,
+  PROPERTY_TYPE,
+  PropertyFilters,
+} from '@/types/property';
 import {
   Wifi,
   Kitchen,
@@ -83,16 +87,26 @@ export const PROPERTY_FACILITIES_OPTIONS = [
   },
 ];
 
+export const PROPERTY_TYPE_NAME = {
+  [PROPERTY_TYPE.Apartment]: 'Apartment',
+  [PROPERTY_TYPE.House]: 'House',
+};
+
+export const PROPERTY_TYPE_ICON = {
+  [PROPERTY_TYPE.Apartment]: Apartment,
+  [PROPERTY_TYPE.House]: House,
+};
+
 export const PROPERTY_TYPE_OPTIONS = [
   {
-    label: 'House',
+    label: PROPERTY_TYPE_NAME[PROPERTY_TYPE.House],
     value: PROPERTY_TYPE.House,
-    icon: House,
+    icon: PROPERTY_TYPE_ICON[PROPERTY_TYPE.House],
   },
   {
-    label: 'Apartment',
+    label: PROPERTY_TYPE_NAME[PROPERTY_TYPE.Apartment],
     value: PROPERTY_TYPE.Apartment,
-    icon: Apartment,
+    icon: PROPERTY_TYPE_ICON[PROPERTY_TYPE.Apartment],
   },
 ];
 
@@ -100,3 +114,38 @@ export const MY_PROPERTIES_DESKTOP_DISPLAY_THRESHOLD = 6;
 export const MY_PROPERTIES_MOBILE_DISPLAY_THRESHOLD = 3;
 
 export const PROPERTIES_OWNED_LIMIT = 25;
+
+export const DEFAULT_PROPERTY_FILTERS: PropertyFilters = {
+  agreementType: [],
+  amount: {
+    min: undefined,
+    max: undefined,
+  },
+  area: {
+    min: undefined,
+    max: undefined,
+  },
+  beds: {
+    min: undefined,
+    max: undefined,
+  },
+  floorLevel: {
+    min: undefined,
+    max: undefined,
+  },
+  floors: {
+    min: undefined,
+    max: undefined,
+  },
+  facilities: [],
+  rating: {
+    min: undefined,
+    max: undefined,
+  },
+  rooms: {
+    min: undefined,
+    max: undefined,
+  },
+  paymentPeriod: [],
+  propertyType: [],
+};

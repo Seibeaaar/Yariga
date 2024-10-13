@@ -86,3 +86,13 @@ export type Property = PropertyData & {
 export type AddPropertyPayload = PropertyDataRequest & {
   isFirstProperty: boolean;
 };
+
+export type SearchPropertyPayload = {
+  query: string;
+  page?: number;
+};
+
+export type FilterPropertyPayload = {
+  filters: PropertyFilters;
+  page?: number;
+};

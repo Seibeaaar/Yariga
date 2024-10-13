@@ -1,8 +1,7 @@
 import { Controller, useForm } from 'react-hook-form';
 import { FC } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch } from '@/redux';
+import { useSelector } from 'react-redux';
 import {
   SquareFoot,
   Money,
@@ -14,6 +13,7 @@ import {
 import { PROPERTY_PREFERENCES_VALIDATION_SCHEMA } from '@/validators/common';
 import Button from '@/components/Button';
 import {
+  DEFAULT_PROPERTY_FILTERS,
   MAX_AREA,
   MAX_BEDS,
   MAX_FLOORS,
@@ -42,38 +42,37 @@ import {
   selectsetPreferencesError,
 } from '@/redux/selectors/user';
 import OptionFormField from '../OptionFormField';
-import { PayloadAction } from '@reduxjs/toolkit';
+import isEqual from 'lodash.isequal';
 
 type PropertyPreferencesFormProps = {
   animated?: boolean;
-  onSubmit(payload: PropertyFilters): PayloadAction<PropertyFilters>;
+  onSubmit(payload: PropertyFilters): void;
   defaultValues?: PropertyFilters;
+  submitText: string;
 };
 
 const PropertyPreferencesForm: FC<PropertyPreferencesFormProps> = ({
   animated = false,
   onSubmit,
-  defaultValues = {
-    facilities: [],
-    agreementType: [],
-    propertyType: [],
-    paymentPeriod: [],
-  },
+  defaultValues = DEFAULT_PROPERTY_FILTERS,
+  submitText,
 }) => {
   const {
     control,
     formState: { errors },
+    watch,
     handleSubmit,
   } = useForm({
     resolver: yupResolver(PROPERTY_PREFERENCES_VALIDATION_SCHEMA),
     defaultValues,
   });
 
-  const dispatch = useDispatch<AppDispatch>();
+  const formValues = watch();
+
   const setPreferencesPending = useSelector(selectSetPreferencesPending);
   const setPreferencesError = useSelector(selectsetPreferencesError);
 
-  const onFormSubmit = (data: PropertyFilters) => dispatch(onSubmit(data));
+  const onFormSubmit = (data: PropertyFilters) => onSubmit(data);
 
   const buildAnimationStyles = (style: string) => {
     if (animated) {
@@ -245,7 +244,11 @@ const PropertyPreferencesForm: FC<PropertyPreferencesFormProps> = ({
         <div
           className={buildAnimationStyles('animate-[slideLeft_2.25s_linear]')}
         >
-          <Button type="submit" text="Set your preferences" />
+          <Button
+            disabled={isEqual(formValues, defaultValues)}
+            type="submit"
+            text={submitText}
+          />
         </div>
       </form>
     </>

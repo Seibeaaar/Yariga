@@ -12,7 +12,7 @@ import { generateErrorMesaage } from '@/utils/redux';
 import { PaginatedResponse } from '@/types/common';
 
 function* getRecommendationsSaga(
-  action: PayloadAction<number>,
+  action: PayloadAction<number | undefined>,
 ): Generator<unknown, void, PaginatedResponse<Property>> {
   try {
     yield put(getRecommendationsError(null));

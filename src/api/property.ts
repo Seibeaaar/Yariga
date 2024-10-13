@@ -1,5 +1,9 @@
 import instance from '.';
-import { PropertyDataRequest, Property } from '@/types/property';
+import {
+  PropertyDataRequest,
+  Property,
+  PropertyFilters,
+} from '@/types/property';
 import { PaginatedResponse } from '@/types/common';
 
 export const addPropertyRequest = async (
@@ -20,8 +24,31 @@ export const getMyPropertiesReuest = async (): Promise<Property[]> => {
 };
 
 export const getRecommendationsRequest = async (
-  page: number,
+  page: number = 1,
 ): Promise<PaginatedResponse<Property>> => {
   const result = await instance.get(`/property/recommendations?page=${page}`);
+  return result.data;
+};
+
+export const getAllPropertiesRequest = async (
+  page: number = 1,
+): Promise<PaginatedResponse<Property>> => {
+  const result = await instance.get(`/property?page=${page}`);
+  return result.data;
+};
+
+export const searchPropertiesRequest = async (
+  query: string,
+  page: number = 1,
+): Promise<PaginatedResponse<Property>> => {
+  const result = await instance.get(`/property/search?q=${query}&page=${page}`);
+  return result.data;
+};
+
+export const filterPropertiesRequest = async (
+  filters: PropertyFilters,
+  page: number = 1,
+): Promise<PaginatedResponse<Property>> => {
+  const result = await instance.post(`/property/filter?page=${page}`, filters);
   return result.data;
 };

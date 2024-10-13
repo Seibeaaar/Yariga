@@ -3,11 +3,16 @@ import useWindowSize from '@/hooks/useWindowSize';
 import { FC, ReactNode, useContext } from 'react';
 
 type AuthContentProps = {
-  title?: string;
+  title: string;
   children: ReactNode;
+  actionItem?: ReactNode;
 };
 
-const AuthContainerContent: FC<AuthContentProps> = ({ children, title }) => {
+const AuthContainerContent: FC<AuthContentProps> = ({
+  children,
+  title,
+  actionItem,
+}) => {
   const { width } = useWindowSize();
   const { navbarCollapsed } = useContext(NavbarContext);
 
@@ -22,7 +27,10 @@ const AuthContainerContent: FC<AuthContentProps> = ({ children, title }) => {
     <section
       className={`transition-all min-h-[calc(100vh-70px)] bg-bg-light mt-[70px] dark:bg-bg-dark w-screen p-[15px] flex-grow ${calculateLeftPaddingStyle()}`}
     >
-      {title ? <h1 className="text-2xl font-bold">{title}</h1> : null}
+      <div className="flex items-center justify-between mb-[24px]">
+        <h1 className="text-2xl font-bold">{title}</h1>
+        {actionItem ?? null}
+      </div>
       {children}
     </section>
   );
