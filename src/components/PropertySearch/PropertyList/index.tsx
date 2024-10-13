@@ -7,13 +7,16 @@ import { SearchOff } from '@mui/icons-material';
 import {
   selectSearchResults,
   selectSearchMode,
+  selectSearchPending,
 } from '@/redux/selectors/property/search';
 import Pagination from '@/components/Pagination';
 import PropertySearchItem from './Item';
+import PropertyItemLoader from './ItemLoader';
 
 const PropertiesSearchList = () => {
   const { results, total, page, pages } = useSelector(selectSearchResults);
   const mode = useSelector(selectSearchMode);
+  const searchPending = useSelector(selectSearchPending);
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
@@ -23,6 +26,9 @@ const PropertiesSearchList = () => {
   }, [dispatch, mode]);
 
   const renderContent = () => {
+    if (searchPending) {
+      return <PropertyItemLoader />;
+    }
     if (results.length === 0) {
       return (
         <div className="flex min-h-[250px] flex-col gap-[16px] items-center justify-center text-secondary-light dark:text-secondary-dark">

@@ -34,8 +34,12 @@ function* getAllPropertiesSaga(
     yield put(setSearchPending(true));
 
     const allProperties = yield call(getAllPropertiesRequest, action.payload);
+
     yield put(setSearchMode('all'));
     yield put(setSearchResults(allProperties));
+
+    yield put(setSearchQuery(''));
+    yield put(setSearchFilters(null));
   } catch (e) {
     yield put(setSearchError(generateErrorMesaage(e)));
   } finally {
