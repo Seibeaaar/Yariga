@@ -3,26 +3,14 @@ import { PaginatedResponse } from '@/types/common';
 import { Property, PropertyFilters } from '@/types/property';
 import { createSlice } from '@reduxjs/toolkit';
 
-// One list - one object of results
-// One list - one error message
-// One list - one pending state
-// Mode - all, search, filter
-// Fetch all properties on an initial mode
-// Show clear search if mode is search
-// Show clear filters if mode is filter
-// Show refresh if mode is all
-// Set mode on request success
-// Preserve search query and filters on successful request
-// If empty filters or query - request all properties
-// If query is not empty when filtering - clear it (and vice versa)
-
 export type SearchPropertyReducerInitialState = {
   pending: boolean;
   error: string | null;
   mode: 'all' | 'search' | 'filter';
   searchQuery: string;
-  filters: PropertyFilters | null;
+  filters?: PropertyFilters;
   results: PaginatedResponse<Property>;
+  filterSuccess: boolean;
 };
 
 const initialState: SearchPropertyReducerInitialState = {
@@ -30,8 +18,9 @@ const initialState: SearchPropertyReducerInitialState = {
   pending: false,
   error: null,
   searchQuery: '',
-  filters: null,
+  filters: undefined,
   mode: 'all',
+  filterSuccess: false,
 };
 
 export const searchPropertySlice = createSlice({
@@ -56,6 +45,9 @@ export const searchPropertySlice = createSlice({
     setSearchFilters: (state, { payload }) => {
       state.filters = payload;
     },
+    setFilterSuccess: (state, { payload }) => {
+      state.filterSuccess = payload;
+    },
   },
 });
 
@@ -66,6 +58,7 @@ export const {
   setSearchMode,
   setSearchPending,
   setSearchQuery,
+  setFilterSuccess,
 } = searchPropertySlice.actions;
 
 export default searchPropertySlice.reducer;

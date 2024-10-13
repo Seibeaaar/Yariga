@@ -16,6 +16,7 @@ import {
   setSearchPending,
   setSearchQuery,
   setSearchResults,
+  setFilterSuccess,
 } from '@/redux/reducers/property/search';
 import { generateErrorMesaage } from '@/utils/redux';
 import { PayloadAction } from '@reduxjs/toolkit';
@@ -39,7 +40,7 @@ function* getAllPropertiesSaga(
     yield put(setSearchResults(allProperties));
 
     yield put(setSearchQuery(''));
-    yield put(setSearchFilters(null));
+    yield put(setSearchFilters(undefined));
   } catch (e) {
     yield put(setSearchError(generateErrorMesaage(e)));
   } finally {
@@ -58,7 +59,7 @@ function* searchPropertiesSaga(
     const searchResults = yield call(searchPropertiesRequest, query, page);
 
     yield put(setSearchQuery(query));
-    yield put(setSearchFilters(null));
+    yield put(setSearchFilters(undefined));
     yield put(setSearchMode('search'));
     yield put(setSearchResults(searchResults));
   } catch (e) {
@@ -74,14 +75,17 @@ function* filterPropertiesSaga(
   try {
     yield put(setSearchError(null));
     yield put(setSearchPending(true));
+    yield put(setFilterSuccess(false));
     const { filters, page } = action.payload;
 
     const filterResults = yield call(filterPropertiesRequest, filters, page);
 
     yield put(setSearchFilters(filters));
     yield put(setSearchMode('filter'));
-    yield put(setSearchQuery(''));
     yield put(setSearchResults(filterResults));
+    yield put(setFilterSuccess(true));
+
+    yield put(setSearchQuery(''));
   } catch (e) {
     yield put(setSearchError(generateErrorMesaage(e)));
   } finally {

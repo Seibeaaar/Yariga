@@ -25,3 +25,7 @@ export const selectSearchFilters = createSelector(
   [(state: RootState) => state.searchProperties],
   (search) => search.filters,
 );
+export const selectSearchFilterSuccess = createSelector(
+  [(state: RootState) => state.searchProperties],
+  (search) => search.filterSuccess,
+);

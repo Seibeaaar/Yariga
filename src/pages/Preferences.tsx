@@ -2,8 +2,15 @@ import { setPreferences } from '@/redux/actions/user';
 import NonAuthorizedScreen from '@/components/ScreenContainer/NonAuth';
 import PropertyPreferencesForm from '@/components/Preferences/Form';
 import AnimatedBlock from '@/components/AnimatedBlock';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '@/redux';
+import { PropertyFilters } from '@/types/property';
 
 const PreferencesPage = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const onFormSubmit = (payload: PropertyFilters) =>
+    dispatch(setPreferences(payload));
+
   return (
     <NonAuthorizedScreen>
       <div className="pt-[36px] pb-[28px]">
@@ -29,7 +36,11 @@ const PreferencesPage = () => {
           </h3>
         </AnimatedBlock>
         <div className="mx-auto px-[24px] md:w-3/4 md:p-0 mt-[24px]">
-          <PropertyPreferencesForm animated onSubmit={setPreferences} />
+          <PropertyPreferencesForm
+            submitText="Set your preferences"
+            animated
+            onSubmit={onFormSubmit}
+          />
         </div>
       </div>
     </NonAuthorizedScreen>

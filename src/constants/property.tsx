@@ -96,13 +96,13 @@ export const PROPERTY_TYPE_ICON = {
 export const PROPERTY_TYPE_OPTIONS = [
   {
     label: PROPERTY_TYPE_NAME[PROPERTY_TYPE.House],
-    value: PROPERTY_TYPE_ICON[PROPERTY_TYPE.House],
-    icon: House,
+    value: PROPERTY_TYPE.House,
+    icon: PROPERTY_TYPE_ICON[PROPERTY_TYPE.House],
   },
   {
     label: PROPERTY_TYPE_NAME[PROPERTY_TYPE.Apartment],
-    value: PROPERTY_TYPE_ICON[PROPERTY_TYPE.Apartment],
-    icon: Apartment,
+    value: PROPERTY_TYPE.Apartment,
+    icon: PROPERTY_TYPE_ICON[PROPERTY_TYPE.Apartment],
   },
 ];
 

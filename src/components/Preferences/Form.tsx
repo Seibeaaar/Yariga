@@ -1,8 +1,7 @@
 import { Controller, useForm } from 'react-hook-form';
 import { FC } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch } from '@/redux';
+import { useSelector } from 'react-redux';
 import {
   SquareFoot,
   Money,
@@ -42,12 +41,12 @@ import {
   selectsetPreferencesError,
 } from '@/redux/selectors/user';
 import OptionFormField from '../OptionFormField';
-import { PayloadAction } from '@reduxjs/toolkit';
 
 type PropertyPreferencesFormProps = {
   animated?: boolean;
-  onSubmit(payload: PropertyFilters): PayloadAction<PropertyFilters>;
+  onSubmit(payload: PropertyFilters): void;
   defaultValues?: PropertyFilters;
+  submitText: string;
 };
 
 const PropertyPreferencesForm: FC<PropertyPreferencesFormProps> = ({
@@ -59,6 +58,7 @@ const PropertyPreferencesForm: FC<PropertyPreferencesFormProps> = ({
     propertyType: [],
     paymentPeriod: [],
   },
+  submitText,
 }) => {
   const {
     control,
@@ -69,11 +69,10 @@ const PropertyPreferencesForm: FC<PropertyPreferencesFormProps> = ({
     defaultValues,
   });
 
-  const dispatch = useDispatch<AppDispatch>();
   const setPreferencesPending = useSelector(selectSetPreferencesPending);
   const setPreferencesError = useSelector(selectsetPreferencesError);
 
-  const onFormSubmit = (data: PropertyFilters) => dispatch(onSubmit(data));
+  const onFormSubmit = (data: PropertyFilters) => onSubmit(data);
 
   const buildAnimationStyles = (style: string) => {
     if (animated) {
@@ -245,7 +244,7 @@ const PropertyPreferencesForm: FC<PropertyPreferencesFormProps> = ({
         <div
           className={buildAnimationStyles('animate-[slideLeft_2.25s_linear]')}
         >
-          <Button type="submit" text="Set your preferences" />
+          <Button type="submit" text={submitText} />
         </div>
       </form>
     </>
