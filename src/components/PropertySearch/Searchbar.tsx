@@ -18,7 +18,7 @@ const PropertySearchbar = () => {
 
   useEffect(() => {
     const searchDelay = setTimeout(() => {
-      if (query.trim().length > 0) {
+      if (query.trim().length > 0 && query !== searchQuery) {
         dispatch(
           searchProperties({
             query,
@@ -28,7 +28,7 @@ const PropertySearchbar = () => {
     }, 500);
 
     return () => clearTimeout(searchDelay);
-  }, [query, dispatch]);
+  }, [query, dispatch, searchQuery]);
 
   useEffect(() => {
     const resetDelay = setTimeout(() => {
