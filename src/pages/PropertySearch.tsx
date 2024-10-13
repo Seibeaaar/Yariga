@@ -15,6 +15,7 @@ import { useEffect } from 'react';
 import { AppDispatch } from '@/redux';
 import {
   selectIsInitialSearch,
+  selectSearchError,
   selectSearchFilterSuccess,
   selectSearchFilters,
   selectSearchMode,
@@ -24,6 +25,7 @@ import {
 } from '@/redux/selectors/property/search';
 import Pagination from '@/components/Pagination';
 import { DEFAULT_PROPERTY_FILTERS } from '@/constants/property';
+import Popup from '@/components/Popup';
 
 const PropertySearchPage = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -39,6 +41,7 @@ const PropertySearchPage = () => {
   const searchPending = useSelector(selectSearchPending);
   const searchMode = useSelector(selectSearchMode);
   const searchQuery = useSelector(selectSearchQuery);
+  const searchError = useSelector(selectSearchError);
   const isInitialSearch = useSelector(selectIsInitialSearch);
 
   useEffect(() => {
@@ -72,6 +75,14 @@ const PropertySearchPage = () => {
       title="Property list"
       actionItem={<PropertySearchActionItem />}
     >
+      <Popup
+        showPopup={!!searchError}
+        title="Oops. Something went wrong"
+        content="Properties lookup failed. Please retry"
+        vertical="top"
+        horizontal="right"
+        severity="error"
+      />
       <Widget>
         <div className="flex items-center gap-[10px] justify-between">
           <PropertySearchbar />
