@@ -75,7 +75,7 @@ export type PropertyDataRequest = PropertyData & {
 };
 
 export type Property = PropertyData & {
-  id: string;
+  _id: string;
   owner: string;
   status: PROPERTY_STATUS;
   rating: number;

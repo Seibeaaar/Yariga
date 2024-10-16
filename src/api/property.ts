@@ -52,3 +52,8 @@ export const filterPropertiesRequest = async (
   const result = await instance.post(`/property/filter?page=${page}`, filters);
   return result.data;
 };
+
+export const getPropertyByIdRequest = async (id: string): Promise<Property> => {
+  const result = await instance.get(`/property/${id}`);
+  return result.data;
+};

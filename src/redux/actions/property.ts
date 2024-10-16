@@ -10,6 +10,7 @@ export const GET_RECOMMENDATIONS = 'GET_RECOMMENDATIONS';
 export const GET_ALL_PROPERTIES = 'GET_ALL_PROPERTIES';
 export const SEARCH_PROPERTIES = 'SEARCH_PROPERTIES';
 export const FILTER_PROPERTIES = 'FILTER_PROPERTIES';
+export const GET_PROPERTY_BY_ID = 'GET_PROPERTY_BY_ID';
 
 export const addProperty = (payload: AddPropertyPayload) => ({
   type: ADD_PROPERTY,
@@ -37,5 +38,10 @@ export const searchProperties = (payload: SearchPropertyPayload) => ({
 
 export const filterProperties = (payload: FilterPropertyPayload) => ({
   type: FILTER_PROPERTIES,
+  payload,
+});
+
+export const getPropertyById = (payload: string) => ({
+  type: GET_PROPERTY_BY_ID,
   payload,
 });
