@@ -1,15 +1,10 @@
-import { FC, ReactNode } from 'react';
+import { FC } from 'react';
 import Navbar from '../Navbar';
 import NavbarContextProvider from '@/contexts/NavbarContext';
 import AuthContainerContent from './AuthContent';
 import Header from '../Header';
 import ProtectedRoute from '@/routes/ProtectedRoute';
-
-type AuthedScreenContainerProps = {
-  children: ReactNode;
-  title: string;
-  actionItem?: ReactNode;
-};
+import { AuthedScreenContainerProps } from '@/types/components';
 
 const AuthedScreenContainer: FC<AuthedScreenContainerProps> = (props) => {
   return (

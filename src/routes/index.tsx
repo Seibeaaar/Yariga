@@ -9,6 +9,7 @@ import ProfilePicturePage from '@/pages/ProfilePicture';
 import Dashboard from '@/pages/Dashboard';
 import NotFoundPage from '@/pages/404';
 import PropertySearchPage from '@/pages/PropertySearch';
+import PropertyDetailsPage from '@/pages/PropertyDetails';
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
   {
     path: '*',
     element: <NotFoundPage />,
+  },
+  {
+    path: '/properties/:details',
+    element: <PropertyDetailsPage />,
   },
 ]);
 

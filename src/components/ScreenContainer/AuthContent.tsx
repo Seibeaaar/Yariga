@@ -1,14 +1,9 @@
 import { NavbarContext } from '@/contexts/NavbarContext';
 import useWindowSize from '@/hooks/useWindowSize';
-import { FC, ReactNode, useContext } from 'react';
+import { AuthedScreenContainerProps } from '@/types/components';
+import { FC, useContext } from 'react';
 
-type AuthContentProps = {
-  title: string;
-  children: ReactNode;
-  actionItem?: ReactNode;
-};
-
-const AuthContainerContent: FC<AuthContentProps> = ({
+const AuthContainerContent: FC<AuthedScreenContainerProps> = ({
   children,
   title,
   actionItem,
@@ -28,7 +23,7 @@ const AuthContainerContent: FC<AuthContentProps> = ({
       className={`transition-all min-h-[calc(100vh-70px)] bg-bg-light mt-[70px] dark:bg-bg-dark w-screen p-[15px] flex-grow ${calculateLeftPaddingStyle()}`}
     >
       <div className="flex items-center justify-between mb-[24px]">
-        <h1 className="text-2xl font-bold">{title}</h1>
+        {title && <h1 className="text-2xl font-bold">{title}</h1>}
         {actionItem ?? null}
       </div>
       {children}

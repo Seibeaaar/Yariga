@@ -1,15 +1,17 @@
 import { FC } from 'react';
 import { Property } from '@/types/property';
-import { formatPropertyPrice } from '@/utils/property';
+import { formatPropertyPrice, formatPropertyURL } from '@/utils/property';
 import { PlaceOutlined, SquareFoot } from '@mui/icons-material';
 import { PROPERTY_TYPE_ICON, PROPERTY_TYPE_NAME } from '@/constants/property';
 import { AGREEMENT_TYPE_ICON, AGREEMENT_TYPE_NAME } from '@/constants/common';
+import { useNavigate } from 'react-router-dom';
 
 type PropertySearchItemProps = {
   property: Property;
 };
 
 const PropertySearchItem: FC<PropertySearchItemProps> = ({ property }) => {
+  const navigate = useNavigate();
   const displayedAttributes = [
     {
       label: PROPERTY_TYPE_NAME[property.type],
@@ -24,8 +26,14 @@ const PropertySearchItem: FC<PropertySearchItemProps> = ({ property }) => {
       icon: AGREEMENT_TYPE_ICON[property.agreementType],
     },
   ];
+
+  const goToPropertyDetails = () => navigate(formatPropertyURL(property));
+
   return (
-    <div className="flex items-stretch gap-[16px] w-full md:w-[calc(50%-24px)]">
+    <div
+      onClick={goToPropertyDetails}
+      className="cursor-pointer flex items-stretch gap-[16px] w-full md:w-[calc(50%-24px)]"
+    >
       <img
         src={property.photos[0]}
         className="h-[125px] w-[200px] rounded-[10px]"
