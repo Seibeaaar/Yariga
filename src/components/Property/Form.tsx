@@ -15,7 +15,7 @@ import {
 import Input from '../Input';
 import Textarea from '../Textarea';
 import LocationAutocomplete from './LocationAutocomplete';
-import PropertyGallery from './PropertyGallery';
+import PropertyPhotoUpload from './PhotoUpload';
 import {
   AGREEMENT_TYPE_OPTIONS,
   PAYMENT_PERIOD_OPTIONS,
@@ -95,8 +95,8 @@ const PropertyForm: FC<PropertyFormProps> = ({
           name="photos"
           render={({ field: { onChange } }) => (
             <div className={buildAnimationStyles('animate-slideLeft')}>
-              <PropertyGallery
-                onGalleryChange={onChange}
+              <PropertyPhotoUpload
+                onPhotoUploadChange={onChange}
                 error={errors.photos?.message}
               />
             </div>

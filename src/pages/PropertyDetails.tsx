@@ -8,6 +8,7 @@ import { selectSingleProperty } from '@/redux/selectors/property/single';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ChevronLeft } from '@mui/icons-material';
 import { extractPropertyIdFromURL } from '@/utils/property';
+import PropertyGallery from '@/components/Property/Gallery';
 
 const PropertyDetailsPage = () => {
   const location = useLocation();
@@ -22,6 +23,8 @@ const PropertyDetailsPage = () => {
     dispatch(getPropertyById(propertyId));
   }, [dispatch, location]);
 
+  if (!property) return null;
+
   const goBack = () => navigate(-1);
 
   return (
@@ -30,7 +33,7 @@ const PropertyDetailsPage = () => {
         {canGoBack && (
           <div
             onClick={goBack}
-            className="flex cursor-pointer items-center gap-[8px]"
+            className="flex cursor-pointer items-center gap-[8px] mb-[24px]"
           >
             <ChevronLeft
               color="inherit"
@@ -42,6 +45,7 @@ const PropertyDetailsPage = () => {
             <p className="text-2xl font-semibold">Details</p>
           </div>
         )}
+        <PropertyGallery photos={property?.photos} />
       </Widget>
     </AuthedScreenContainer>
   );
