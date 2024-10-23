@@ -42,7 +42,7 @@ const PropertySearchItem: FC<PropertySearchItemProps> = ({ property }) => {
       <div className="flex flex-col justify-between">
         <div className="bg-secondary rounded-[5px] px-[10px] py-[8px] w-fit">
           <p className="text-primary text-xs font-medium">
-            ${formatPropertyPrice(property.amount)}
+            {formatPropertyPrice(property.amount)}
           </p>
         </div>
         <div>

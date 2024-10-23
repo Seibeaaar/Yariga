@@ -1,7 +1,7 @@
 import { Property } from '@/types/property';
 
 export const formatPropertyPrice = (price: number) => {
-  return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  return '$' + price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 
 export const formatPropertyURL = (property: Property) => {

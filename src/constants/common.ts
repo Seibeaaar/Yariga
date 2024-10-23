@@ -64,6 +64,14 @@ export const PAYMENT_PERIOD_OPTIONS = [
   },
 ];
 
+export const PAYMENT_PERIOD_PREPOSITION = {
+  [PROPERTY_PAYMENT_PERIOD.Daily]: 'For One Day',
+  [PROPERTY_PAYMENT_PERIOD.Monthly]: 'For One Month',
+  [PROPERTY_PAYMENT_PERIOD.Weekly]: 'For One Week',
+  [PROPERTY_PAYMENT_PERIOD.Yearly]: 'For One Year',
+  [PROPERTY_PAYMENT_PERIOD.Once]: 'Once',
+};
+
 export const ACCEPTED_IMAGE_FORMATS = ['png', 'jpeg', 'jpg', 'webp'];
 
 export const DEFAULT_PAGINATED_RESPONSE = {

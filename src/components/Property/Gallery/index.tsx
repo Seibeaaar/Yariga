@@ -69,7 +69,7 @@ const PropertyGallery: FC<PropertyGalleryProps> = ({ photos }) => {
     <>
       <div
         onClick={openPhotoList}
-        className="cursor-pointer flex items-stretch gap-[16px] w-2/3"
+        className="cursor-pointer flex items-stretch gap-[16px]"
       >
         {renderPhotos()}
       </div>

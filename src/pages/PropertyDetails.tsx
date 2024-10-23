@@ -15,8 +15,8 @@ import {
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ChevronLeft } from '@mui/icons-material';
 import { extractPropertyIdFromURL } from '@/utils/property';
-import PropertyGallery from '@/components/Property/Gallery';
 import CustomLoader from '@/components/CustomLoader';
+import PropertyDetailsContent from '@/components/PropertyDetails/Content';
 
 const PropertyDetailsPage = () => {
   const location = useLocation();
@@ -79,7 +79,7 @@ const PropertyDetailsPage = () => {
             <p className="text-2xl font-semibold">Details</p>
           </div>
         )}
-        <PropertyGallery photos={property?.photos} />
+        <PropertyDetailsContent property={property} />
       </Widget>
     );
   };
