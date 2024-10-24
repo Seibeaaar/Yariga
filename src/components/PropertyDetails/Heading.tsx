@@ -22,7 +22,7 @@ const PropertyDetailsHeading: FC<PropertyDetailsHeadingProps> = ({
     : COLORS['secondary-light'];
 
   return (
-    <div className="flex">
+    <div className="flex flex-wrap gap-y-[16px]">
       <div className="flex-grow">
         <h5 className="text-lg font-medium">
           {PROPERTY_TYPE_NAME[property.type]}

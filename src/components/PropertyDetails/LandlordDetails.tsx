@@ -1,5 +1,6 @@
 import { Landlord } from '@/types/user';
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 import { Avatar } from '@mui/material';
 import { LocalPhoneOutlined, ChatOutlined } from '@mui/icons-material';
 import { buildFullName, extractInitials } from '@/utils/user';
@@ -13,7 +14,7 @@ const PropertyLandlordDetails: FC<PropertyLandlordDetailsProps> = ({
   landlord,
 }) => {
   return (
-    <article className="rounded-[10px] px-[25px] pt-[15px] pb-[20px] border border-border-light dark:border-border-dark">
+    <article className="rounded-[10px] px-[25px] pt-[25px] pb-[20px] border border-border-light dark:border-border-dark">
       <div className="flex flex-col items-center">
         <Avatar
           sx={{
@@ -39,9 +40,9 @@ const PropertyLandlordDetails: FC<PropertyLandlordDetailsProps> = ({
         </p>
       </div>
       <div className="mt-[20px] flex items-center gap-[20px]">
-        <button
-          type="button"
-          className="border border-primary px-[15px] py-[10px] rounded-[5px] transition-all hover:bg-transparent dark:hover:bg-transparent flex w-[calc(50%-10px)] justify-center items-center gap-[8px] bg-primary outline-none"
+        <Link
+          to="/chat"
+          className="border border-primary px-[15px] py-[10px] rounded-[5px] transition-all hover:bg-transparent dark:hover:bg-transparent hover:text-primary dark:hover:text-primary flex w-[calc(50%-10px)] justify-center items-center gap-[8px] bg-primary outline-none"
         >
           <ChatOutlined
             color="inherit"
@@ -51,10 +52,10 @@ const PropertyLandlordDetails: FC<PropertyLandlordDetailsProps> = ({
             }}
           />
           <p className="font-medium">Chat</p>
-        </button>
+        </Link>
         <a
           href={`tel:${landlord.phoneNumber}`}
-          className="border border-success transition-all hover:bg-transparent dark:hover:bg-transparent justify-center w-[calc(50%-10px)] bg-success outline-none  px-[15px] py-[10px] rounded-[5px] flex items-center gap-[8px]"
+          className="border border-success hover:text-success dark:hover:text-success transition-all hover:bg-transparent dark:hover:bg-transparent justify-center w-[calc(50%-10px)] bg-success outline-none  px-[15px] py-[10px] rounded-[5px] flex items-center gap-[8px]"
         >
           <LocalPhoneOutlined
             color="inherit"

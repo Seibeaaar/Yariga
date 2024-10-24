@@ -22,15 +22,15 @@ const PropertyGallery: FC<PropertyGalleryProps> = ({ photos }) => {
 
     if (photos.length === 2) {
       return (
-        <div className="flex w-full gap-[16px]">
+        <div className="flex flex-col sm:flex-row w-full gap-[16px]">
           <img
             loading="lazy"
-            className="flex-grow rounded-[10px] max-h-[350px]"
+            className="rounded-[10px] w-full max-h-[250px] md:max-h-[400px] lg:max-h-[300px] xl:max-h-[350px]"
             src={photos[0]}
             alt="Property main photo"
           />
           <img
-            className="rounded-[10px] w-[30%] h-[calc(50%-16px)]"
+            className="rounded-[10px] w-full sm:w-[45%] lg:w-[30%] max-h-[250px] sm:h-[calc(50%-16px)]"
             src={photos[1]}
             alt="Property secondary photo"
           />

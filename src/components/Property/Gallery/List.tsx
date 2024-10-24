@@ -1,6 +1,7 @@
 import { FC, useState, MouseEvent } from 'react';
 import { Backdrop } from '@mui/material';
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
+import useWindowSize from '@/hooks/useWindowSize';
 
 type PropertyGalleryListProps = {
   photos: string[];
@@ -14,6 +15,7 @@ const PropertyGalleryList: FC<PropertyGalleryListProps> = ({
   photos,
 }) => {
   const [activeImage, setActiveImage] = useState(0);
+  const { width } = useWindowSize();
   const [imageAnimationDirection, setImageAnimationDirection] = useState<
     'left' | 'right'
   >('left');
@@ -53,13 +55,13 @@ const PropertyGalleryList: FC<PropertyGalleryListProps> = ({
               : '-translate-x-[20px]';
           const imageStyle =
             idx === activeImage
-              ? 'w-fit opacity-1 translate-x-0'
+              ? 'w-[calc(100%-48px)] md:w-fit opacity-1 translate-x-0'
               : `'w-0 opacity-0 ${animationTranslate}`;
           return (
             <img
               key={photo}
               src={photo}
-              className={`transition-all duration-700 absolute h-2/3 ${imageStyle}`}
+              className={`transition-all z-[0] duration-700 absolute h-1/2 lg:h-2/3 ${imageStyle}`}
             />
           );
         })}
@@ -75,26 +77,30 @@ const PropertyGalleryList: FC<PropertyGalleryListProps> = ({
       open={listOpen}
       onClick={onClose}
     >
-      <div className="w-[calc(100%-48px)] mx-auto h-full flex items-center justify-between">
-        <div onClick={onLeftClick} className={buildArrowStyles('left')}>
-          <ChevronLeft
-            sx={{
-              width: 64,
-              height: 64,
-            }}
-            color="inherit"
-          />
-        </div>
+      <div className="w-[calc(100%-48px)] mx-auto h-full flex items-center justify-center md:justify-between">
+        {width > 768 && (
+          <div onClick={onLeftClick} className={buildArrowStyles('left')}>
+            <ChevronLeft
+              sx={{
+                width: 64,
+                height: 64,
+              }}
+              color="inherit"
+            />
+          </div>
+        )}
         {renderList()}
-        <div onClick={onRightClick} className={buildArrowStyles('right')}>
-          <ChevronRight
-            sx={{
-              width: 64,
-              height: 64,
-            }}
-            color="inherit"
-          />
-        </div>
+        {width > 768 && (
+          <div onClick={onRightClick} className={buildArrowStyles('right')}>
+            <ChevronRight
+              sx={{
+                width: 64,
+                height: 64,
+              }}
+              color="inherit"
+            />
+          </div>
+        )}
       </div>
     </Backdrop>
   );
