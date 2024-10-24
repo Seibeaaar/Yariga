@@ -3,6 +3,7 @@ import userReducer from './user';
 import ownPropertiesReducer from './property/own';
 import recommendationsReducer from './property/recommendations';
 import searchPropertiesReducer from './property/search';
+import singlePropertyReducer from './property/single';
 import agreementReducer from './agreement';
 import { combineReducers } from '@reduxjs/toolkit';
 
@@ -13,4 +14,5 @@ export default combineReducers({
   agreement: agreementReducer,
   recommendations: recommendationsReducer,
   searchProperties: searchPropertiesReducer,
+  singleProperty: singlePropertyReducer,
 });

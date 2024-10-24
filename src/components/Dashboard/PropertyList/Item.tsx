@@ -29,7 +29,7 @@ const DashboardPropertyItem: FC<DashboardPropertyItemProps> = ({
         </div>
         <div className="px-[10px] py-[8px] bg-secondary rounded-[4px]">
           <p className="text-primary text-xs">
-            ${formatPropertyPrice(property.amount)}
+            {formatPropertyPrice(property.amount)}
           </p>
         </div>
       </div>

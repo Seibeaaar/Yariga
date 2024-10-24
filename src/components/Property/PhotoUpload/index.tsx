@@ -3,13 +3,13 @@ import { AddCircle } from '@mui/icons-material';
 import { ACCEPTED_IMAGE_FORMATS } from '@/constants/common';
 import GalleryImage from './Image';
 
-type PropertyGalleryProps = {
-  onGalleryChange(images: File[]): void;
+type PropertyPhotoUploadProps = {
+  onPhotoUploadChange(images: File[]): void;
   error?: string;
 };
 
-const PropertyGallery: FC<PropertyGalleryProps> = ({
-  onGalleryChange,
+const PropertyPhotoUpload: FC<PropertyPhotoUploadProps> = ({
+  onPhotoUploadChange,
   error,
 }) => {
   const [uploadedImages, setUploadedImages] = useState<File[]>([]);
@@ -18,7 +18,7 @@ const PropertyGallery: FC<PropertyGalleryProps> = ({
     if (!e.target.files || e.target.files.length === 0) return;
     setUploadedImages((images) => {
       const files = Array.from(e.target.files!);
-      onGalleryChange([...images, ...files]);
+      onPhotoUploadChange([...images, ...files]);
       return [...images, ...files];
     });
   };
@@ -26,7 +26,7 @@ const PropertyGallery: FC<PropertyGalleryProps> = ({
   const handleImageRemoval = (image: File) => {
     setUploadedImages((images) => {
       const updatedList = images.filter((i) => i !== image);
-      onGalleryChange(updatedList);
+      onPhotoUploadChange(updatedList);
       return updatedList;
     });
   };
@@ -71,4 +71,4 @@ const PropertyGallery: FC<PropertyGalleryProps> = ({
   );
 };
 
-export default PropertyGallery;
+export default PropertyPhotoUpload;

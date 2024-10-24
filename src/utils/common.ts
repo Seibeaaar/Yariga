@@ -5,3 +5,15 @@ export const toggleValue = <T>(arr: T[], value: T) => {
 
   return [...arr, value];
 };
+
+export const formatPlurarString = (
+  value: number,
+  single: string,
+  plural: string,
+) => {
+  if (Math.abs(value) === 1) {
+    return `${value} ${single}`;
+  }
+
+  return `${value} ${plural}`;
+};

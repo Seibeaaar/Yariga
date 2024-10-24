@@ -4,6 +4,7 @@ import userSaga from './user';
 import ownPropertiesSaga from './property/own';
 import recommendationsSaga from './property/recommendations';
 import searchPropertiesSaga from './property/search';
+import singlePropertySaga from './property/single';
 import agreementSaga from './agreement';
 
 export default function* rootSaga() {
@@ -14,5 +15,6 @@ export default function* rootSaga() {
     agreementSaga(),
     recommendationsSaga(),
     searchPropertiesSaga(),
+    singlePropertySaga(),
   ]);
 }
