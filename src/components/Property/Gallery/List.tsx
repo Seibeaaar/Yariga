@@ -1,4 +1,5 @@
 import { FC, useState, MouseEvent } from 'react';
+import { useSwipeable } from 'react-swipeable';
 import { Backdrop } from '@mui/material';
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import useWindowSize from '@/hooks/useWindowSize';
@@ -23,18 +24,33 @@ const PropertyGalleryList: FC<PropertyGalleryListProps> = ({
   const leftArrowDisabled = activeImage === 0;
   const rightArrowDisabled = activeImage === photos.length - 1;
 
-  const onRightClick = (e: MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
+  const goToRightImage = () => {
     if (rightArrowDisabled) return;
     setActiveImage(activeImage + 1);
     setImageAnimationDirection('right');
   };
 
-  const onLeftClick = (e: MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
+  const goToLeftImage = () => {
     if (leftArrowDisabled) return;
     setActiveImage(activeImage - 1);
     setImageAnimationDirection('left');
+  };
+
+  const handlers = useSwipeable({
+    onSwipedRight: goToLeftImage,
+    onSwipedLeft: goToRightImage,
+    trackMouse: true,
+    trackTouch: true,
+  });
+
+  const onRightClick = (e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    goToRightImage();
+  };
+
+  const onLeftClick = (e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    goToLeftImage();
   };
 
   const buildArrowStyles = (arrow: 'left' | 'right') => {
@@ -55,12 +71,13 @@ const PropertyGalleryList: FC<PropertyGalleryListProps> = ({
               : '-translate-x-[20px]';
           const imageStyle =
             idx === activeImage
-              ? 'w-[calc(100%-48px)] md:w-fit opacity-1 translate-x-0'
+              ? 'w-fit opacity-1 translate-x-0'
               : `'w-0 opacity-0 ${animationTranslate}`;
           return (
             <img
               key={photo}
               src={photo}
+              {...handlers}
               className={`transition-all z-[0] duration-700 absolute h-1/2 lg:h-2/3 ${imageStyle}`}
             />
           );
