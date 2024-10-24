@@ -1,12 +1,13 @@
 import { FC } from 'react';
-import { Property } from '@/types/property';
+import { PropertyExtended } from '@/types/property';
 
 import PropertyGallery from '../Property/Gallery';
 import PropertyDetailsHeading from './Heading';
 import PropertyDetailsFacilities from './Facilities';
+import PropertyLandlordDetails from './LandlordDetails';
 
 type PropertyDetailsContentProps = {
-  property: Property;
+  property: PropertyExtended;
 };
 
 const PropertyDetailsContent: FC<PropertyDetailsContentProps> = ({
@@ -25,7 +26,9 @@ const PropertyDetailsContent: FC<PropertyDetailsContentProps> = ({
           </p>
         </div>
       </div>
-      <div className="w-1/3"></div>
+      <div className="w-[40%]">
+        <PropertyLandlordDetails landlord={property.owner} />
+      </div>
     </section>
   );
 };

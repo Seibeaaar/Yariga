@@ -1,10 +1,10 @@
-import { Property } from '@/types/property';
+import { PropertyExtended } from '@/types/property';
 import { createSlice } from '@reduxjs/toolkit';
 
 export type SinglePropertyReducerInitialState = {
   getPropertyPending: boolean;
   getPropertyError: string | null;
-  property: Property | null;
+  property: PropertyExtended | null;
 };
 
 const initialState: SinglePropertyReducerInitialState = {

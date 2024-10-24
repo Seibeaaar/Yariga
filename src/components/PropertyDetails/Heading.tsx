@@ -1,4 +1,4 @@
-import { Property } from '@/types/property';
+import { PropertyExtended } from '@/types/property';
 import { FC, useContext } from 'react';
 import { Rating } from '@mui/material';
 import { LocationOn, Star } from '@mui/icons-material';
@@ -9,7 +9,7 @@ import { formatPropertyPrice } from '@/utils/property';
 import { PAYMENT_PERIOD_PREPOSITION } from '@/constants/common';
 
 type PropertyDetailsHeadingProps = {
-  property: Property;
+  property: PropertyExtended;
 };
 
 const PropertyDetailsHeading: FC<PropertyDetailsHeadingProps> = ({
@@ -42,7 +42,7 @@ const PropertyDetailsHeading: FC<PropertyDetailsHeadingProps> = ({
       <div className="flex flex-col gap-[8px]">
         <Rating
           readOnly
-          value={2.5}
+          value={property.rating}
           precision={0.5}
           icon={
             <Star

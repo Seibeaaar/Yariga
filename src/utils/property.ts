@@ -5,7 +5,7 @@ export const formatPropertyPrice = (price: number) => {
 };
 
 export const formatPropertyURL = (property: Property) => {
-  return `/properties/${property.title.toLowerCase().replaceAll(' ', '_')}-${property._id}`;
+  return `/properties/${property.title.toLowerCase().replaceAll(' ', '-')}-${property._id}`;
 };
 
 export const extractPropertyIdFromURL = (url: string) => {

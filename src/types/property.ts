@@ -1,4 +1,5 @@
 import { AGREEMENT_TYPE } from './agreement';
+import { Landlord } from './user';
 
 export enum PROPERTY_TYPE {
   House = 'house',
@@ -81,6 +82,10 @@ export type Property = PropertyData & {
   rating: number;
   votes: number;
   photos: string[];
+};
+
+export type PropertyExtended = Property & {
+  owner: Landlord;
 };
 
 export type AddPropertyPayload = PropertyDataRequest & {

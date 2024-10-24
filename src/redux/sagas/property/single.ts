@@ -2,7 +2,7 @@ import { getPropertyByIdRequest } from '@/api/property';
 import { call, takeLatest, put } from 'redux-saga/effects';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { GET_PROPERTY_BY_ID } from '@/redux/actions/property';
-import { Property } from '@/types/property';
+import { PropertyExtended } from '@/types/property';
 import {
   getPropertyError,
   getPropertyPending,
@@ -12,7 +12,7 @@ import { generateErrorMesaage } from '@/utils/redux';
 
 function* getPropertyByIdSaga(
   action: PayloadAction<string>,
-): Generator<unknown, void, Property> {
+): Generator<unknown, void, PropertyExtended> {
   try {
     yield put(getPropertyError(null));
     yield put(getPropertyPending(true));

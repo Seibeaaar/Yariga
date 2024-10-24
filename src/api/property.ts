@@ -3,6 +3,7 @@ import {
   PropertyDataRequest,
   Property,
   PropertyFilters,
+  PropertyExtended,
 } from '@/types/property';
 import { PaginatedResponse } from '@/types/common';
 
@@ -53,7 +54,9 @@ export const filterPropertiesRequest = async (
   return result.data;
 };
 
-export const getPropertyByIdRequest = async (id: string): Promise<Property> => {
+export const getPropertyByIdRequest = async (
+  id: string,
+): Promise<PropertyExtended> => {
   const result = await instance.get(`/property/${id}`);
   return result.data;
 };
