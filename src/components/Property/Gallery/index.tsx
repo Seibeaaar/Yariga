@@ -13,7 +13,7 @@ const PropertyGallery: FC<PropertyGalleryProps> = ({ photos }) => {
       return (
         <img
           loading="lazy"
-          className="flex-grow rounded-[10px] max-h-[350px]"
+          className="w-full sm:w-3/4 mx-auto lg:mx-0 lg:w-full rounded-[10px] max-h-[400px]"
           src={photos[0]}
           alt="Property main photo"
         />
@@ -25,12 +25,12 @@ const PropertyGallery: FC<PropertyGalleryProps> = ({ photos }) => {
         <div className="flex flex-col sm:flex-row w-full gap-[16px]">
           <img
             loading="lazy"
-            className="rounded-[10px] w-full max-h-[250px] md:max-h-[400px] lg:max-h-[300px] xl:max-h-[350px]"
+            className="rounded-[10px] w-full max-h-[350px] md:max-h-[400px] lg:max-h-[300px] xl:max-h-[350px]"
             src={photos[0]}
             alt="Property main photo"
           />
           <img
-            className="rounded-[10px] w-full sm:w-[45%] lg:w-[30%] max-h-[250px] sm:h-[calc(50%-16px)]"
+            className="rounded-[10px] w-full sm:w-[45%] lg:w-[35%] max-h-[350px] sm:h-[calc(50%-16px)]"
             src={photos[1]}
             alt="Property secondary photo"
           />
@@ -39,17 +39,17 @@ const PropertyGallery: FC<PropertyGalleryProps> = ({ photos }) => {
     }
 
     return (
-      <div className="flex items-stretch w-full gap-[16px]">
+      <div className="flex flex-col sm:flex-row items-stretch w-full sm:max-h-[250px] md:max-h-[400px] lg:max-h-[300px] xl:max-h-[350px] gap-[16px]">
         <img
           loading="lazy"
-          className="flex-grow rounded-[10px] max-h-[350px]"
+          className="rounded-[10px] w-full max-h-[350px] sm:h-full"
           src={photos[0]}
           alt="Property main photo"
         />
-        <div className="flex flex-col gap-[16px]">
+        <div className="flex flex-col gap-y-[16px] w-full sm:w-[45%] lg:w-[35%]">
           <img
             loading="lazy"
-            className="rounded-[10px] w-[30%]"
+            className="rounded-[10px] w-full max-h-[350px] sm:h-[calc(50%-8px)]"
             src={photos[1]}
             alt="Property secondary photo"
           />

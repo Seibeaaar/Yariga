@@ -30,7 +30,7 @@ const PropertyDetailsContent: FC<PropertyDetailsContentProps> = ({
           </div>
         </div>
       </div>
-      <div className="w-full xl:w-[40%] flex flex-col gap-[20px]">
+      <div className="w-full xl:w-[45%] flex flex-col gap-[20px]">
         <PropertyLandlordDetails landlord={property.owner} />
         <PropertyLocationMap location={property.location} />
         <Link to="/new-agreement">

@@ -10,7 +10,7 @@ const PropertyGalleryMore: FC<PropertyGalleryMoreProps> = ({
   photosLeft,
 }) => {
   return (
-    <div className="relative rounded-[10px] overflow-hidden">
+    <div className="relative rounded-[10px] overflow-hidden w-full max-h-[350px] sm:h-[calc(50%-8px)]">
       {photosLeft > 0 && (
         <>
           <div className="bg-bg-dark opacity-60 w-full h-full top-0 left-0 absolute flex items-center justify-center" />
@@ -19,7 +19,7 @@ const PropertyGalleryMore: FC<PropertyGalleryMoreProps> = ({
           </p>
         </>
       )}
-      <img src={photo} alt="More property photos" />
+      <img className="w-full h-full" src={photo} alt="More property photos" />
     </div>
   );
 };
